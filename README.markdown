@@ -40,6 +40,25 @@ to not to aggregate the entity itself and has implemented proper caching for met
         );
     }
 
+## Configure the default locale
+
+By default the default locale used by the Translatable feature is en_US.
+You can change it in the configuration.
+
+    <!-- app/config.xml -->
+    <container xmlns:doctrine_extensions="http://www.symfony-project.org/schema/dic/doctrine_extensions">
+        <!-- Put also the other namespaces -->
+
+        <doctrine_extensions:config default_locale="fr" />
+        <!-- ... -->
+    </container>
+
+or with yaml
+
+    # app/config.yml
+    doctrine_extensions.config:
+        default_locale: fr
+
 ## Use the DoctrineExtensions library
 
 All explanations about this library is available [here](http://gediminasm.org "Tutorials for extensions")
