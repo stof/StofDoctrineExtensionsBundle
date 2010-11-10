@@ -79,9 +79,12 @@ dedicated translation entity to have good performances. This is very easy :
     /**
      * Application\MyBundle\Entity\MyTranslationEntity
      *
-     * @orm:Entity
+     * @orm:Entity(repositoryClass="DoctrineExtensions\Translatable\Repository\TranslationRepository")
      * @orm:Table(name="my_translation")
      */
     class TranslationEntity extends AbstractTranslationEntity
     {
     }
+
+You can also create your own repositoryClass by extending
+DoctrineExtensions\Translatable\Repository\TranslationRepository

@@ -8,7 +8,7 @@ namespace Bundle\DoctrineExtensionsBundle\Entity;
  * @orm:Table(indexes={
  *      @orm:index(name="lookup_idx", columns={"locale", "entity", "foreign_key", "field"})
  * })
- * @orm:MappedSuperclass(repositoryClass="DoctrineExtensions\Translatable\Repository\TranslationRepository")
+ * @orm:MappedSuperclass
  */
 abstract class AbstractTranslationEntity
 {
