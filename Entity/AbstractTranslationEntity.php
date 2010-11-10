@@ -5,9 +5,6 @@ namespace Bundle\DoctrineExtensionsBundle\Entity;
 /**
  * Bundle\DoctrineExtensionsBundle\Entity\AbstractTranslationEntity
  *
- * @orm:Table(indexes={
- *      @orm:index(name="lookup_idx", columns={"locale", "entity", "foreign_key", "field"})
- * })
  * @orm:MappedSuperclass
  */
 abstract class AbstractTranslationEntity

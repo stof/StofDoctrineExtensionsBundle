@@ -80,7 +80,9 @@ dedicated translation entity to have good performances. This is very easy :
      * Application\MyBundle\Entity\MyTranslationEntity
      *
      * @orm:Entity(repositoryClass="DoctrineExtensions\Translatable\Repository\TranslationRepository")
-     * @orm:Table(name="my_translation")
+     * @orm:Table(name="my_translation", indexes={
+     *      @orm:index(name="lookup_idx", columns={"locale", "entity", "foreign_key", "field"})
+     * })
      */
     class TranslationEntity extends AbstractTranslationEntity
     {
