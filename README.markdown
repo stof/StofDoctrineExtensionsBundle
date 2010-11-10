@@ -42,22 +42,22 @@ to not to aggregate the entity itself and has implemented proper caching for met
 
 ## Configure the default locale
 
-By default the default locale used by the Translatable feature is en_US.
-You can change it in the configuration.
+This bundle uses the session default_locale. So you have to define it in the
+configuration file.
 
     <!-- app/config.xml -->
-    <container xmlns:doctrine_extensions="http://www.symfony-project.org/schema/dic/doctrine_extensions">
-        <!-- Put also the other namespaces -->
-
-        <doctrine_extensions:config default_locale="fr" />
-        <!-- ... -->
+    <container>
+        <app:config>
+            <app:user default_locale="en_US">
+        </app:config>
     </container>
 
 or with yaml
 
     # app/config.yml
-    doctrine_extensions.config:
-        default_locale: fr
+    app.config:
+        user:
+            default_locale: en_US
 
 ## Use the DoctrineExtensions library
 

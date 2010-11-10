@@ -24,7 +24,7 @@ class DoctrineExtensionsBundle extends Bundle
         $sluggableListener = new SluggableListener();
         $eventManager->addEventSubscriber($sluggableListener);
         $translatableListener = new TranslationListener();
-        $translatableListener->setTranslatableLocale($this->container->getParameter('doctrine_extensions.default_locale'));
+        $translatableListener->setTranslatableLocale($this->container->getParameter('session.default_locale'));
         $eventManager->addEventSubscriber($translatableListener);
     }
 }
