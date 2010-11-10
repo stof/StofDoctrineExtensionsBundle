@@ -26,7 +26,7 @@ to not to aggregate the entity itself and has implemented proper caching for met
 
 ### Add DoctrineExtensionsBundle to your src/Bundle dir
 
-    git submodule add git://github.com/stof/DoctrineUserBundle.git src/Bundle/DoctrineExtensionsBundle
+    git submodule add git://github.com/stof/DoctrineExtensionsBundle.git src/Bundle/DoctrineExtensionsBundle
 
 ### Add DoctrineExtensionsBundle to your application kernel
 
