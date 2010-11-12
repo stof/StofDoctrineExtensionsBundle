@@ -10,6 +10,6 @@ namespace Bundle\DoctrineExtensionsBundle\Entity;
  *      @orm:index(name="lookup_idx", columns={"locale", "entity", "foreign_key", "field"})
  * })
  */
-class TranslationEntity extends AbstractTranslationEntity
+class TranslationEntity extends AbstractTranslation
 {
 }

@@ -3,11 +3,11 @@
 namespace Bundle\DoctrineExtensionsBundle\Entity;
 
 /**
- * Bundle\DoctrineExtensionsBundle\Entity\AbstractTranslationEntity
+ * Bundle\DoctrineExtensionsBundle\Entity\AbstractTranslation
  *
  * @orm:MappedSuperclass
  */
-abstract class AbstractTranslationEntity
+abstract class AbstractTranslation
 {
     /**
      * @var integer $id
@@ -52,7 +52,7 @@ abstract class AbstractTranslationEntity
      * @orm:Column(name="content", type="text", nullable=true)
      */
     private $content;
-    
+
     /**
      * Get id
      *
@@ -122,7 +122,7 @@ abstract class AbstractTranslationEntity
     {
         return $this->entity;
     }
-    
+
     /**
      * Set foreignKey
      *
@@ -142,7 +142,7 @@ abstract class AbstractTranslationEntity
     {
         return $this->foreignKey;
     }
-    
+
     /**
      * Set content
      *

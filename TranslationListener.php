@@ -11,5 +11,5 @@ use DoctrineExtensions\Translatable\TranslationListener as BaseTranslationListen
  */
 class TranslationListener extends BaseTranslationListener
 {
-    const TRANSLATION_ENTITY_CLASS = 'Bundle\DoctrineExtensionsBundle\Entity\TranslationEntity';
+    const TRANSLATION_ENTITY_CLASS = 'Bundle\DoctrineExtensionsBundle\Entity\Translation';
 }

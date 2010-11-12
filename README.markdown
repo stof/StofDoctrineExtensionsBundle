@@ -74,7 +74,7 @@ dedicated translation entity to have good performances. This is very easy :
 
     namespace Application\MyBundle\Entity;
 
-    use Bundle\DoctrineExtensionsBundle\Entity\AbstractTranslationEntity
+    use Bundle\DoctrineExtensionsBundle\Entity\AbstractTranslation
 
     /**
      * Application\MyBundle\Entity\MyTranslationEntity
@@ -84,7 +84,7 @@ dedicated translation entity to have good performances. This is very easy :
      *      @orm:index(name="lookup_idx", columns={"locale", "entity", "foreign_key", "field"})
      * })
      */
-    class TranslationEntity extends AbstractTranslationEntity
+    class TranslationEntity extends AbstractTranslation
     {
     }
 
