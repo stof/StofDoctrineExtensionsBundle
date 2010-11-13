@@ -15,28 +15,28 @@ class DoctrineExtensionsBundle extends Bundle
      */
     protected static $timestampableListener;
 
-    protected static $timestampableAttached = false;
+    protected static $timestampableAttached = array ();
 
     /**
      * @var DoctrineExtensions\Tree\TreeListener
      */
     protected static $treeListener;
 
-    protected static $treeAttached = false;
+    protected static $treeAttached = array ();
 
     /**
      * @var DoctrineExtensions\Sluggable\SluggableListener
      */
     protected static $sluggableListener;
 
-    protected static $sluggableAttached = false;
+    protected static $sluggableAttached = array ();
 
     /**
      * @var Bundle\DoctrineExtensionsBundle\TranslationListener
      */
     protected static $translationListener;
 
-    protected static $translationAttached = false;
+    protected static $translationAttached = array ();
 
     protected static $default_locale;
 
@@ -69,36 +69,39 @@ class DoctrineExtensionsBundle extends Bundle
 
     public static function addTimestampableListener(EntityManager $em)
     {
-        if (self::$timestampableAttached){
+        $eventManager = $em->getEventManager();
+        $hash = spl_object_hash($eventManager);
+        if (array_key_exists($hash, self::$timestampableAttached) && self::$timestampableAttached[$hash]){
             return;
         }
         if (null === self::$timestampableListener){
             self::$timestampableListener = new TimestampableListener();
         }
-        $eventManager = $em->getEventManager();
         $eventManager->addEventSubscriber(self::$timestampableListener);
-        self::$timestampableAttached = true;
+        self::$timestampableAttached[$hash] = true;
     }
 
     public static function removeTimestampableListener(EntityManager $em)
     {
-        if (self::$timestampableAttached){
-            $eventManager = $em->getEventManager();
+        $eventManager = $em->getEventManager();
+        $hash = spl_object_hash($eventManager);
+        if (array_key_exists($hash, self::$timestampableAttached) && self::$timestampableAttached[$hash]){
             $eventManager->removeEventListener(self::$timestampableListener->getSubscribedEvents(), self::$timestampableListener);
-            self::$timestampableAttached = false;
+            self::$timestampableAttached[$hash] = false;
         }
     }
 
     public static function addSluggableListener(EntityManager $em)
     {
-        if (self::$sluggableAttached){
+        $eventManager = $em->getEventManager();
+        $hash = spl_object_hash($eventManager);
+        if (array_key_exists($hash, self::$sluggableAttached) && self::$sluggableAttached[$hash]){
             return;
         }
         if (null === self::$sluggableListener){
             self::$sluggableListener = new SluggableListener();
         }
-        $eventManager = $em->getEventManager();
-        if (self::$translationAttached){
+        if (array_key_exists($hash, self::$translationAttached) && self::$translationAttached[$hash]){
             // TranslationListener has to be attached after SluggableListener
             self::removeTranslationListener($em);
             $eventManager->addEventSubscriber(self::$sluggableListener);
@@ -106,60 +109,65 @@ class DoctrineExtensionsBundle extends Bundle
         } else {
             $eventManager->addEventSubscriber(self::$sluggableListener);
         }
-        self::$sluggableAttached = true;
+        self::$sluggableAttached[$hash] = true;
     }
 
     public static function removeSluggableListener(EntityManager $em)
     {
-        if (self::$sluggableAttached){
-            $eventManager = $em->getEventManager();
+        $eventManager = $em->getEventManager();
+        $hash = spl_object_hash($eventManager);
+        if (array_key_exists($hash, self::$sluggableAttached) && self::$sluggableAttached[$hash]){
             $eventManager->removeEventListener(self::$sluggableListener->getSubscribedEvents(), self::$sluggableListener);
-            self::$sluggableAttached = false;
+            self::$sluggableAttached[$hash] = false;
         }
     }
 
     public static function addTreeListener(EntityManager $em)
     {
-        if (self::$treeAttached){
+        $eventManager = $em->getEventManager();
+        $hash = spl_object_hash($eventManager);
+        if (array_key_exists($hash, self::$treeAttached) && self::$treeAttached[$hash]){
             return;
         }
         if (null === self::$treeListener){
             self::$treeListener = new TreeListener();
         }
-        $eventManager = $em->getEventManager();
         $eventManager->addEventSubscriber(self::$treeListener);
-        self::$treeAttached = true;
+        self::$treeAttached[$hash] = true;
     }
 
     public static function removeTreeListener(EntityManager $em)
     {
-        if (self::$treeAttached){
-            $eventManager = $em->getEventManager();
+        $eventManager = $em->getEventManager();
+        $hash = spl_object_hash($eventManager);
+        if (array_key_exists($hash, self::$treeAttached) && self::$treeAttached[$hash]){
             $eventManager->removeEventListener(self::$treeListener->getSubscribedEvents(), self::$treeListener);
-            self::$treeAttached = false;
+            self::$treeAttached[$hash] = false;
         }
     }
 
     public static function addTranslationListener(EntityManager $em)
     {
-        if (self::$translationAttached){
+        $eventManager = $em->getEventManager();
+        $hash = spl_object_hash($eventManager);
+        if (array_key_exists($hash, self::$translationAttached) && self::$translationAttached[$hash]){
             return;
         }
         if (null === self::$translationListener){
             self::$translationListener = new TranslationListener();
             self::$translationListener->setTranslatableLocale(self::$default_locale);
         }
-        $eventManager = $em->getEventManager();
         $eventManager->addEventSubscriber(self::$translationListener);
-        self::$translationAttached = true;
+        self::$translationAttached[$hash] = true;
     }
 
     public static function removeTranslationListener(EntityManager $em)
     {
-        if (self::$translationAttached){
-            $eventManager = $em->getEventManager();
+        $eventManager = $em->getEventManager();
+        $hash = spl_object_hash($eventManager);
+        if (array_key_exists($hash, self::$translationAttached) && self::$translationAttached[$hash]){
             $eventManager->removeEventListener(self::$translationListener->getSubscribedEvents(), self::$translationListener);
-            self::$translationAttached = false;
+            self::$translationAttached[$hash] = false;
         }
     }
 }
