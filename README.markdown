@@ -90,3 +90,26 @@ dedicated translation entity to have good performances. This is very easy :
 
 You can also create your own repositoryClass by extending
 DoctrineExtensions\Translatable\Repository\TranslationRepository
+
+## Advanced use
+
+The bundle automatically attach all 4 listeners to the default EntityManager. If
+you want to use these listeners with another EntityManager you can attach them
+with the following methods :
+
+    DoctrineExtensionsBundle::addTreeListener($em)
+    DoctrineExtensionsBundle::addSluggableListener($em)
+    DoctrineExtensionsBundle::addTimestampableListener($em)
+    DoctrineExtensionsBundle::addTranslationListener($em)
+
+or all of them with the `DoctrineExtensionsBundle::addAllListeners` method
+
+If you need to remove these listeners (eg if you need to force the createdAt
+value) you can use the following methods :
+
+    DoctrineExtensionsBundle::removeTreeListener($em)
+    DoctrineExtensionsBundle::removeSluggableListener($em)
+    DoctrineExtensionsBundle::removeTimestampableListener($em)
+    DoctrineExtensionsBundle::removeTranslationListener($em)
+
+or all of them with the `DoctrineExtensionsBundle::removeAllListeners` method
