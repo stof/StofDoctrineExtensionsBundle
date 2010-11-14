@@ -3,29 +3,29 @@
 namespace Bundle\DoctrineExtensionsBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
-use DoctrineExtensions\Sluggable\SluggableListener;
-use DoctrineExtensions\Timestampable\TimestampableListener;
-use DoctrineExtensions\Tree\TreeListener;
+use Gedmo\Sluggable\SluggableListener;
+use Gedmo\Timestampable\TimestampableListener;
+use Gedmo\Tree\TreeListener;
 use Doctrine\ORM\EntityManager;
 
 class DoctrineExtensionsBundle extends Bundle
 {
     /**
-     * @var DoctrineExtensions\Timestampable\TimestampableListener
+     * @var Gedmo\Timestampable\TimestampableListener
      */
     protected static $timestampableListener;
 
     protected static $timestampableAttached = array ();
 
     /**
-     * @var DoctrineExtensions\Tree\TreeListener
+     * @var Gedmo\Tree\TreeListener
      */
     protected static $treeListener;
 
     protected static $treeAttached = array ();
 
     /**
-     * @var DoctrineExtensions\Sluggable\SluggableListener
+     * @var Gedmo\Sluggable\SluggableListener
      */
     protected static $sluggableListener;
 

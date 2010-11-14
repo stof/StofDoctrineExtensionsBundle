@@ -2,7 +2,7 @@
 
 namespace Bundle\DoctrineExtensionsBundle;
 
-use DoctrineExtensions\Translatable\TranslationListener as BaseTranslationListener;
+use Gedmo\Translatable\TranslationListener as BaseTranslationListener;
 
 /**
  * TranslationListener

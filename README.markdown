@@ -20,7 +20,7 @@ to not to aggregate the entity itself and has implemented proper caching for met
 
     // src/autoload.php
     $loader->registerNamespaces(array(
-        'DoctrineExtensions' => $vendorDir.'/doctrine-extensions/lib',
+        'Gedmo' => $vendorDir.'/doctrine-extensions/lib',
         // your other namespaces
     ));
 
@@ -79,7 +79,7 @@ dedicated translation entity to have good performances. This is very easy :
     /**
      * Application\MyBundle\Entity\MyTranslationEntity
      *
-     * @orm:Entity(repositoryClass="DoctrineExtensions\Translatable\Repository\TranslationRepository")
+     * @orm:Entity(repositoryClass="Gedmo\Translatable\Repository\TranslationRepository")
      * @orm:Table(name="my_translation", indexes={
      *      @orm:index(name="lookup_idx", columns={"locale", "entity", "foreign_key", "field"})
      * })
@@ -89,7 +89,7 @@ dedicated translation entity to have good performances. This is very easy :
     }
 
 You can also create your own repositoryClass by extending
-DoctrineExtensions\Translatable\Repository\TranslationRepository
+Gedmo\Translatable\Repository\TranslationRepository
 
 ## Advanced use
 

@@ -5,8 +5,8 @@ namespace Bundle\DoctrineExtensionsBundle\Entity;
 /**
  * Bundle\DoctrineExtensionsBundle\Entity\TranslationEntity
  *
- * @orm:Entity(repositoryClass="DoctrineExtensions\Translatable\Repository\TranslationRepository")
- * @orm:Table(name="doctrine_extensions_translation", indexes={
+ * @orm:Entity(repositoryClass="Gedmo\Translatable\Repository\TranslationRepository")
+ * @orm:Table(name="ext_translation", indexes={
  *      @orm:index(name="lookup_idx", columns={"locale", "entity", "foreign_key", "field"})
  * })
  */
