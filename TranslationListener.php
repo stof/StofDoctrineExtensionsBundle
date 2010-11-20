@@ -11,5 +11,5 @@ use Gedmo\Translatable\TranslationListener as BaseTranslationListener;
  */
 class TranslationListener extends BaseTranslationListener
 {
-    const TRANSLATION_ENTITY_CLASS = 'Bundle\DoctrineExtensionsBundle\Entity\Translation';
+    protected $_defaultTranslationEntity = 'Bundle\DoctrineExtensionsBundle\Entity\Translation';
 }
