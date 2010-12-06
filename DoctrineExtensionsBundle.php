@@ -40,6 +40,8 @@ class DoctrineExtensionsBundle extends Bundle
 
     protected static $default_locale;
 
+    protected static $locale;
+
     public function boot()
     {
         try {
@@ -48,6 +50,7 @@ class DoctrineExtensionsBundle extends Bundle
             throw new \InvalidArgumentException('You must provide a Doctrine ORM Entity Manager');
         }
         self::$default_locale = $this->container->getParameter('session.default_locale');
+        self::$locale = $this->container->getParameter('session.default_locale');
         self::addAllListeners($em);
     }
 
@@ -155,7 +158,8 @@ class DoctrineExtensionsBundle extends Bundle
         }
         if (null === self::$translationListener){
             self::$translationListener = new TranslationListener();
-            self::$translationListener->setTranslatableLocale(self::$default_locale);
+            self::$translationListener->setDefaultLocale(self::$default_locale);
+            self::$translationListener->setTranslatableLocale(self::$locale);
         }
         $eventManager->addEventSubscriber(self::$translationListener);
         self::$translationAttached[$hash] = true;
@@ -169,5 +173,11 @@ class DoctrineExtensionsBundle extends Bundle
             $eventManager->removeEventListener(self::$translationListener->getSubscribedEvents(), self::$translationListener);
             self::$translationAttached[$hash] = false;
         }
+    }
+
+    public static function setTranslatableLocale($locale)
+    {
+        self::$locale = $locale;
+        self::$translationListener->setTranslatableLocale(self::$locale);
     }
 }

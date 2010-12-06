@@ -40,10 +40,12 @@ to not to aggregate the entity itself and has implemented proper caching for met
         );
     }
 
-## Configure the default locale
+## Configure the bundle
 
-This bundle uses the session default_locale. So you have to define it in the
-configuration file.
+### Register the default locale
+
+This bundle uses the session default_locale as the default locale used if the translation 
+does not exists in the asked language. So you have to define it in the configuration file.
 
     <!-- app/config.xml -->
     <container>
@@ -58,6 +60,21 @@ or with yaml
     app.config:
         user:
             default_locale: en_US
+
+### Activate the update of the locale with the session
+
+This allows to automatically use the locale of the session.
+If this is not set it will always use the session default_locale.
+
+    <!-- app/config.xml -->
+    <container xmlns:doctrine_extensions="http://www.symfony-project.org/schema/dic/doctrine_extensions">
+        <doctrine_extensions:config />
+    </container>
+
+or with yaml
+
+    # app/config.yml
+    doctrine_extensions.config: ~
 
 ## Use the DoctrineExtensions library
 
@@ -113,3 +130,7 @@ value) you can use the following methods :
     DoctrineExtensionsBundle::removeTranslationListener($em)
 
 or all of them with the `DoctrineExtensionsBundle::removeAllListeners` method
+
+To change the locale of the used translation you can use the following method :
+
+    DoctrineExtensionsBundle::setTranslatableLocale($locale)
