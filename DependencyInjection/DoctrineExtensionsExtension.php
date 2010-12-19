@@ -13,6 +13,7 @@ class DoctrineExtensionsExtension extends Extension
     {
         $loader = new XmlFileLoader($container, __DIR__.'/../Resources/config');
         $loader->load('listener.xml');
+        $loader->load('entity_manager.xml');
     }
 
     /**

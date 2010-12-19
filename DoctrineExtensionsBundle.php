@@ -15,28 +15,28 @@ class DoctrineExtensionsBundle extends Bundle
      */
     protected static $timestampableListener;
 
-    protected static $timestampableAttached = array ();
+    protected static $timestampableAttached = array();
 
     /**
      * @var Gedmo\Tree\TreeListener
      */
     protected static $treeListener;
 
-    protected static $treeAttached = array ();
+    protected static $treeAttached = array();
 
     /**
      * @var Gedmo\Sluggable\SluggableListener
      */
     protected static $sluggableListener;
 
-    protected static $sluggableAttached = array ();
+    protected static $sluggableAttached = array();
 
     /**
      * @var Bundle\DoctrineExtensionsBundle\TranslationListener
      */
     protected static $translationListener;
 
-    protected static $translationAttached = array ();
+    protected static $translationAttached = array();
 
     protected static $default_locale;
 
@@ -45,10 +45,11 @@ class DoctrineExtensionsBundle extends Bundle
     public function boot()
     {
         try {
-            $em = $this->container->get('doctrine.orm.entity_manager');
+            $em = $this->container->get($this->container->getParameter('doctrine_extensions.entity_manager'));
         } catch (\InvalidArgumentException $e){
             throw new \InvalidArgumentException('You must provide a Doctrine ORM Entity Manager');
         }
+
         self::$default_locale = $this->container->getParameter('session.default_locale');
         self::$locale = $this->container->getParameter('session.default_locale');
         self::addAllListeners($em);
