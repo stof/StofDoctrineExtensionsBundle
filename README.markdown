@@ -47,6 +47,13 @@ to not to aggregate the entity itself and has implemented proper caching for met
 This bundle uses the session default_locale as the default locale used if the translation 
 does not exists in the asked language. So you have to define it in the configuration file.
 
+    # app/config.yml
+    app.config:
+        user:
+            default_locale: en_US
+
+or with XML
+
     <!-- app/config.xml -->
     <container>
         <app:config>
@@ -54,27 +61,23 @@ does not exists in the asked language. So you have to define it in the configura
         </app:config>
     </container>
 
-or with yaml
+### Activate the bundle
+
+You have to activate the extensions for entity manager. The id is the one used
+in the ORM configuration.
 
     # app/config.yml
-    app.config:
-        user:
-            default_locale: en_US
+    doctrine_extensions.config:
+        default: ~
 
-### Activate the update of the locale with the session
-
-This allows to automatically use the locale of the session.
-If this is not set it will always use the session default_locale.
+or with XML
 
     <!-- app/config.xml -->
     <container xmlns:doctrine_extensions="http://www.symfony-project.org/schema/dic/doctrine_extensions">
-        <doctrine_extensions:config />
+        <doctrine_extensions:config>
+            <doctrine_extensions:entity-manager id="default" />
+        </doctrine_extensionsconfig>
     </container>
-
-or with yaml
-
-    # app/config.yml
-    doctrine_extensions.config: ~
 
 ## Use the DoctrineExtensions library
 
@@ -110,27 +113,56 @@ Gedmo\Translatable\Repository\TranslationRepository
 
 ## Advanced use
 
-The bundle automatically attach all 4 listeners to the default EntityManager. If
-you want to use these listeners with another EntityManager you can attach them
-with the following methods :
+### Advanced configuration
 
-    DoctrineExtensionsBundle::addTreeListener($em)
-    DoctrineExtensionsBundle::addSluggableListener($em)
-    DoctrineExtensionsBundle::addTimestampableListener($em)
-    DoctrineExtensionsBundle::addTranslationListener($em)
+By default the bundle attachs all 4 listeners to the entity managers listed in
+the configuration. You can change this behavior by disabling some of them
+explicitely.
 
-or all of them with the `DoctrineExtensionsBundle::addAllListeners` method
+    # app/config.yml
+    doctrine_extensions.config:
+        default:
+            tree: false
+            timestampable: true # not needed: listeners are enabled by default
+        other:
+            timestampable: false
 
-If you need to remove these listeners (eg if you need to force the createdAt
-value) you can use the following methods :
+or with XML
 
-    DoctrineExtensionsBundle::removeTreeListener($em)
-    DoctrineExtensionsBundle::removeSluggableListener($em)
-    DoctrineExtensionsBundle::removeTimestampableListener($em)
-    DoctrineExtensionsBundle::removeTranslationListener($em)
+    <!-- app/config.xml -->
+    <container xmlns:doctrine_extensions="http://www.symfony-project.org/schema/dic/doctrine_extensions">
+        <doctrine_extensions:config>
+            <doctrine_extensions:entity-manager
+                id="default"
+                tree="false"
+                timestampable="true"
+            />
+            <doctrine_extensions:entity-manager
+                id="other"
+                timestampable="false"
+            />
+        </doctrine_extensionsconfig>
+    </container>
 
-or all of them with the `DoctrineExtensionsBundle::removeAllListeners` method
+### Attaching and Removing listeners manually
 
-To change the locale of the used translation you can use the following method :
+You can manage the listener with the ListenerManager.
 
-    DoctrineExtensionsBundle::setTranslatableLocale($locale)
+    $lm = $container->get('doctrine_extensions.listener_manager');
+
+The ListenerManager provides method to attach and remove each listener.
+
+    $lm->addTreeListener($em);
+    $lm->addSluggableListener($em);
+    $lm->addTimestampableListener($em);
+    $lm->addTranslationListener($em);
+
+    $lm->removeTreeListener($em)
+    $lm->removeSluggableListener($em)
+    $lm->removeTimestampableListener($em)
+    $lm->removeTranslationListener($em)
+
+You can also attach or detach or the listeners:
+
+    $lm->addAllListeners($em);
+    $lm->removeAllListeners($em);

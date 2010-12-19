@@ -12,7 +12,24 @@ class DoctrineExtensionsExtension extends Extension
     public function configLoad(array $config, ContainerBuilder $container)
     {
         $loader = new XmlFileLoader($container, __DIR__.'/../Resources/config');
-        $loader->load('listener.xml');
+        $loader->load('listener_manager.xml');
+
+        $defaultListeners = array (
+            'tree' => true,
+            'timestampable' => true,
+            'translatable' => true,
+            'sluggable' => true,
+        );
+
+        $entity_managers = array ();
+        $emConfig = $config;
+        if (isset($config['entity-managers'])){
+            $emConfig = $config['entity-managers'];
+        }
+        foreach ($emConfig as $name => $listeners){
+            $entity_managers[isset($listeners['id']) ? $listeners['id'] : $name] = array_merge($defaultListeners, $listeners);
+        }
+        $container->setParameter('doctrine_extensions.entity_managers', $entity_managers);
     }
 
     /**
