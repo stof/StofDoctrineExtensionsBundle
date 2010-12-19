@@ -162,7 +162,7 @@ The ListenerManager provides method to attach and remove each listener.
     $lm->removeTimestampableListener($em)
     $lm->removeTranslationListener($em)
 
-You can also attach or detach or the listeners:
+You can also attach or detach all the listeners:
 
     $lm->addAllListeners($em);
     $lm->removeAllListeners($em);
