@@ -27,6 +27,9 @@ class DoctrineExtensionsExtension extends Extension
             $emConfig = $config['entity-managers'];
         }
         foreach ($emConfig as $name => $listeners){
+            if (null === $listeners){
+                $listeners = array ();
+            }
             $entity_managers[isset($listeners['id']) ? $listeners['id'] : $name] = array_merge($defaultListeners, $listeners);
         }
         $container->setParameter('doctrine_extensions.entity_managers', $entity_managers);
