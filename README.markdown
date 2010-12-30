@@ -44,8 +44,9 @@ to not to aggregate the entity itself and has implemented proper caching for met
 
 ### Register the default locale
 
-This bundle uses the session default_locale as the default locale used if the translation 
-does not exists in the asked language. So you have to define it in the configuration file.
+This bundle uses the session default_locale as the default locale used if the
+translation does not exists in the asked language. So you have to define it in
+the configuration file.
 
     # app/config.yml
     app.config:
@@ -63,8 +64,8 @@ or with XML
 
 ### Activate the bundle
 
-You have to activate the extensions for entity manager. The id is the one used
-in the ORM configuration.
+You have to activate the extensions for each entity manager for which you want
+to enable the extensions. The id is the one used in the ORM configuration.
 
     # app/config.yml
     doctrine_extensions.config:
@@ -78,6 +79,10 @@ or with XML
             <doctrine_extensions:entity-manager id="default" />
         </doctrine_extensionsconfig>
     </container>
+
+Note: This uses the core.request event to register the listeners so you have to
+enable the extensions manually in your commands as you have no request. See the
+"Advanced use" paragraph for the explanations.
 
 ## Use the DoctrineExtensions library
 
