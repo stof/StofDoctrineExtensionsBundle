@@ -40,6 +40,17 @@ to not to aggregate the entity itself and has implemented proper caching for met
         );
     }
 
+### Add DoctrineExtensionsBundle to your mapping
+
+See the [official documentation](http://docs.symfony-reloaded.org/master/guides/doctrine/orm/overview.html)
+for details.
+
+    # app/config.yml
+    doctrine.orm:
+        mappings:
+            DoctrineExtensionsBundle: ~
+            # ... your others bundle
+
 ## Configure the bundle
 
 ### Register the default locale
