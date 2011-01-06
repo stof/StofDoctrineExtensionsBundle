@@ -124,7 +124,7 @@ or in XML::
     <container xmlns:doctrine_extensions="http://www.symfony-project.org/schema/dic/doctrine_extensions">
         <doctrine_extensions:config>
             <doctrine_extensions:entity-manager id="default" />
-        </doctrine_extensionsconfig>
+        </doctrine_extensions:config>
     </container>
 
 .. Caution::
@@ -205,7 +205,7 @@ or in XML::
                 id="other"
                 timestampable="false"
             />
-        </doctrine_extensionsconfig>
+        </doctrine_extensions:config>
     </container>
 
 Attaching and Removing listeners manually
