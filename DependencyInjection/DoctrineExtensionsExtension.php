@@ -36,6 +36,44 @@ class DoctrineExtensionsExtension extends Extension
             }
             $container->setParameter('stof_doctrine_extensions.orm.entity_managers', $entity_managers);
         }
+
+        if (isset($config['class'])) {
+            $this->remapParametersNamespaces($config['class'], $container, array(
+                'orm' => 'stof_doctrine_extensions.orm.listener.%s.class',
+            ));
+        }
+    }
+
+    protected function remapParameters(array $config, ContainerBuilder $container, array $map)
+    {
+        foreach ($map as $name => $paramName) {
+            if (isset($config[$name])) {
+                $container->setParameter($paramName, $config[$name]);
+            }
+        }
+    }
+
+    protected function remapParametersNamespaces(array $config, ContainerBuilder $container, array $namespaces)
+    {
+        foreach ($namespaces as $ns => $map) {
+            if ($ns) {
+                if (!isset($config[$ns])) {
+                    continue;
+                }
+                $namespaceConfig = $config[$ns];
+            } else {
+                $namespaceConfig = $config;
+            }
+            if (is_array($map)) {
+                $this->remapParameters($namespaceConfig, $container, $map);
+            } else {
+                foreach ($namespaceConfig as $name => $value) {
+                    if (null !== $value) {
+                        $container->setParameter(sprintf($map, $name), $value);
+                    }
+                }
+            }
+        }
     }
 
     /**

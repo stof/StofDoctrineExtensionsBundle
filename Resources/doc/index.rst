@@ -218,6 +218,37 @@ or in XML::
         </stof_doctrine_extensions:config>
     </container>
 
+Overriding the listeners
+------------------------
+
+You can change the listeners used by extending the Gedmo listeners and
+giving the class name in the configuration.
+
+in YAML::
+
+    # app/config.yml
+    stof_doctrine_extensions.config:
+        class:
+            orm:
+                tree: MyBundle\TreeListener
+                timestampable: MyBundle\TimestampableListener
+                sluggable: ~
+                translatable: ~
+
+or in XML::
+
+    <!-- app/config.xml -->
+    <container xmlns:doctrine_extensions="http://www.symfony-project.org/schema/dic/stof_doctrine_extensions">
+        <stof_doctrine_extensions:config>
+            <stof_doctrine_extensions:class>
+                <stof_doctrine_extensions:orm
+                    tree="MyBundle\TreeListener"
+                    timestampable="MyBundle\TimestampableListener"
+                />
+            </stof_doctrine_extensions:class>
+        </stof_doctrine_extensions:config>
+    </container>
+
 Attaching and Removing listeners manually
 -----------------------------------------
 
