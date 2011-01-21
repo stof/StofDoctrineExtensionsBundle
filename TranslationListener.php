@@ -1,6 +1,6 @@
 <?php
 
-namespace Bundle\DoctrineExtensionsBundle;
+namespace Stof\DoctrineExtensionsBundle;
 
 use Gedmo\Translatable\TranslationListener as BaseTranslationListener;
 
@@ -11,5 +11,5 @@ use Gedmo\Translatable\TranslationListener as BaseTranslationListener;
  */
 class TranslationListener extends BaseTranslationListener
 {
-    protected $_defaultTranslationEntity = 'Bundle\DoctrineExtensionsBundle\Entity\Translation';
+    protected $_defaultTranslationEntity = 'Stof\DoctrineExtensionsBundle\Entity\Translation';
 }

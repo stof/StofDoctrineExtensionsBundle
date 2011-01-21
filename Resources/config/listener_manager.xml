@@ -5,7 +5,7 @@
     xsi:schemaLocation="http://www.symfony-project.org/schema/dic/services http://www.symfony-project.org/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="doctrine_extensions.listener_manager.class">Bundle\DoctrineExtensionsBundle\ListenerManager</parameter>
+        <parameter key="doctrine_extensions.listener_manager.class">Stof\DoctrineExtensionsBundle\ListenerManager</parameter>
     </parameters>
 
     <services>

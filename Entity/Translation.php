@@ -1,9 +1,9 @@
 <?php
 
-namespace Bundle\DoctrineExtensionsBundle\Entity;
+namespace Stof\DoctrineExtensionsBundle\Entity;
 
 /**
- * Bundle\DoctrineExtensionsBundle\Entity\Translation
+ * Stof\DoctrineExtensionsBundle\Entity\Translation
  *
  * @orm:Entity(repositoryClass="Gedmo\Translatable\Repository\TranslationRepository")
  * @orm:Table(

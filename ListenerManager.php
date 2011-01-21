@@ -1,6 +1,6 @@
 <?php
 
-namespace Bundle\DoctrineExtensionsBundle;
+namespace Stof\DoctrineExtensionsBundle;
 
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Gedmo\Sluggable\SluggableListener;
@@ -34,7 +34,7 @@ class ListenerManager extends ContainerAware
     protected $sluggableAttached = array ();
 
     /**
-     * @var Bundle\DoctrineExtensionsBundle\TranslationListener
+     * @var Stof\DoctrineExtensionsBundle\TranslationListener
      */
     protected $translationListener;
 

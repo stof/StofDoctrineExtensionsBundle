@@ -1,9 +1,9 @@
 <?php
 
-namespace Bundle\DoctrineExtensionsBundle\Entity;
+namespace Stof\DoctrineExtensionsBundle\Entity;
 
 /**
- * Bundle\DoctrineExtensionsBundle\Entity\AbstractTranslation
+ * Stof\DoctrineExtensionsBundle\Entity\AbstractTranslation
  *
  * @orm:MappedSuperclass
  */

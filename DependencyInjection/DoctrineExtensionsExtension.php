@@ -1,6 +1,6 @@
 <?php
 
-namespace Bundle\DoctrineExtensionsBundle\DependencyInjection;
+namespace Stof\DoctrineExtensionsBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
@@ -47,11 +47,11 @@ class DoctrineExtensionsExtension extends Extension
 
     public function getNamespace()
     {
-        return 'http://www.symfony-project.org/schema/dic/doctrine_extensions';
+        return 'http://www.symfony-project.org/schema/dic/stof_doctrine_extensions';
     }
 
     public function getAlias()
     {
-        return 'doctrine_extensions';
+        return 'stof_doctrine_extensions';
     }
 }

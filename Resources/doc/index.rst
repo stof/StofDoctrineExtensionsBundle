@@ -33,23 +33,24 @@ Add DoctrineExtensions to your vendor dir
 
     git submodule add git://github.com/l3pp4rd/DoctrineExtensions.git src/vendor/doctrine-extensions
 
-Register the DoctrineExtensions namespace
------------------------------------------
-
-::
-
-    // src/autoload.php
-    $loader->registerNamespaces(array(
-        'Gedmo' => $vendorDir.'/doctrine-extensions/lib',
-        // your other namespaces
-    ));
-
 Add DoctrineExtensionsBundle to your src/Bundle dir
 ---------------------------------------------------
 
 ::
 
-    git submodule add git://github.com/stof/DoctrineExtensionsBundle.git src/Bundle/DoctrineExtensionsBundle
+    git submodule add git://github.com/stof/DoctrineExtensionsBundle.git src/Stof/DoctrineExtensionsBundle
+
+Register the DoctrineExtensions and Stof namespaces
+---------------------------------------------------
+
+::
+
+    // src/autoload.php
+    $loader->registerNamespaces(array(
+        'Stof' => __DIR__,
+        'Gedmo' => $vendorDir.'/doctrine-extensions/lib',
+        // your other namespaces
+    ));
 
 Add DoctrineExtensionsBundle to your application kernel
 -------------------------------------------------------
@@ -61,7 +62,7 @@ Add DoctrineExtensionsBundle to your application kernel
     {
         return array(
             // ...
-            new Bundle\DoctrineExtensionsBundle\DoctrineExtensionsBundle(),
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             // ...
         );
     }
@@ -76,7 +77,7 @@ See the official documentation_ for details.
     # app/config.yml
     doctrine.orm:
         mappings:
-            DoctrineExtensionsBundle: ~
+            StofDoctrineExtensionsBundle: ~
             # ... your others bundle
 
 Configure the bundle
@@ -115,16 +116,16 @@ configuration.
 in YAML::
 
     # app/config.yml
-    doctrine_extensions.config:
+    stof_doctrine_extensions.config:
         default: ~
 
 or in XML::
 
     <!-- app/config.xml -->
-    <container xmlns:doctrine_extensions="http://www.symfony-project.org/schema/dic/doctrine_extensions">
-        <doctrine_extensions:config>
-            <doctrine_extensions:entity-manager id="default" />
-        </doctrine_extensions:config>
+    <container xmlns:stof_doctrine_extensions="http://www.symfony-project.org/schema/dic/stof_doctrine_extensions">
+        <stof_doctrine_extensions:config>
+            <stof_doctrine_extensions:entity-manager id="default" />
+        </stof_doctrine_extensions:config>
     </container>
 
 .. Caution::
@@ -139,7 +140,7 @@ Use the DoctrineExtensions library
 All explanations about this library are available on the official blog_
 
 The default entity for translations is
-``Bundle\DoctrineExtensionsBundle\Entity\TranslationEntity``
+``Stof\DoctrineExtensionsBundle\Entity\TranslationEntity``
 
 Creating your own translation entity
 ------------------------------------
@@ -154,7 +155,7 @@ difference when using it with Symfony2 is the mapped-superclass to use.
 
     namespace Application\MyBundle\Entity;
 
-    use Bundle\DoctrineExtensionsBundle\Entity\AbstractTranslation
+    use Stof\DoctrineExtensionsBundle\Entity\AbstractTranslation
 
     /**
      * Application\MyBundle\Entity\MyTranslationEntity
@@ -184,7 +185,7 @@ some of them explicitely.
 in YAML::
 
     # app/config.yml
-    doctrine_extensions.config:
+    stof_doctrine_extensions.config:
         default:
             tree: false
             timestampable: true # not needed: listeners are enabled by default
@@ -194,18 +195,18 @@ in YAML::
 or in XML::
 
     <!-- app/config.xml -->
-    <container xmlns:doctrine_extensions="http://www.symfony-project.org/schema/dic/doctrine_extensions">
-        <doctrine_extensions:config>
-            <doctrine_extensions:entity-manager
+    <container xmlns:doctrine_extensions="http://www.symfony-project.org/schema/dic/stof_doctrine_extensions">
+        <stof_doctrine_extensions:config>
+            <stof_doctrine_extensions:entity-manager
                 id="default"
                 tree="false"
                 timestampable="true"
             />
-            <doctrine_extensions:entity-manager
+            <stof_doctrine_extensions:entity-manager
                 id="other"
                 timestampable="false"
             />
-        </doctrine_extensions:config>
+        </stof_doctrine_extensions:config>
     </container>
 
 Attaching and Removing listeners manually
