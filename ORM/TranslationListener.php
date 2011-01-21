@@ -1,6 +1,6 @@
 <?php
 
-namespace Stof\DoctrineExtensionsBundle;
+namespace Stof\DoctrineExtensionsBundle\ORM;
 
 use Gedmo\Translatable\TranslationListener as BaseTranslationListener;
 

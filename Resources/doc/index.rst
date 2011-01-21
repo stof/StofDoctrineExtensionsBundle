@@ -80,6 +80,8 @@ See the official documentation_ for details.
             StofDoctrineExtensionsBundle: ~
             # ... your others bundle
 
+Note: This is only necessary if you want to use the Translatable behavior. The
+
 Configure the bundle
 ====================
 
@@ -87,14 +89,15 @@ Register the default locale
 ---------------------------
 
 This bundle uses the session default_locale as the default locale used
-f the translation does not exists in the asked language. So you have to
-define it in the configuration file.
+if the translation does not exists in the asked language. So you have
+to define it in the configuration file (Symfony2 define it to ``en`` by
+default).
 
 in YAML::
 
     # app/config.yml
     app.config:
-        user:
+        session:
             default_locale: en_US
 
 or in XML::
@@ -102,7 +105,7 @@ or in XML::
     <!-- app/config.xml -->
     <container>
         <app:config>
-            <app:user default_locale="en_US">
+            <app:session default-locale="en_US">
         </app:config>
     </container>
 
@@ -117,14 +120,17 @@ in YAML::
 
     # app/config.yml
     stof_doctrine_extensions.config:
-        default: ~
+        orm:
+            default: ~
 
 or in XML::
 
     <!-- app/config.xml -->
     <container xmlns:stof_doctrine_extensions="http://www.symfony-project.org/schema/dic/stof_doctrine_extensions">
         <stof_doctrine_extensions:config>
-            <stof_doctrine_extensions:entity-manager id="default" />
+            <stof_doctrine_extensions:orm>
+                <stof_doctrine_extensions:entity-manager id="default" />
+            </stof_doctrine_extensions:orm>
         </stof_doctrine_extensions:config>
     </container>
 
@@ -186,26 +192,29 @@ in YAML::
 
     # app/config.yml
     stof_doctrine_extensions.config:
-        default:
-            tree: false
-            timestampable: true # not needed: listeners are enabled by default
-        other:
-            timestampable: false
+        orm:
+            default:
+                tree: false
+                timestampable: true # not needed: listeners are enabled by default
+            other:
+                timestampable: false
 
 or in XML::
 
     <!-- app/config.xml -->
     <container xmlns:doctrine_extensions="http://www.symfony-project.org/schema/dic/stof_doctrine_extensions">
         <stof_doctrine_extensions:config>
-            <stof_doctrine_extensions:entity-manager
-                id="default"
-                tree="false"
-                timestampable="true"
-            />
-            <stof_doctrine_extensions:entity-manager
-                id="other"
-                timestampable="false"
-            />
+            <stof_doctrine_extensions:orm>
+                <stof_doctrine_extensions:entity-manager
+                    id="default"
+                    tree="false"
+                    timestampable="true"
+                />
+                <stof_doctrine_extensions:entity-manager
+                    id="other"
+                    timestampable="false"
+                />
+            </stof_doctrine_extensions:orm>
         </stof_doctrine_extensions:config>
     </container>
 
@@ -214,7 +223,7 @@ Attaching and Removing listeners manually
 
 You can manage the listener with the ``ListenerManager``::
 
-    $lm = $container->get('doctrine_extensions.listener_manager');
+    $lm = $container->get('stof_doctrine_extensions.orm.listener_manager');
 
 The ``ListenerManager`` provides method to attach and remove each
 listener.

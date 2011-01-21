@@ -11,9 +11,6 @@ class DoctrineExtensionsExtension extends Extension
 {
     public function configLoad(array $config, ContainerBuilder $container)
     {
-        $loader = new XmlFileLoader($container, __DIR__.'/../Resources/config');
-        $loader->load('listener_manager.xml');
-
         $defaultListeners = array (
             'tree' => true,
             'timestampable' => true,
@@ -21,18 +18,24 @@ class DoctrineExtensionsExtension extends Extension
             'sluggable' => true,
         );
 
-        $entity_managers = array ();
-        $emConfig = $config;
-        if (isset($config['entity-managers'])){
-            $emConfig = $config['entity-managers'];
-        }
-        foreach ($emConfig as $name => $listeners){
-            if (null === $listeners){
-                $listeners = array ();
+        if (isset($config['orm'])) {
+            $loader = new XmlFileLoader($container, __DIR__.'/../Resources/config');
+            $loader->load('orm.xml');
+
+            $entity_managers = array ();
+            $emConfig = $config['orm'];
+            foreach ($emConfig as $name => $listeners){
+                if (null === $listeners){
+                    $listeners = array ();
+                }
+                if (isset($listeners['id'])) {
+                    $name = $listeners['id'];
+                    unset ($listeners['id']);
+                }
+                $entity_managers[$name] = array_merge($defaultListeners, $listeners);
             }
-            $entity_managers[isset($listeners['id']) ? $listeners['id'] : $name] = array_merge($defaultListeners, $listeners);
+            $container->setParameter('stof_doctrine_extensions.orm.entity_managers', $entity_managers);
         }
-        $container->setParameter('doctrine_extensions.entity_managers', $entity_managers);
     }
 
     /**
