@@ -80,7 +80,9 @@ See the official documentation_ for details.
             StofDoctrineExtensionsBundle: ~
             # ... your others bundle
 
-Note: This is only necessary if you want to use the Translatable behavior. The
+.. Note::
+
+    This is only necessary if you want to use the Translatable behavior.
 
 Configure the bundle
 ====================
@@ -122,6 +124,8 @@ in YAML::
     stof_doctrine_extensions.config:
         orm:
             default: ~
+        mongodb:
+            default: ~
 
 or in XML::
 
@@ -131,6 +135,9 @@ or in XML::
             <stof_doctrine_extensions:orm>
                 <stof_doctrine_extensions:entity-manager id="default" />
             </stof_doctrine_extensions:orm>
+            <stof_doctrine_extensions:mongodb>
+                <stof_doctrine_extensions:document-manager id="default" />
+            </stof_doctrine_extensions:mongodb>
         </stof_doctrine_extensions:config>
     </container>
 
@@ -218,6 +225,8 @@ or in XML::
         </stof_doctrine_extensions:config>
     </container>
 
+Same is available for MongoDB.
+
 Overriding the listeners
 ------------------------
 
@@ -230,10 +239,12 @@ in YAML::
     stof_doctrine_extensions.config:
         class:
             orm:
-                tree: MyBundle\TreeListener
-                timestampable: MyBundle\TimestampableListener
-                sluggable: ~
-                translatable: ~
+                tree:           MyBundle\TreeListener
+                timestampable:  MyBundle\TimestampableListener
+                sluggable:      ~
+                translatable:   ~
+            mongodb:
+                sluggable:      MyBundle\SluggableListener
 
 or in XML::
 
@@ -245,6 +256,9 @@ or in XML::
                     tree="MyBundle\TreeListener"
                     timestampable="MyBundle\TimestampableListener"
                 />
+                <stof_doctrine_extensions:mongodb
+                    sluggable="MyBundle\SluggableListener"
+                />
             </stof_doctrine_extensions:class>
         </stof_doctrine_extensions:config>
     </container>
@@ -255,6 +269,7 @@ Attaching and Removing listeners manually
 You can manage the listener with the ``ListenerManager``::
 
     $lm = $container->get('stof_doctrine_extensions.orm.listener_manager');
+    $lm = $container->get('stof_doctrine_extensions.odm.mongodb.listener_manager');
 
 The ``ListenerManager`` provides method to attach and remove each
 listener.

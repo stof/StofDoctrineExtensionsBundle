@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://www.symfony-project.org/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.symfony-project.org/schema/dic/services http://www.symfony-project.org/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="stof_doctrine_extensions.odm.mongodb.listener_manager.class">Stof\DoctrineExtensionsBundle\ODM\MongoDB\ListenerManager</parameter>
+        <!--<parameter key="stof_doctrine_extensions.odm.mongodb.listener.timestampable.class">Gedmo\Timestampable\TimestampableListener</parameter>
+        <parameter key="stof_doctrine_extensions.odm.mongodb.listener.tree.class">Gedmo\Tree\TreeListener</parameter>-->
+        <parameter key="stof_doctrine_extensions.odm.mongodb.listener.sluggable.class">Gedmo\Sluggable\ODM\MongoDB\SluggableListener</parameter>
+        <!--<parameter key="stof_doctrine_extensions.odm.mongodb.listener.translatable.class">Stof\DoctrineExtensionsBundle\ORM\TranslationListener</parameter>-->
+    </parameters>
+
+    <services>
+        <service id="stof_doctrine_extensions.odm.mongodb.listener_manager" class="%stof_doctrine_extensions.odm.mongodb.listener_manager.class%">
+            <argument type="service" id="stof_doctrine_extensions.odm.mongodb.listener.timestampable" on-invalid="null" />
+            <argument type="service" id="stof_doctrine_extensions.odm.mongodb.listener.tree" on-invalid="null" />
+            <argument type="service" id="stof_doctrine_extensions.odm.mongodb.listener.sluggable" on-invalid="null" />
+            <argument type="service" id="stof_doctrine_extensions.odm.mongodb.listener.translatable" on-invalid="null" />
+            <argument type="service" id="session" on-invalid="ignore" />
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+            <tag name="kernel.listener" />
+        </service>
+<!--
+        <service id="stof_doctrine_extensions.odm.mongodb.listener.timestampable" class="%stof_doctrine_extensions.odm.mongodb.listener.timestampable.class%" public="false" />
+
+        <service id="stof_doctrine_extensions.odm.mongodb.listener.tree" class="%stof_doctrine_extensions.odm.mongodb.listener.tree.class%" public="false" />
+-->
+        <service id="stof_doctrine_extensions.odm.mongodb.listener.sluggable" class="%stof_doctrine_extensions.odm.mongodb.listener.sluggable.class%" public="false" />
+<!--
+        <service id="stof_doctrine_extensions.odm.mongodb.listener.translatable" class="%stof_doctrine_extensions.odm.mongodb.listener.translatable.class%" public="false">
+            <call method="setDefaultLocale">
+                <argument>%session.default_locale%</argument>
+            </call>
+        </service>-->
+    </services>
+</container>

@@ -46,7 +46,7 @@ abstract class AbstractListenerManager extends ContainerAware
         $this->treeListener = $treeListener;
         $this->sluggableListener = $sluggableListener;
         $this->translationListener = $translationListener;
-        if (null !== $session) {
+        if (null !== $session && null !== $this->translationListener) {
             $this->translationListener->setTranslatableLocale($session->getLocale());
         }
     }
