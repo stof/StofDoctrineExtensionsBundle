@@ -227,6 +227,12 @@ or in XML::
 
 Same is available for MongoDB.
 
+.. Caution::
+
+    If you configure the listeners of an entity manager in several
+    config file the last one will be used. So you have to list all the
+    listeners you want to detach.
+
 Overriding the listeners
 ------------------------
 
