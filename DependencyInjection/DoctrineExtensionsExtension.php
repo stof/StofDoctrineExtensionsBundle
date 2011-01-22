@@ -2,9 +2,8 @@
 
 namespace Stof\DoctrineExtensionsBundle\DependencyInjection;
 
-use Symfony\Component\DependencyInjection\Extension\Extension;
+use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class DoctrineExtensionsExtension extends Extension
@@ -18,49 +17,50 @@ class DoctrineExtensionsExtension extends Extension
             'sluggable' => true,
         );
         $loader = new XmlFileLoader($container, __DIR__.'/../Resources/config');
-        $config = $this->mergeConfigurations($configs);
 
-        if (isset($config['orm'])) {
-            $loader->load('orm.xml');
+        foreach ($configs as $$config) {
+            if (isset($config['orm'])) {
+                $loader->load('orm.xml');
 
-            $entity_managers = array ();
-            $emConfig = $config['orm'];
-            foreach ($emConfig as $name => $listeners){
-                if (null === $listeners){
-                    $listeners = array ();
+                $entity_managers = $container->getParameter('stof_doctrine_extensions.orm.entity_managers');
+                $emConfig = $config['orm'];
+                foreach ($emConfig as $name => $listeners) {
+                    if (null === $listeners){
+                        $listeners = array ();
+                    }
+                    if (isset($listeners['id'])) {
+                        $name = $listeners['id'];
+                        unset ($listeners['id']);
+                    }
+                    $entity_managers[$name] = array_merge($defaultListeners, $listeners);
                 }
-                if (isset($listeners['id'])) {
-                    $name = $listeners['id'];
-                    unset ($listeners['id']);
-                }
-                $entity_managers[$name] = array_merge($defaultListeners, $listeners);
+                $container->setParameter('stof_doctrine_extensions.orm.entity_managers', $entity_managers);
             }
-            $container->setParameter('stof_doctrine_extensions.orm.entity_managers', $entity_managers);
-        }
 
-        if (isset($config['mongodb'])) {
-            $loader->load('mongodb.xml');
+            if (isset($config['mongodb'])) {
+                $loader->load('mongodb.xml');
 
-            $document_managers = array ();
-            $mongodbConfig = $config['mongodb'];
-            foreach ($mongodbConfig as $name => $listeners){
-                if (null === $listeners){
-                    $listeners = array ();
+                $document_managers = $container->getParameter('stof_doctrine_extensions.odm.mongodb.document_managers');
+                $mongodbConfig = $config['mongodb'];
+                foreach ($mongodbConfig as $name => $listeners) {
+                    if (null === $listeners) {
+                        $listeners = array ();
+                    }
+                    if (isset($listeners['id'])) {
+                        $name = $listeners['id'];
+                        unset ($listeners['id']);
+                    }
+                    $document_managers[$name] = array_merge($defaultListeners, $listeners);
                 }
-                if (isset($listeners['id'])) {
-                    $name = $listeners['id'];
-                    unset ($listeners['id']);
-                }
-                $document_managers[$name] = array_merge($defaultListeners, $listeners);
+                $container->setParameter('stof_doctrine_extensions.odm.mongodb.document_managers', $document_managers);
             }
-            $container->setParameter('stof_doctrine_extensions.odm.mongodb.document_managers', $document_managers);
-        }
 
-        if (isset($config['class'])) {
-            $this->remapParametersNamespaces($config['class'], $container, array(
-                'orm'       => 'stof_doctrine_extensions.orm.listener.%s.class',
-                'mongodb'   => 'stof_doctrine_extensions.odm.mongodb.listener.%s.class',
-            ));
+            if (isset($config['class'])) {
+                $this->remapParametersNamespaces($config['class'], $container, array(
+                    'orm'       => 'stof_doctrine_extensions.orm.listener.%s.class',
+                    'mongodb'   => 'stof_doctrine_extensions.odm.mongodb.listener.%s.class',
+                ));
+            }
         }
     }
 
@@ -94,44 +94,6 @@ class DoctrineExtensionsExtension extends Extension
                 }
             }
         }
-    }
-
-    /**
-     * Merges the configurations
-     *
-     * @param array $configs
-     * @return array
-     */
-    protected function mergeConfigurations(array $configs)
-    {
-        $config = array ();
-        foreach ($configs as $file) {
-            $config = $this->mergeRecursively($config, $file);
-        }
-
-        return $config;
-    }
-
-    /**
-     * Merges two configurations recursively
-     *
-     * @param array $oldConfig
-     * @param array $newConfig
-     * @return array
-     */
-    protected function mergeRecursively(array $oldConfig, array $newConfig)
-    {
-        foreach ($newConfig as $key => $value) {
-            if (!is_array($value)) {
-                $oldConfig[$key] = $value;
-            } elseif (!array_key_exists($key, $oldConfig)) {
-                $oldConfig[$key] = $value;
-            } else {
-                $oldConfig[$key] = $this->mergeRecursively($oldConfig[$key], $value);
-            }
-        }
-
-        return $oldConfig;
     }
 
     /**

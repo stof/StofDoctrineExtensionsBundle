@@ -10,6 +10,7 @@
         <parameter key="stof_doctrine_extensions.orm.listener.tree.class">Gedmo\Tree\TreeListener</parameter>
         <parameter key="stof_doctrine_extensions.orm.listener.sluggable.class">Gedmo\Sluggable\SluggableListener</parameter>
         <parameter key="stof_doctrine_extensions.orm.listener.translatable.class">Stof\DoctrineExtensionsBundle\ORM\TranslationListener</parameter>
+        <parameter key="stof_doctrine_extensions.orm.entity_managers" type="collection"></parameter>
     </parameters>
 
     <services>

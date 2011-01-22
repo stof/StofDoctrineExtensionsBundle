@@ -10,6 +10,7 @@
         <parameter key="stof_doctrine_extensions.odm.mongodb.listener.tree.class">Gedmo\Tree\TreeListener</parameter>-->
         <parameter key="stof_doctrine_extensions.odm.mongodb.listener.sluggable.class">Gedmo\Sluggable\ODM\MongoDB\SluggableListener</parameter>
         <!--<parameter key="stof_doctrine_extensions.odm.mongodb.listener.translatable.class">Stof\DoctrineExtensionsBundle\ORM\TranslationListener</parameter>-->
+        <parameter key="stof_doctrine_extensions.odm.mongodb.document_managers" type="collection"></parameter>
     </parameters>
 
     <services>
