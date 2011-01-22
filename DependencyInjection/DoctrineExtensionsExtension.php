@@ -18,7 +18,7 @@ class DoctrineExtensionsExtension extends Extension
         );
         $loader = new XmlFileLoader($container, __DIR__.'/../Resources/config');
 
-        foreach ($configs as $$config) {
+        foreach ($configs as $config) {
             if (isset($config['orm'])) {
                 $loader->load('orm.xml');
 
