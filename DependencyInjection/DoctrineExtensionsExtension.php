@@ -62,6 +62,30 @@ class DoctrineExtensionsExtension extends Extension
                 ));
             }
         }
+
+        if ($container->hasParameter('stof_doctrine_extensions.orm.entity_managers')) {
+            foreach ($container->getParameter('stof_doctrine_extensions.orm.entity_managers') as $manager => $listeners) {
+                foreach ($listeners as $ext => $enabled) {
+                    $listener = sprintf('stof_doctrine_extensions.orm.listener.%s', $ext);
+                    if ($enabled && $container->hasDefinition($listener)) {
+                        $container->getDefinition($listener)
+                            ->addTag(sprintf('doctrine.dbal.%s_event_subscriber', $manager));
+                    }
+                }
+            }
+        }
+
+        if ($container->hasParameter('stof_doctrine_extensions.odm.mongodb.document_managers')) {
+            foreach ($container->getParameter('stof_doctrine_extensions.odm.mongodb.document_managers') as $manager => $listeners) {
+                foreach ($listeners as $ext => $enabled) {
+                    $listener = sprintf('stof_doctrine_extensions.odm.mongodb.listener.%s', $ext);
+                    if ($enabled && $container->hasDefinition($listener)) {
+                        $container->getDefinition($listener)
+                            ->addTag(sprintf('doctrine.odm.mongodb.%s_event_subscriber', $manager));
+                    }
+                }
+            }
+        }
     }
 
     protected function remapParameters(array $config, ContainerBuilder $container, array $map)

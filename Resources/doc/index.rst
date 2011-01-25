@@ -269,34 +269,6 @@ or in XML::
         </stof_doctrine_extensions:config>
     </container>
 
-Attaching and Removing listeners manually
------------------------------------------
-
-You can manage the listener with the ``ListenerManager``::
-
-    $lm = $container->get('stof_doctrine_extensions.orm.listener_manager');
-    $lm = $container->get('stof_doctrine_extensions.odm.mongodb.listener_manager');
-
-The ``ListenerManager`` provides method to attach and remove each
-listener.
-
-::
-
-    $lm->addTreeListener($em);
-    $lm->addSluggableListener($em);
-    $lm->addTimestampableListener($em);
-    $lm->addTranslationListener($em);
-
-    $lm->removeTreeListener($em)
-    $lm->removeSluggableListener($em)
-    $lm->removeTimestampableListener($em)
-    $lm->removeTranslationListener($em)
-
-You can also attach or detach all the listeners::
-
-    $lm->addAllListeners($em);
-    $lm->removeAllListeners($em);
-
 .. _DoctrineExtensions: http://github.com/l3pp4rd/DoctrineExtensions
 .. _blog:               http://gediminasm.org/articles
 .. _documentation:      http://docs.symfony-reloaded.org/master/guides/doctrine/orm/overview.html
