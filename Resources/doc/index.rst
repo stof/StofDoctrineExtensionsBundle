@@ -72,10 +72,18 @@ Add DoctrineExtensionsBundle to your mapping
 
 See the official documentation_ for details.
 
-::
+for ORM::
 
     # app/config.yml
     doctrine.orm:
+        mappings:
+            StofDoctrineExtensionsBundle: ~
+            # ... your others bundle
+
+or for MongoDB ODM::
+
+    # app/config.yml
+    doctrine_odm.mongodb:
         mappings:
             StofDoctrineExtensionsBundle: ~
             # ... your others bundle
@@ -116,7 +124,7 @@ Activate the bundle
 
 You have to activate the extensions for each entity manager for which
 you want to enable the extensions. The id is the one used in the ORM
-configuration.
+configuration (or the ODM one).
 
 in YAML::
 
@@ -153,7 +161,8 @@ Use the DoctrineExtensions library
 All explanations about this library are available on the official blog_
 
 The default entity for translations is
-``Stof\DoctrineExtensionsBundle\Entity\TranslationEntity``
+``Stof\DoctrineExtensionsBundle\Entity\Translation``. The default
+document is ``Stof\DoctrineExtensionsBundle\Document\Translation``.
 
 Creating your own translation entity
 ------------------------------------
@@ -162,7 +171,10 @@ When you have a great number of entries for an entity you should create
 a dedicated translation entity to have good performances. The only
 difference when using it with Symfony2 is the mapped-superclass to use.
 
-::
+The simpliest way to do it is to copy the default translation entity
+and just change the namespace and the class name.
+
+Here is an example for the ORM::
 
     // src/Application/MyBundle/Entity/MyTranslationEntity.php
 
@@ -173,17 +185,26 @@ difference when using it with Symfony2 is the mapped-superclass to use.
     /**
      * Application\MyBundle\Entity\MyTranslationEntity
      *
-     * @orm:Entity(repositoryClass="Gedmo\Translatable\Repository\TranslationRepository")
-     * @orm:Table(name="my_translation", indexes={
-     *      @orm:index(name="lookup_idx", columns={"locale", "entity", "foreign_key", "field"})
-     * })
+     * @orm:Entity(repositoryClass="Gedmo\Translatable\Entity\Repository\TranslationRepository")
+     * @orm:Table(
+     *         name="ext_translations",
+     *         indexes={@orm:index(name="translations_lookup_idx", columns={
+     *             "locale", "entity", "foreign_key"
+     *         })},
+     *         uniqueConstraints={@orm:UniqueConstraint(name="lookup_unique_idx", columns={
+     *             "locale", "entity", "foreign_key", "field"
+     *         })}
+     * )
      */
     class TranslationEntity extends AbstractTranslation
     {
     }
 
+Same is doable for the ODM.
+
 You can also create your own repositoryClass by extending
-``Gedmo\Translatable\Repository\TranslationRepository``
+``Gedmo\Translatable\Entity\Repository\TranslationRepository`` or
+``Gedmo\Translatable\Document\Repository\TranslationRepository``
 
 Advanced use
 ============
@@ -225,7 +246,8 @@ or in XML::
         </stof_doctrine_extensions:config>
     </container>
 
-Same is available for MongoDB.
+Same is available for MongoDB using ``document-manager`` in the XML
+files instead of ``entity-manager``.
 
 .. Caution::
 
