@@ -123,8 +123,9 @@ Activate the bundle
 -------------------
 
 You have to activate the extensions for each entity manager for which
-you want to enable the extensions. The id is the one used in the ORM
-configuration (or the ODM one).
+you want to enable the extensions. The id is the id of the DBAL
+connection when using the ORM behaviors. It is the id of the document
+manager when using mongoDB
 
 in YAML::
 
@@ -148,12 +149,6 @@ or in XML::
             </stof_doctrine_extensions:mongodb>
         </stof_doctrine_extensions:config>
     </container>
-
-.. Caution::
-
-    This uses the core.request event to register the listeners so you
-    have to enable the extensions manually in your commands as you have
-    no request. See the `Advanced use` paragraph for the explanations.
 
 Use the DoctrineExtensions library
 ==================================
@@ -258,8 +253,9 @@ files instead of ``entity-manager``.
 Overriding the listeners
 ------------------------
 
-You can change the listeners used by extending the Gedmo listeners and
-giving the class name in the configuration.
+You can change the listeners used by extending the Gedmo listeners (or
+the listeners of the bundle for translations) and giving the class name
+in the configuration.
 
 in YAML::
 
@@ -290,34 +286,6 @@ or in XML::
             </stof_doctrine_extensions:class>
         </stof_doctrine_extensions:config>
     </container>
-
-Attaching and Removing listeners manually
------------------------------------------
-
-You can manage the listener with the ``ListenerManager``::
-
-    $lm = $container->get('stof_doctrine_extensions.orm.listener_manager');
-    $lm = $container->get('stof_doctrine_extensions.odm.mongodb.listener_manager');
-
-The ``ListenerManager`` provides method to attach and remove each
-listener.
-
-::
-
-    $lm->addTreeListener($em);
-    $lm->addSluggableListener($em);
-    $lm->addTimestampableListener($em);
-    $lm->addTranslationListener($em);
-
-    $lm->removeTreeListener($em)
-    $lm->removeSluggableListener($em)
-    $lm->removeTimestampableListener($em)
-    $lm->removeTranslationListener($em)
-
-You can also attach or detach all the listeners::
-
-    $lm->addAllListeners($em);
-    $lm->removeAllListeners($em);
 
 .. _DoctrineExtensions: http://github.com/l3pp4rd/DoctrineExtensions
 .. _blog:               http://gediminasm.org/articles

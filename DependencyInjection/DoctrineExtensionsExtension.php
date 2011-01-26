@@ -10,6 +10,8 @@ class DoctrineExtensionsExtension extends Extension
 {
     public function configLoad(array $configs, ContainerBuilder $container)
     {
+        $entity_managers = array ();
+        $document_managers = array ();
         $defaultListeners = array (
             'tree' => true,
             'timestampable' => true,
@@ -22,7 +24,6 @@ class DoctrineExtensionsExtension extends Extension
             if (isset($config['orm'])) {
                 $loader->load('orm.xml');
 
-                $entity_managers = $container->getParameter('stof_doctrine_extensions.orm.entity_managers');
                 $emConfig = $config['orm'];
                 foreach ($emConfig as $name => $listeners) {
                     if (null === $listeners){
@@ -34,13 +35,11 @@ class DoctrineExtensionsExtension extends Extension
                     }
                     $entity_managers[$name] = array_merge($defaultListeners, $listeners);
                 }
-                $container->setParameter('stof_doctrine_extensions.orm.entity_managers', $entity_managers);
             }
 
             if (isset($config['mongodb'])) {
                 $loader->load('mongodb.xml');
 
-                $document_managers = $container->getParameter('stof_doctrine_extensions.odm.mongodb.document_managers');
                 $mongodbConfig = $config['mongodb'];
                 foreach ($mongodbConfig as $name => $listeners) {
                     if (null === $listeners) {
@@ -52,7 +51,6 @@ class DoctrineExtensionsExtension extends Extension
                     }
                     $document_managers[$name] = array_merge($defaultListeners, $listeners);
                 }
-                $container->setParameter('stof_doctrine_extensions.odm.mongodb.document_managers', $document_managers);
             }
 
             if (isset($config['class'])) {
@@ -60,6 +58,32 @@ class DoctrineExtensionsExtension extends Extension
                     'orm'       => 'stof_doctrine_extensions.orm.listener.%s.class',
                     'mongodb'   => 'stof_doctrine_extensions.odm.mongodb.listener.%s.class',
                 ));
+            }
+        }
+
+        foreach ($entity_managers as $name => $listeners) {
+            if (!$container->hasDefinition(sprintf('doctrine.dbal.%s_connection', $name))) {
+                throw new \InvalidArgumentException(sprintf('The "%s" DBAL connection does not exist', $name));
+            }
+            foreach ($listeners as $ext => $enabled) {
+                $listener = sprintf('stof_doctrine_extensions.orm.listener.%s', $ext);
+                if ($enabled && $container->hasDefinition($listener)) {
+                    $container->getDefinition($listener)
+                            ->addTag(sprintf('doctrine.dbal.%s_event_subscriber', $name));
+                }
+            }
+        }
+
+        foreach ($document_managers as $name => $listeners) {
+            if (!$container->hasDefinition(sprintf('doctrine.odm.mongodb.%s_document_manager', $name))) {
+                throw new \InvalidArgumentException(sprintf('The "%s" document manager does not exist', $name));
+            }
+            foreach ($listeners as $ext => $enabled) {
+                $listener = sprintf('stof_doctrine_extensions.odm.mongodb.listener.%s', $ext);
+                if ($enabled && $container->hasDefinition($listener)) {
+                    $container->getDefinition($listener)
+                            ->addTag(sprintf('doctrine.odm.mongodb.%s_event_subscriber', $name));
+                }
             }
         }
     }

@@ -5,34 +5,17 @@
     xsi:schemaLocation="http://www.symfony-project.org/schema/dic/services http://www.symfony-project.org/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="stof_doctrine_extensions.orm.listener_manager.class">Stof\DoctrineExtensionsBundle\ORM\ListenerManager</parameter>
         <parameter key="stof_doctrine_extensions.orm.listener.timestampable.class">Gedmo\Timestampable\TimestampableListener</parameter>
         <parameter key="stof_doctrine_extensions.orm.listener.tree.class">Gedmo\Tree\TreeListener</parameter>
         <parameter key="stof_doctrine_extensions.orm.listener.sluggable.class">Gedmo\Sluggable\SluggableListener</parameter>
         <parameter key="stof_doctrine_extensions.orm.listener.translatable.class">Stof\DoctrineExtensionsBundle\ORM\TranslationListener</parameter>
-        <parameter key="stof_doctrine_extensions.orm.entity_managers" type="collection"></parameter>
     </parameters>
 
     <services>
-        <service id="stof_doctrine_extensions.orm.listener_manager" class="%stof_doctrine_extensions.orm.listener_manager.class%">
-            <argument type="service" id="stof_doctrine_extensions.orm.listener.timestampable" />
-            <argument type="service" id="stof_doctrine_extensions.orm.listener.tree" />
-            <argument type="service" id="stof_doctrine_extensions.orm.listener.sluggable" />
-            <argument type="service" id="stof_doctrine_extensions.orm.listener.translatable" />
-            <argument type="service" id="session" on-invalid="ignore" />
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-            <tag name="kernel.listener" />
-        </service>
-
-        <service id="stof_doctrine_extensions.orm.listener.timestampable" class="%stof_doctrine_extensions.orm.listener.timestampable.class%" public="false" />
-
-        <service id="stof_doctrine_extensions.orm.listener.tree" class="%stof_doctrine_extensions.orm.listener.tree.class%" public="false" />
-
-        <service id="stof_doctrine_extensions.orm.listener.sluggable" class="%stof_doctrine_extensions.orm.listener.sluggable.class%" public="false" />
-
-        <service id="stof_doctrine_extensions.orm.listener.translatable" class="%stof_doctrine_extensions.orm.listener.translatable.class%" public="false">
+        <service id="stof_doctrine_extensions.orm.listener.timestampable" class="%stof_doctrine_extensions.orm.listener.timestampable.class%" />
+        <service id="stof_doctrine_extensions.orm.listener.tree" class="%stof_doctrine_extensions.orm.listener.tree.class%" />
+        <service id="stof_doctrine_extensions.orm.listener.sluggable" class="%stof_doctrine_extensions.orm.listener.sluggable.class%" />
+        <service id="stof_doctrine_extensions.orm.listener.translatable" class="%stof_doctrine_extensions.orm.listener.translatable.class%">
             <call method="setDefaultLocale">
                 <argument>%session.default_locale%</argument>
             </call>
