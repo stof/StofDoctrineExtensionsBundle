@@ -20,6 +20,9 @@
             <call method="setDefaultLocale">
                 <argument>%session.default_locale%</argument>
             </call>
+            <call method="setTranslatableLocaleFromSession">
+                <argument type="service" id="session" on-invalid="ignore" />
+            </call>
         </service>
     </services>
 </container>

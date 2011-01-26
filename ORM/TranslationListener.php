@@ -3,6 +3,7 @@
 namespace Stof\DoctrineExtensionsBundle\ORM;
 
 use Gedmo\Translatable\TranslationListener as BaseTranslationListener;
+use Symfony\Component\HttpFoundation\Session;
 
 /**
  * TranslationListener
@@ -12,4 +13,17 @@ use Gedmo\Translatable\TranslationListener as BaseTranslationListener;
 class TranslationListener extends BaseTranslationListener
 {
     protected $_defaultTranslationEntity = 'Stof\DoctrineExtensionsBundle\Entity\Translation';
+
+    /**
+     * Set the translation listener locale from the session.
+     *
+     * @param Session $session
+     * @return void
+     */
+    public function setTranslatableLocaleFromSession(Session $session = null)
+    {
+        if ($session !== null) {
+            $this->setTranslatableLocale($session->getLocale());
+        }
+    }
 }
