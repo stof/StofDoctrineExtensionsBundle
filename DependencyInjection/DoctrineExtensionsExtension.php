@@ -8,10 +8,12 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class DoctrineExtensionsExtension extends Extension
 {
+    protected $entityManagers   = array();
+    protected $documentManagers = array();
+
     public function configLoad(array $configs, ContainerBuilder $container)
     {
-        $entity_managers = array ();
-        $document_managers = array ();
+
         $defaultListeners = array (
             'tree' => true,
             'timestampable' => true,
@@ -33,7 +35,7 @@ class DoctrineExtensionsExtension extends Extension
                         $name = $listeners['id'];
                         unset ($listeners['id']);
                     }
-                    $entity_managers[$name] = array_merge($defaultListeners, $listeners);
+                    $this->entityManagers[$name] = array_merge($defaultListeners, $listeners);
                 }
             }
 
@@ -49,7 +51,7 @@ class DoctrineExtensionsExtension extends Extension
                         $name = $listeners['id'];
                         unset ($listeners['id']);
                     }
-                    $document_managers[$name] = array_merge($defaultListeners, $listeners);
+                    $this->documentManagers[$name] = array_merge($defaultListeners, $listeners);
                 }
             }
 
@@ -61,7 +63,7 @@ class DoctrineExtensionsExtension extends Extension
             }
         }
 
-        foreach ($entity_managers as $name => $listeners) {
+        foreach ($this->entityManagers as $name => $listeners) {
             foreach ($listeners as $ext => $enabled) {
                 $listener = sprintf('stof_doctrine_extensions.orm.listener.%s', $ext);
                 if ($enabled && $container->hasDefinition($listener)) {
@@ -71,7 +73,7 @@ class DoctrineExtensionsExtension extends Extension
             }
         }
 
-        foreach ($document_managers as $name => $listeners) {
+        foreach ($this->documentManagers as $name => $listeners) {
             foreach ($listeners as $ext => $enabled) {
                 $listener = sprintf('stof_doctrine_extensions.odm.mongodb.listener.%s', $ext);
                 if ($enabled && $container->hasDefinition($listener)) {
@@ -110,6 +112,21 @@ class DoctrineExtensionsExtension extends Extension
                         $container->setParameter(sprintf($map, $name), $value);
                     }
                 }
+            }
+        }
+    }
+
+    public function configValidate(ContainerBuilder $container)
+    {
+        foreach (array_keys($this->entityManagers) as $name) {
+            if (!$container->hasDefinition(sprintf('doctrine.dbal.%s_connection', $name))) {
+                throw new \InvalidArgumentException(sprintf('Invalid %s config: DBAL connection "%s" not found', $this->getAlias(), $name));
+            }
+        }
+
+        foreach (array_keys($this->documentManagers) as $name) {
+            if (!$container->hasDefinition(sprintf('doctrine.odm.mongodb.%s_document_manager', $name))) {
+                throw new \InvalidArgumentException(sprintf('Invalid %s config: document manager "%s" not found', $this->getAlias(), $name));
             }
         }
     }
