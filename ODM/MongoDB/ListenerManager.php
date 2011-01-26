@@ -18,27 +18,17 @@ class ListenerManager extends AbstractListenerManager
             }/*
             if (isset($listeners['tree']) && $listeners['tree']){
                 $this->addTreeListener($dm);
-            }
+            }*/
             if (isset($listeners['translatable']) && $listeners['translatable']){
                 $this->addTranslationListener($dm);
             }
             if (isset($listeners['timestampable']) && $listeners['timestampable']){
                 $this->addTimestampableListener($dm);
-            }*/
+            }
             if (isset($listeners['sluggable']) && $listeners['sluggable']){
                 $this->addSluggableListener($dm);
             }
         }
-    }
-
-    public function addTimestampableListener($om)
-    {
-        return;
-    }
-
-    public function  addTranslationListener($om)
-    {
-        return;
     }
 
     public function addTreeListener($om)
