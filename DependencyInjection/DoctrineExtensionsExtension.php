@@ -62,9 +62,6 @@ class DoctrineExtensionsExtension extends Extension
         }
 
         foreach ($entity_managers as $name => $listeners) {
-            if (!$container->hasDefinition(sprintf('doctrine.dbal.%s_connection', $name))) {
-                throw new \InvalidArgumentException(sprintf('The "%s" DBAL connection does not exist', $name));
-            }
             foreach ($listeners as $ext => $enabled) {
                 $listener = sprintf('stof_doctrine_extensions.orm.listener.%s', $ext);
                 if ($enabled && $container->hasDefinition($listener)) {
@@ -75,9 +72,6 @@ class DoctrineExtensionsExtension extends Extension
         }
 
         foreach ($document_managers as $name => $listeners) {
-            if (!$container->hasDefinition(sprintf('doctrine.odm.mongodb.%s_document_manager', $name))) {
-                throw new \InvalidArgumentException(sprintf('The "%s" document manager does not exist', $name));
-            }
             foreach ($listeners as $ext => $enabled) {
                 $listener = sprintf('stof_doctrine_extensions.odm.mongodb.listener.%s', $ext);
                 if ($enabled && $container->hasDefinition($listener)) {
