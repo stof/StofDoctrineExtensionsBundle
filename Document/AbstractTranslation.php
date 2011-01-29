@@ -45,7 +45,7 @@ abstract class AbstractTranslation
     private $foreignKey;
 
     /**
-     * @var text
+     * @var string
      *
      * @mongodb:String
      */
@@ -144,7 +144,7 @@ abstract class AbstractTranslation
     /**
      * Set content
      *
-     * @param text $content
+     * @param string $content
      */
     public function setContent($content)
     {
@@ -154,7 +154,7 @@ abstract class AbstractTranslation
     /**
      * Get content
      *
-     * @return text
+     * @return string
      */
     public function getContent()
     {

@@ -10,7 +10,7 @@ namespace Stof\DoctrineExtensionsBundle\Entity;
 abstract class AbstractTranslation
 {
     /**
-     * @var integer $id
+     * @var integer
      *
      * @orm:Column(name="id", type="integer")
      * @orm:Id
@@ -19,35 +19,35 @@ abstract class AbstractTranslation
     private $id;
 
     /**
-     * @var string $locale
+     * @var string
      *
      * @orm:Column(name="locale", type="string", length=8)
      */
     private $locale;
 
     /**
-     * @var string $entity
+     * @var string
      *
-     * @orm:Column(name="entity", type="string", length=255)
+     * @orm:Column(name="object_class", type="string", length=255)
      */
-    private $entity;
+    private $objectClass;
 
     /**
-     * @var string $field
+     * @var string
      *
      * @orm:Column(name="field", type="string", length=32)
      */
     private $field;
 
     /**
-     * @var string $foreignKey
+     * @var string
      *
      * @orm:Column(name="foreign_key", type="string", length="64")
      */
     private $foreignKey;
 
     /**
-     * @var text $content
+     * @var string
      *
      * @orm:Column(name="content", type="text", nullable=true)
      */
@@ -56,7 +56,7 @@ abstract class AbstractTranslation
     /**
      * Get id
      *
-     * @return integer $id
+     * @return integer
      */
     public function getId()
     {
@@ -76,7 +76,7 @@ abstract class AbstractTranslation
     /**
      * Get locale
      *
-     * @return string $locale
+     * @return string
      */
     public function getLocale()
     {
@@ -96,7 +96,7 @@ abstract class AbstractTranslation
     /**
      * Get field
      *
-     * @return string $field
+     * @return string
      */
     public function getField()
     {
@@ -104,23 +104,23 @@ abstract class AbstractTranslation
     }
 
     /**
-     * Set entity
+     * Set object class
      *
-     * @param string $entity
+     * @param string $objectClass
      */
-    public function setEntity($entity)
+    public function setObjectClass($objectClass)
     {
-        $this->entity = $entity;
+        $this->objectClass = $objectClass;
     }
 
     /**
-     * Get entity
+     * Get objectClass
      *
-     * @return string $entity
+     * @return string
      */
-    public function getEntity()
+    public function getObjectClass()
     {
-        return $this->entity;
+        return $this->objectClass;
     }
 
     /**
@@ -136,7 +136,7 @@ abstract class AbstractTranslation
     /**
      * Get foreignKey
      *
-     * @return string $foreignKey
+     * @return string
      */
     public function getForeignKey()
     {
@@ -146,7 +146,7 @@ abstract class AbstractTranslation
     /**
      * Set content
      *
-     * @param text $content
+     * @param string $content
      */
     public function setContent($content)
     {
@@ -156,7 +156,7 @@ abstract class AbstractTranslation
     /**
      * Get content
      *
-     * @return text $content
+     * @return string
      */
     public function getContent()
     {
