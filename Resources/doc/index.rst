@@ -47,7 +47,7 @@ Register the DoctrineExtensions and Stof namespaces
 
     // src/autoload.php
     $loader->registerNamespaces(array(
-        'Stof' => __DIR__,
+        'Stof' => __DIR__.'/../src',
         'Gedmo' => $vendorDir.'/doctrine-extensions/lib',
         // your other namespaces
     ));
