@@ -31,7 +31,7 @@ Add DoctrineExtensions to your vendor dir
 
 ::
 
-    git submodule add git://github.com/l3pp4rd/DoctrineExtensions.git src/vendor/doctrine-extensions
+    git submodule add git://github.com/l3pp4rd/DoctrineExtensions.git vendor/doctrine-extensions
 
 Add DoctrineExtensionsBundle to your src/Bundle dir
 ---------------------------------------------------
