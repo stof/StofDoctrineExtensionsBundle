@@ -45,10 +45,10 @@ Register the DoctrineExtensions and Stof namespaces
 
 ::
 
-    // src/autoload.php
+    // app/autoload.php
     $loader->registerNamespaces(array(
         'Stof' => __DIR__.'/../src',
-        'Gedmo' => $vendorDir.'/doctrine-extensions/lib',
+        'Gedmo' => __DIR__.'/../vendor/doctrine-extensions/lib',
         // your other namespaces
     ));
 
@@ -184,10 +184,10 @@ Here is an example for the ORM::
      * @orm:Table(
      *         name="ext_translations",
      *         indexes={@orm:index(name="translations_lookup_idx", columns={
-     *             "locale", "entity", "foreign_key"
+     *             "locale", "object_class", "foreign_key"
      *         })},
      *         uniqueConstraints={@orm:UniqueConstraint(name="lookup_unique_idx", columns={
-     *             "locale", "entity", "foreign_key", "field"
+     *             "locale", "object_class", "foreign_key", "field"
      *         })}
      * )
      */
