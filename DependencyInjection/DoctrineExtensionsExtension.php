@@ -4,6 +4,7 @@ namespace Stof\DoctrineExtensionsBundle\DependencyInjection;
 
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Loader\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class DoctrineExtensionsExtension extends Extension
@@ -20,7 +21,7 @@ class DoctrineExtensionsExtension extends Extension
             'translatable' => true,
             'sluggable' => true,
         );
-        $loader = new XmlFileLoader($container, __DIR__.'/../Resources/config');
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
         foreach ($configs as $config) {
             if (isset($config['orm'])) {
