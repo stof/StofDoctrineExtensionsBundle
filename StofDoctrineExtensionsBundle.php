@@ -8,7 +8,6 @@ use Stof\DoctrineExtensionsBundle\DependencyInjection\Compiler\ValidateExtension
 
 class StofDoctrineExtensionsBundle extends Bundle
 {
-
     /**
      * {@inheritdoc}
      */
@@ -16,21 +15,5 @@ class StofDoctrineExtensionsBundle extends Bundle
     {
         parent::registerExtensions($container);
         $container->addCompilerPass(new ValidateExtensionConfigurationPass());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getNamespace()
-    {
-        return __NAMESPACE__;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPath()
-    {
-        return strtr(__DIR__, '\\', '/');
     }
 }
