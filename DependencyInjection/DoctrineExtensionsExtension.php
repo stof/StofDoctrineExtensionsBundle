@@ -3,6 +3,7 @@
 namespace Stof\DoctrineExtensionsBundle\DependencyInjection;
 
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use Symfony\Component\DependencyInjection\Configuration\Processor;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Loader\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -14,74 +15,49 @@ class DoctrineExtensionsExtension extends Extension
 
     public function configLoad(array $configs, ContainerBuilder $container)
     {
+        $processor = new Processor();
+        $configuration = new Configuration();
 
-        $defaultListeners = array (
-            'tree' => true,
-            'timestampable' => true,
-            'translatable' => true,
-            'sluggable' => true,
-        );
+        $config = $processor->process($configuration->getConfigTree(), $configs);
+
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-        foreach ($configs as $config) {
-            if (isset($config['orm'])) {
-                $loader->load('orm.xml');
+        if ($config['orm']) {
+            $loader->load('orm.xml');
 
-                $emConfig = $config['orm'];
-                foreach ($emConfig as $name => $listeners) {
-                    if (null === $listeners){
-                        $listeners = array ();
+            foreach ($config['orm'] as $name => $listeners) {
+                foreach ($listeners as $ext => $enabled) {
+                    $listener = sprintf('stof_doctrine_extensions.orm.listener.%s', $ext);
+                    if ($enabled && $container->hasDefinition($listener)) {
+                        $container->getDefinition($listener)
+                                ->addTag(sprintf('doctrine.dbal.%s_event_subscriber', $name));
                     }
-                    if (isset($listeners['id'])) {
-                        $name = $listeners['id'];
-                        unset ($listeners['id']);
-                    }
-                    $this->entityManagers[$name] = array_merge($defaultListeners, $listeners);
                 }
-            }
 
-            if (isset($config['mongodb'])) {
-                $loader->load('mongodb.xml');
-
-                $mongodbConfig = $config['mongodb'];
-                foreach ($mongodbConfig as $name => $listeners) {
-                    if (null === $listeners) {
-                        $listeners = array ();
-                    }
-                    if (isset($listeners['id'])) {
-                        $name = $listeners['id'];
-                        unset ($listeners['id']);
-                    }
-                    $this->documentManagers[$name] = array_merge($defaultListeners, $listeners);
-                }
-            }
-
-            if (isset($config['class'])) {
-                $this->remapParametersNamespaces($config['class'], $container, array(
-                    'orm'       => 'stof_doctrine_extensions.orm.listener.%s.class',
-                    'mongodb'   => 'stof_doctrine_extensions.odm.mongodb.listener.%s.class',
-                ));
+                $this->entityManagers[$name] = $listeners;
             }
         }
 
-        foreach ($this->entityManagers as $name => $listeners) {
-            foreach ($listeners as $ext => $enabled) {
-                $listener = sprintf('stof_doctrine_extensions.orm.listener.%s', $ext);
-                if ($enabled && $container->hasDefinition($listener)) {
-                    $container->getDefinition($listener)
-                            ->addTag(sprintf('doctrine.dbal.%s_event_subscriber', $name));
+        if ($config['mongodb']) {
+            $loader->load('mongodb.xml');
+
+            foreach ($config['mongodb'] as $name => $listeners) {
+                foreach ($listeners as $ext => $enabled) {
+                    $listener = sprintf('stof_doctrine_extensions.odm.mongodb.listener.%s', $ext);
+                    if ($enabled && $container->hasDefinition($listener)) {
+                        $container->getDefinition($listener)
+                                ->addTag(sprintf('doctrine.odm.mongodb.%s_event_subscriber', $name));
+                    }
                 }
+                $this->documentManagers[$name] = $listeners;
             }
         }
 
-        foreach ($this->documentManagers as $name => $listeners) {
-            foreach ($listeners as $ext => $enabled) {
-                $listener = sprintf('stof_doctrine_extensions.odm.mongodb.listener.%s', $ext);
-                if ($enabled && $container->hasDefinition($listener)) {
-                    $container->getDefinition($listener)
-                            ->addTag(sprintf('doctrine.odm.mongodb.%s_event_subscriber', $name));
-                }
-            }
+        if (isset($config['class'])) {
+            $this->remapParametersNamespaces($config['class'], $container, array(
+                'orm'       => 'stof_doctrine_extensions.orm.listener.%s.class',
+                'mongodb'   => 'stof_doctrine_extensions.odm.mongodb.listener.%s.class',
+            ));
         }
     }
 
