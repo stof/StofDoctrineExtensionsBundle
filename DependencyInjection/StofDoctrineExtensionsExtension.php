@@ -8,12 +8,12 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class DoctrineExtensionsExtension extends Extension
+class StofDoctrineExtensionsExtension extends Extension
 {
     protected $entityManagers   = array();
     protected $documentManagers = array();
 
-    public function configLoad(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container)
     {
         $processor = new Processor();
         $configuration = new Configuration();

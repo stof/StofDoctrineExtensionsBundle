@@ -75,15 +75,16 @@ See the official documentation_ for details.
 for ORM::
 
     # app/config.yml
-    doctrine.orm:
-        mappings:
-            StofDoctrineExtensionsBundle: ~
-            # ... your others bundle
+    doctrine:
+        orm:
+            mappings:
+                StofDoctrineExtensionsBundle: ~
+                # ... your others bundle
 
 or for MongoDB ODM::
 
     # app/config.yml
-    doctrine_odm.mongodb:
+    doctrine_mongo_db:
         mappings:
             StofDoctrineExtensionsBundle: ~
             # ... your others bundle
@@ -106,7 +107,7 @@ default).
 in YAML::
 
     # app/config.yml
-    app.config:
+    framework:
         session:
             default_locale: en_US
 
@@ -114,7 +115,7 @@ or in XML::
 
     <!-- app/config.xml -->
     <container>
-        <app:config>
+        <framework:config>
             <app:session default-locale="en_US">
         </app:config>
     </container>
@@ -130,7 +131,7 @@ manager when using mongoDB
 in YAML::
 
     # app/config.yml
-    stof_doctrine_extensions.config:
+    stof_doctrine_extensions:
         orm:
             default: ~
         mongodb:
@@ -214,7 +215,7 @@ some of them explicitely.
 in YAML::
 
     # app/config.yml
-    stof_doctrine_extensions.config:
+    stof_doctrine_extensions:
         orm:
             default:
                 tree: false
@@ -260,7 +261,7 @@ in the configuration.
 in YAML::
 
     # app/config.yml
-    stof_doctrine_extensions.config:
+    stof_doctrine_extensions:
         class:
             orm:
                 tree:           MyBundle\TreeListener

@@ -15,7 +15,7 @@ class Configuration
     public function getConfigTree()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('stof_doctrine_extension:config', 'array');
+        $rootNode = $treeBuilder->root('stof_doctrine_extensions', 'array');
 
         $this->addVendorConfig($rootNode, 'orm');
         $this->addVendorConfig($rootNode, 'mongodb');
