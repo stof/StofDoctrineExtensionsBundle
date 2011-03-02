@@ -12,10 +12,10 @@
     </parameters>
 
     <services>
-        <service id="stof_doctrine_extensions.orm.listener.timestampable" class="%stof_doctrine_extensions.orm.listener.timestampable.class%" />
-        <service id="stof_doctrine_extensions.orm.listener.tree" class="%stof_doctrine_extensions.orm.listener.tree.class%" />
-        <service id="stof_doctrine_extensions.orm.listener.sluggable" class="%stof_doctrine_extensions.orm.listener.sluggable.class%" />
-        <service id="stof_doctrine_extensions.orm.listener.translatable" class="%stof_doctrine_extensions.orm.listener.translatable.class%">
+        <service id="stof_doctrine_extensions.orm.listener.timestampable" class="%stof_doctrine_extensions.orm.listener.timestampable.class%" public="false"/>
+        <service id="stof_doctrine_extensions.orm.listener.tree" class="%stof_doctrine_extensions.orm.listener.tree.class%" public="false"/>
+        <service id="stof_doctrine_extensions.orm.listener.sluggable" class="%stof_doctrine_extensions.orm.listener.sluggable.class%" public="false"/>
+        <service id="stof_doctrine_extensions.orm.listener.translatable" class="%stof_doctrine_extensions.orm.listener.translatable.class%" public="false">
             <call method="setDefaultLocale">
                 <argument>%session.default_locale%</argument>
             </call>
