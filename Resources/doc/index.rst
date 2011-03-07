@@ -140,7 +140,7 @@ in YAML::
 or in XML::
 
     <!-- app/config.xml -->
-    <container xmlns:stof_doctrine_extensions="http://www.symfony-project.org/schema/dic/stof_doctrine_extensions">
+    <container xmlns:stof_doctrine_extensions="http://symfony.com/schema/dic/stof_doctrine_extensions">
         <stof_doctrine_extensions:config>
             <stof_doctrine_extensions:orm>
                 <stof_doctrine_extensions:entity-manager id="default" />
@@ -226,7 +226,7 @@ in YAML::
 or in XML::
 
     <!-- app/config.xml -->
-    <container xmlns:doctrine_extensions="http://www.symfony-project.org/schema/dic/stof_doctrine_extensions">
+    <container xmlns:doctrine_extensions="http://symfony.com/schema/dic/stof_doctrine_extensions">
         <stof_doctrine_extensions:config>
             <stof_doctrine_extensions:orm>
                 <stof_doctrine_extensions:entity-manager
@@ -274,7 +274,7 @@ in YAML::
 or in XML::
 
     <!-- app/config.xml -->
-    <container xmlns:doctrine_extensions="http://www.symfony-project.org/schema/dic/stof_doctrine_extensions">
+    <container xmlns:doctrine_extensions="http://symfony.com/schema/dic/stof_doctrine_extensions">
         <stof_doctrine_extensions:config>
             <stof_doctrine_extensions:class>
                 <stof_doctrine_extensions:orm

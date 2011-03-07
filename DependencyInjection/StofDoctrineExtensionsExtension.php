@@ -120,7 +120,7 @@ class StofDoctrineExtensionsExtension extends Extension
 
     public function getNamespace()
     {
-        return 'http://www.symfony-project.org/schema/dic/stof_doctrine_extensions';
+        return 'http://symfony.com/schema/dic/stof_doctrine_extensions';
     }
 
     public function getAlias()
