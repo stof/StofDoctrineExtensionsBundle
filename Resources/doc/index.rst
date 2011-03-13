@@ -38,7 +38,7 @@ Add DoctrineExtensionsBundle to your src/Bundle dir
 
 ::
 
-    git submodule add git://github.com/stof/DoctrineExtensionsBundle.git src/Stof/DoctrineExtensionsBundle
+    git submodule add git://github.com/stof/DoctrineExtensionsBundle.git vendor/bundles/Stof/DoctrineExtensionsBundle
 
 Register the DoctrineExtensions and Stof namespaces
 ---------------------------------------------------
@@ -47,7 +47,7 @@ Register the DoctrineExtensions and Stof namespaces
 
     // app/autoload.php
     $loader->registerNamespaces(array(
-        'Stof' => __DIR__.'/../src',
+        'Stof'  => __DIR__.'/../vendor/bundles',
         'Gedmo' => __DIR__.'/../vendor/gedmo-doctrine-extensions/lib',
         // your other namespaces
     ));
