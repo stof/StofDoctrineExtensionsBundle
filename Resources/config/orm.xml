@@ -9,6 +9,7 @@
         <parameter key="stof_doctrine_extensions.orm.listener.tree.class">Gedmo\Tree\TreeListener</parameter>
         <parameter key="stof_doctrine_extensions.orm.listener.sluggable.class">Gedmo\Sluggable\SluggableListener</parameter>
         <parameter key="stof_doctrine_extensions.orm.listener.translatable.class">Stof\DoctrineExtensionsBundle\ORM\TranslationListener</parameter>
+        <parameter key="stof_doctrine_extensions.orm.listener.loggable.class">Stof\DoctrineExtensionsBundle\ORM\LoggableListener</parameter>
     </parameters>
 
     <services>
@@ -21,6 +22,11 @@
             </call>
             <call method="setTranslatableLocaleFromSession">
                 <argument type="service" id="session" on-invalid="ignore" />
+            </call>
+        </service>
+        <service id="stof_doctrine_extensions.orm.listener.loggable" class="%stof_doctrine_extensions.orm.listener.loggable.class%">
+            <call method="setUsernameFromSecurity">
+                <argument type="service" id="security.context"/>
             </call>
         </service>
     </services>

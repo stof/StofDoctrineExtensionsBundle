@@ -16,6 +16,7 @@ DoctrineExtensions's features
 - Sluggable - urlizes your specified fields into single unique slug
 - Timestampable - updates date fields on create, update and even
   property change.
+- Loggable - tracks your record changes and is able to manage versions.
 
 All these extensions can be nested together. And most allready use only
 annotations without interface requirement to not to aggregate the
@@ -268,6 +269,7 @@ in YAML::
                 timestampable:  MyBundle\TimestampableListener
                 sluggable:      ~
                 translatable:   ~
+                loggable:       ~
             mongodb:
                 sluggable:      MyBundle\SluggableListener
 

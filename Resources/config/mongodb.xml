@@ -9,6 +9,7 @@
         <!--<parameter key="stof_doctrine_extensions.odm.mongodb.listener.tree.class">Gedmo\Tree\ODM\MongoDB\TreeListener</parameter>-->
         <parameter key="stof_doctrine_extensions.odm.mongodb.listener.sluggable.class">Gedmo\Sluggable\ODM\MongoDB\SluggableListener</parameter>
         <parameter key="stof_doctrine_extensions.odm.mongodb.listener.translatable.class">Stof\DoctrineExtensionsBundle\ODM\MongoDB\TranslationListener</parameter>
+        <parameter key="stof_doctrine_extensions.odm.mongodb.listener.loggable.class">Stof\DoctrineExtensionsBundle\ODM\MongoDB\LoggableListener</parameter>
     </parameters>
 
     <services>
@@ -21,6 +22,11 @@
             </call>
             <call method="setTranslatableLocaleFromSession">
                 <argument type="service" id="session" on-invalid="ignore" />
+            </call>
+        </service>
+        <service id="stof_doctrine_extensions.odm.mongodb.listener.loggable" class="%stof_doctrine_extensions.odm.mongodb.listener.loggable.class%">
+            <call method="setUsernameFromSecurity">
+                <argument type="service" id="security.context" />
             </call>
         </service>
     </services>
