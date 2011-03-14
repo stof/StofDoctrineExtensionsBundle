@@ -29,8 +29,11 @@ class StofDoctrineExtensionsExtension extends Extension
                 foreach ($listeners as $ext => $enabled) {
                     $listener = sprintf('stof_doctrine_extensions.orm.listener.%s', $ext);
                     if ($enabled && $container->hasDefinition($listener)) {
-                        $container->getDefinition($listener)
-                                ->addTag(sprintf('doctrine.dbal.%s_event_subscriber', $name));
+                        $definition = $container->getDefinition($listener);
+                        $definition->addTag(sprintf('doctrine.dbal.%s_event_subscriber', $name));
+                        if ('loggable' === $ext) {
+                            $definition->addTag('kernel.listener', array('event' => 'core.request', 'method' => 'setUsernameFromSecurityContext', 'priority' => -150)); // Executed after the security one.
+                        }
                     }
                 }
 
@@ -45,8 +48,11 @@ class StofDoctrineExtensionsExtension extends Extension
                 foreach ($listeners as $ext => $enabled) {
                     $listener = sprintf('stof_doctrine_extensions.odm.mongodb.listener.%s', $ext);
                     if ($enabled && $container->hasDefinition($listener)) {
-                        $container->getDefinition($listener)
-                                ->addTag(sprintf('doctrine.odm.mongodb.%s_event_subscriber', $name));
+                        $definition = $container->getDefinition($listener);
+                        $definition->addTag(sprintf('doctrine.odm.mongodb.%s_event_subscriber', $name));
+                        if ('loggable' === $ext) {
+                            $definition->addTag('kernel.listener', array('event' => 'core.request', 'method' => 'setUsernameFromSecurityContext', 'priority' => -150)); // Executed after the security one.
+                        }
                     }
                 }
                 $this->documentManagers[$name] = $listeners;

@@ -25,9 +25,7 @@
             </call>
         </service>
         <service id="stof_doctrine_extensions.odm.mongodb.listener.loggable" class="%stof_doctrine_extensions.odm.mongodb.listener.loggable.class%">
-            <call method="setUsernameFromSecurity">
-                <argument type="service" id="security.context" />
-            </call>
+            <argument type="service" id="security.context" on-invalid="ignore" />
         </service>
     </services>
 </container>
