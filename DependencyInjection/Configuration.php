@@ -38,6 +38,7 @@ class Configuration
                     ->scalarNode('timestampable')->defaultTrue()->end()
                     ->scalarNode('sluggable')->defaultTrue()->end()
                     ->scalarNode('tree')->defaultTrue()->end()
+                    ->scalarNode('loggable')->defaultTrue()->end()
                 ->end()
             ->end();
     }
@@ -50,6 +51,7 @@ class Configuration
                 ->scalarNode('timestampable')->end()
                 ->scalarNode('sluggable')->end()
                 ->scalarNode('tree')->end()
+                ->scalarNode('loggable')->end()
             ->end();
     }
 }
