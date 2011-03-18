@@ -42,16 +42,17 @@ class StofDoctrineExtensionsExtension extends Extension
         }
 
         if ($config['mongodb']) {
-            $loader->load('mongodb.xml');
-
             foreach ($config['mongodb'] as $name => $listeners) {
                 foreach ($listeners as $ext => $enabled) {
-                    $listener = sprintf('stof_doctrine_extensions.odm.mongodb.listener.%s', $ext);
-                    if ($enabled && $container->hasDefinition($listener)) {
-                        $definition = $container->getDefinition($listener);
-                        $definition->addTag(sprintf('doctrine.odm.mongodb.%s_event_subscriber', $name));
-                        if ('loggable' === $ext) {
-                            $definition->addTag('kernel.listener', array('event' => 'onCoreRequest', 'priority' => -150)); // Executed after the security one.
+                    if ($enabled) {
+                        $loader->load(sprintf('mongodb.%s.xml', $ext));
+                        $listener = sprintf('stof_doctrine_extensions.odm.mongodb.listener.%s', $ext);
+                        if ($container->hasDefinition($listener)) {
+                            $definition = $container->getDefinition($listener);
+                            $definition->addTag(sprintf('doctrine.odm.mongodb.%s_event_subscriber', $name));
+                            if ('loggable' === $ext) {
+                                $definition->addTag('kernel.listener', array('event' => 'onCoreRequest', 'priority' => -150)); // Executed after the security one.
+                            }
                         }
                     }
                 }
