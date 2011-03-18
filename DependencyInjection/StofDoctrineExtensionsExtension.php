@@ -32,7 +32,7 @@ class StofDoctrineExtensionsExtension extends Extension
                         $definition = $container->getDefinition($listener);
                         $definition->addTag(sprintf('doctrine.dbal.%s_event_subscriber', $name));
                         if ('loggable' === $ext) {
-                            $definition->addTag('kernel.listener', array('event' => 'core.request', 'method' => 'setUsernameFromSecurityContext', 'priority' => -150)); // Executed after the security one.
+                            $definition->addTag('kernel.listener', array('event' => 'onCoreRequest', 'priority' => -150)); // Executed after the security one.
                         }
                     }
                 }
@@ -51,7 +51,7 @@ class StofDoctrineExtensionsExtension extends Extension
                         $definition = $container->getDefinition($listener);
                         $definition->addTag(sprintf('doctrine.odm.mongodb.%s_event_subscriber', $name));
                         if ('loggable' === $ext) {
-                            $definition->addTag('kernel.listener', array('event' => 'core.request', 'method' => 'setUsernameFromSecurityContext', 'priority' => -150)); // Executed after the security one.
+                            $definition->addTag('kernel.listener', array('event' => 'onCoreRequest', 'priority' => -150)); // Executed after the security one.
                         }
                     }
                 }
@@ -114,23 +114,8 @@ class StofDoctrineExtensionsExtension extends Extension
         }
     }
 
-    /**
-     * Returns the base path for the XSD files.
-     *
-     * @return string The XSD base path
-     */
-    public function getXsdValidationBasePath()
-    {
-        return null;
-    }
-
     public function getNamespace()
     {
         return 'http://symfony.com/schema/dic/stof_doctrine_extensions';
-    }
-
-    public function getAlias()
-    {
-        return 'stof_doctrine_extensions';
     }
 }

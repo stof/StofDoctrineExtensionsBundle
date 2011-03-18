@@ -4,12 +4,13 @@ namespace Stof\DoctrineExtensionsBundle\ORM;
 
 use Gedmo\Loggable\LoggableListener as BaseLoggableListener;
 use Symfony\Component\Security\Core\SecurityContextInterface;
-use Symfony\Component\EventDispatcher\EventInterface;
+use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
 /**
  * LoggableListener
  *
  * @author jules BOUSSEKEYT
+ * @author Christophe Coevoet <stof@notk.org>
  */
 class LoggableListener extends BaseLoggableListener
 {
@@ -30,9 +31,9 @@ class LoggableListener extends BaseLoggableListener
     /**
      * Set the username from the security context by listening on core.request
      *
-     * @param EventInterface $event
+     * @param GetResponseEvent $event
      */
-    public function setUsernameFromSecurityContext(EventInterface $event)
+    public function onCoreRequest(GetResponseEvent $event)
     {
         if (null !== $this->securityContext && null !== $this->securityContext->getToken() && $this->securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             $this->setUsername($this->securityContext->getToken()->getUsername());
