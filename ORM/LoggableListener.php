@@ -24,7 +24,7 @@ class LoggableListener extends BaseLoggableListener
     /**
      * @param SecurityContextInterface $securityContext
      */
-    public function __construct(SecurityContextInterface $securityContext = null) {
+    public function setSecurityContext(SecurityContextInterface $securityContext = null) {
         $this->securityContext = $securityContext;
     }
 
