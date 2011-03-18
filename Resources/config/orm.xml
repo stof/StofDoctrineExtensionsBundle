@@ -24,8 +24,6 @@
                 <argument type="service" id="session" on-invalid="ignore" />
             </call>
         </service>
-        <service id="stof_doctrine_extensions.orm.listener.loggable" class="%stof_doctrine_extensions.orm.listener.loggable.class%">
-            <argument type="service" id="security.context" on-invalid="ignore" />
-        </service>
+        <service id="stof_doctrine_extensions.orm.listener.loggable" class="%stof_doctrine_extensions.orm.listener.loggable.class%" />
     </services>
 </container>

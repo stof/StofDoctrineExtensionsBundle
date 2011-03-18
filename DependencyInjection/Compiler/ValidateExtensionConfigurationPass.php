@@ -7,7 +7,6 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 
 class ValidateExtensionConfigurationPass implements CompilerPassInterface
 {
-
     /**
      * Validate the DoctrineExtensions DIC extension config.
      *
@@ -16,7 +15,6 @@ class ValidateExtensionConfigurationPass implements CompilerPassInterface
      * compiler pass.
      *
      * @param ContainerBuilder $container
-     * @return void
      */
     public function process(ContainerBuilder $container)
     {
