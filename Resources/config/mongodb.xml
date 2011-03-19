@@ -13,10 +13,10 @@
     </parameters>
 
     <services>
-        <service id="stof_doctrine_extensions.odm.mongodb.listener.timestampable" class="%stof_doctrine_extensions.odm.mongodb.listener.timestampable.class%" />
+        <service id="stof_doctrine_extensions.odm.mongodb.listener.timestampable" class="%stof_doctrine_extensions.odm.mongodb.listener.timestampable.class%" public="false" />
         <!--<service id="stof_doctrine_extensions.odm.mongodb.listener.tree" class="%stof_doctrine_extensions.odm.mongodb.listener.tree.class%" />-->
-        <service id="stof_doctrine_extensions.odm.mongodb.listener.sluggable" class="%stof_doctrine_extensions.odm.mongodb.listener.sluggable.class%" />
-        <service id="stof_doctrine_extensions.odm.mongodb.listener.translatable" class="%stof_doctrine_extensions.odm.mongodb.listener.translatable.class%">
+        <service id="stof_doctrine_extensions.odm.mongodb.listener.sluggable" class="%stof_doctrine_extensions.odm.mongodb.listener.sluggable.class%" public="false" />
+        <service id="stof_doctrine_extensions.odm.mongodb.listener.translatable" class="%stof_doctrine_extensions.odm.mongodb.listener.translatable.class%" public="false">
             <call method="setDefaultLocale">
                 <argument>%session.default_locale%</argument>
             </call>
