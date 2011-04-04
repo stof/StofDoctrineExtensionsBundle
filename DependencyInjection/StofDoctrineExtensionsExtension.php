@@ -21,83 +21,41 @@ class StofDoctrineExtensionsExtension extends Extension
         $config = $processor->process($configuration->getConfigTree(), $configs);
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader->load('listeners.xml');
 
         $container->setParameter('stof_doctrine_extensions.default_locale', $config['default_locale']);
 
-        if ($config['orm']) {
-            $loader->load('orm.xml');
-
-            foreach ($config['orm'] as $name => $listeners) {
-                foreach ($listeners as $ext => $enabled) {
-                    $listener = sprintf('stof_doctrine_extensions.orm.listener.%s', $ext);
-                    if ($enabled && $container->hasDefinition($listener)) {
-                        $definition = $container->getDefinition($listener);
-                        $definition->addTag(sprintf('doctrine.dbal.%s_event_subscriber', $name));
-                        if ('loggable' === $ext) {
-                            $definition->addTag('kernel.listener', array('event' => 'onCoreRequest', 'priority' => -150)); // Executed after the security one.
-                        }
-                    }
-                }
-
-                $this->entityManagers[$name] = $listeners;
-            }
-        }
-
-        if ($config['mongodb']) {
-            $loader->load('mongodb.xml');
-
-            foreach ($config['mongodb'] as $name => $listeners) {
-                foreach ($listeners as $ext => $enabled) {
-                    $listener = sprintf('stof_doctrine_extensions.odm.mongodb.listener.%s', $ext);
-                    if ($enabled && $container->hasDefinition($listener)) {
-                        $definition = $container->getDefinition($listener);
-                        $definition->addTag(sprintf('doctrine.odm.mongodb.%s_event_subscriber', $name));
-                        if ('loggable' === $ext) {
-                            $definition->addTag('kernel.listener', array('event' => 'onCoreRequest', 'priority' => -150)); // Executed after the security one.
-                        }
-                    }
-                }
-                $this->documentManagers[$name] = $listeners;
-            }
-        }
-
-        if (isset($config['class'])) {
-            $this->remapParametersNamespaces($config['class'], $container, array(
-                'orm'       => 'stof_doctrine_extensions.orm.listener.%s.class',
-                'mongodb'   => 'stof_doctrine_extensions.odm.mongodb.listener.%s.class',
-            ));
-        }
-    }
-
-    protected function remapParameters(array $config, ContainerBuilder $container, array $map)
-    {
-        foreach ($map as $name => $paramName) {
-            if (isset($config[$name])) {
-                $container->setParameter($paramName, $config[$name]);
-            }
-        }
-    }
-
-    protected function remapParametersNamespaces(array $config, ContainerBuilder $container, array $namespaces)
-    {
-        foreach ($namespaces as $ns => $map) {
-            if ($ns) {
-                if (!isset($config[$ns])) {
-                    continue;
-                }
-                $namespaceConfig = $config[$ns];
-            } else {
-                $namespaceConfig = $config;
-            }
-            if (is_array($map)) {
-                $this->remapParameters($namespaceConfig, $container, $map);
-            } else {
-                foreach ($namespaceConfig as $name => $value) {
-                    if (null !== $value) {
-                        $container->setParameter(sprintf($map, $name), $value);
+        foreach ($config['orm'] as $name => $listeners) {
+            foreach ($listeners as $ext => $enabled) {
+                $listener = sprintf('stof_doctrine_extensions.listener.%s', $ext);
+                if ($enabled && $container->hasDefinition($listener)) {
+                    $definition = $container->getDefinition($listener);
+                    $definition->addTag(sprintf('doctrine.dbal.%s_event_subscriber', $name));
+                    if ('loggable' === $ext) {
+                        $definition->addTag('kernel.listener', array('event' => 'onCoreRequest', 'priority' => -150)); // Executed after the security one.
                     }
                 }
             }
+
+            $this->entityManagers[$name] = $listeners;
+        }
+
+        foreach ($config['mongodb'] as $name => $listeners) {
+            foreach ($listeners as $ext => $enabled) {
+                $listener = sprintf('stof_doctrine_extensions.listener.%s', $ext);
+                if ($enabled && $container->hasDefinition($listener)) {
+                    $definition = $container->getDefinition($listener);
+                    $definition->addTag(sprintf('doctrine.odm.mongodb.%s_event_subscriber', $name));
+                    if ('loggable' === $ext) {
+                        $definition->addTag('kernel.listener', array('event' => 'onCoreRequest', 'priority' => -150)); // Executed after the security one.
+                    }
+                }
+            }
+            $this->documentManagers[$name] = $listeners;
+        }
+
+        foreach ($config['class'] as $listener => $class) {
+            $container->setParameter(sprintf('stof_doctrine_extensions.listener.%s.class', $listener), $class);
         }
     }
 

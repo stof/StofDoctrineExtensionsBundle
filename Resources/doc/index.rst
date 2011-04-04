@@ -243,29 +243,21 @@ in YAML::
     # app/config.yml
     stof_doctrine_extensions:
         class:
-            orm:
-                tree:           MyBundle\TreeListener
-                timestampable:  MyBundle\TimestampableListener
-                sluggable:      ~
-                translatable:   ~
-                loggable:       ~
-            mongodb:
-                sluggable:      MyBundle\SluggableListener
+            tree:           MyBundle\TreeListener
+            timestampable:  MyBundle\TimestampableListener
+            sluggable:      ~
+            translatable:   ~
+            loggable:       ~
 
 or in XML::
 
     <!-- app/config.xml -->
     <container xmlns:doctrine_extensions="http://symfony.com/schema/dic/stof_doctrine_extensions">
         <stof_doctrine_extensions:config>
-            <stof_doctrine_extensions:class>
-                <stof_doctrine_extensions:orm
-                    tree="MyBundle\TreeListener"
-                    timestampable="MyBundle\TimestampableListener"
-                />
-                <stof_doctrine_extensions:mongodb
-                    sluggable="MyBundle\SluggableListener"
-                />
-            </stof_doctrine_extensions:class>
+            <stof_doctrine_extensions:class
+                tree="MyBundle\TreeListener"
+                timestampable="MyBundle\TimestampableListener"
+            />
         </stof_doctrine_extensions:config>
     </container>
 

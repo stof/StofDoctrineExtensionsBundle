@@ -1,8 +1,9 @@
 <?php
 
-namespace Stof\DoctrineExtensionsBundle\ODM\MongoDB;
+namespace Stof\DoctrineExtensionsBundle\Listener;
 
-use Gedmo\Loggable\ODM\MongoDB\LoggableListener as BaseLoggableListener;
+use Gedmo\Loggable\LoggableListener as BaseLoggableListener;
+use Gedmo\Loggable\Mapping\Event\LoggableAdapter;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
@@ -14,8 +15,6 @@ use Symfony\Component\HttpKernel\Event\GetResponseEvent;
  */
 class LoggableListener extends BaseLoggableListener
 {
-    protected $defaultLogEntryDocument = 'Stof\DoctrineExtensionsBundle\Document\LogEntry';
-
     /**
      * @var SecurityContextInterface
      */
@@ -38,5 +37,18 @@ class LoggableListener extends BaseLoggableListener
         if (null !== $this->securityContext && null !== $this->securityContext->getToken() && $this->securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             $this->setUsername($this->securityContext->getToken()->getUsername());
         }
+    }
+
+    protected function getLogEntryClass(LoggableAdapter $ea, $class)
+    {
+        $class = parent::getLogEntryClass($ea, $class);
+
+        if ($class === 'Gedmo\\Loggable\\Entity\\LogEntry') {
+            return 'Stof\\DoctrineExtensionsBundle\\Entity\\LogEntry';
+        } elseif ($class === 'Gedmo\\Loggable\\Document\\LogEntry') {
+            return 'Stof\\DoctrineExtensionsBundle\\Document\\LogEntry';
+        }
+
+        return $class;
     }
 }

@@ -20,14 +20,11 @@ class Configuration
         $rootNode
             ->append($this->getVendorNode('orm'))
             ->append($this->getVendorNode('mongodb'))
+            ->append($this->getClassNode())
             ->children()
                 ->scalarNode('default_locale')
                     ->cannotBeEmpty()
                     ->defaultValue('en')
-                ->end()
-                ->arrayNode('class')
-                    ->append($this->getVendorClassNode('orm'))
-                    ->append($this->getVendorClassNode('mongodb'))
                 ->end()
             ->end()
         ;
@@ -57,18 +54,34 @@ class Configuration
         return $node;
     }
 
-    private function getVendorClassNode($name)
+    private function getClassNode()
     {
         $treeBuilder = new TreeBuilder();
-        $node = $treeBuilder->root($name);
+        $node = $treeBuilder->root('class');
 
         $node
+            ->addDefaultsIfNotSet()
             ->children()
-                ->scalarNode('translatable')->end()
-                ->scalarNode('timestampable')->end()
-                ->scalarNode('sluggable')->end()
-                ->scalarNode('tree')->end()
-                ->scalarNode('loggable')->end()
+                ->scalarNode('translatable')
+                    ->cannotBeEmpty()
+                    ->defaultValue('Stof\\DoctrineExtensionsBundle\\Listener\\TranslationListener')
+                ->end()
+                ->scalarNode('timestampable')
+                    ->cannotBeEmpty()
+                    ->defaultValue('Gedmo\\Timestampable\\TimestampableListener')
+                ->end()
+                ->scalarNode('sluggable')
+                    ->cannotBeEmpty()
+                    ->defaultValue('Gedmo\\Sluggable\\SluggableListener')
+                ->end()
+                ->scalarNode('tree')
+                    ->cannotBeEmpty()
+                    ->defaultValue('Gedmo\\Tree\\TreeListener')
+                ->end()
+                ->scalarNode('loggable')
+                    ->cannotBeEmpty()
+                    ->defaultValue('Stof\\DoctrineExtensionsBundle\\Listener\\LoggableListener')
+                ->end()
             ->end()
         ;
 
