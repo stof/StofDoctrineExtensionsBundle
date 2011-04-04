@@ -97,42 +97,20 @@ or for MongoDB ODM::
 Configure the bundle
 ====================
 
-Register the default locale
----------------------------
-
-This bundle uses the session default_locale as the default locale used
-if the translation does not exists in the asked language. So you have
-to define it in the configuration file (Symfony2 define it to ``en`` by
-default).
-
-in YAML::
-
-    # app/config.yml
-    framework:
-        session:
-            default_locale: en_US
-
-or in XML::
-
-    <!-- app/config.xml -->
-    <container>
-        <framework:config>
-            <app:session default-locale="en_US">
-        </app:config>
-    </container>
-
-Activate the bundle
--------------------
-
 You have to activate the extensions for each entity manager for which
 you want to enable the extensions. The id is the id of the DBAL
 connection when using the ORM behaviors. It is the id of the document
-manager when using mongoDB
+manager when using mongoDB.
+
+This bundle needs a default locale used if the translation does not
+exists in the asked language. If you don't provide it explicitly, it
+will default to ``en``.
 
 in YAML::
 
     # app/config.yml
     stof_doctrine_extensions:
+        default_locale: en_US
         orm:
             default: ~
         mongodb:
@@ -142,7 +120,7 @@ or in XML::
 
     <!-- app/config.xml -->
     <container xmlns:stof_doctrine_extensions="http://symfony.com/schema/dic/stof_doctrine_extensions">
-        <stof_doctrine_extensions:config>
+        <stof_doctrine_extensions:config default-locale="en_US">
             <stof_doctrine_extensions:orm>
                 <stof_doctrine_extensions:entity-manager id="default" />
             </stof_doctrine_extensions:orm>
@@ -217,6 +195,7 @@ in YAML::
 
     # app/config.yml
     stof_doctrine_extensions:
+        default_locale: en_US
         orm:
             default:
                 tree: false
@@ -228,7 +207,7 @@ or in XML::
 
     <!-- app/config.xml -->
     <container xmlns:doctrine_extensions="http://symfony.com/schema/dic/stof_doctrine_extensions">
-        <stof_doctrine_extensions:config>
+        <stof_doctrine_extensions:config default-locale="en_US">
             <stof_doctrine_extensions:orm>
                 <stof_doctrine_extensions:entity-manager
                     id="default"

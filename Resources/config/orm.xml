@@ -18,7 +18,7 @@
         <service id="stof_doctrine_extensions.orm.listener.sluggable" class="%stof_doctrine_extensions.orm.listener.sluggable.class%" public="false"/>
         <service id="stof_doctrine_extensions.orm.listener.translatable" class="%stof_doctrine_extensions.orm.listener.translatable.class%" public="false">
             <call method="setDefaultLocale">
-                <argument>%session.default_locale%</argument>
+                <argument>%stof_doctrine_extensions.default_locale%</argument>
             </call>
             <call method="setTranslatableLocaleFromSession">
                 <argument type="service" id="session" on-invalid="ignore" />

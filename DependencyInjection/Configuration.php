@@ -17,49 +17,61 @@ class Configuration
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('stof_doctrine_extensions');
 
-        $this->addVendorConfig($rootNode, 'orm');
-        $this->addVendorConfig($rootNode, 'mongodb');
-
-        $classNode = $rootNode->children()->arrayNode('class');
-        $this->addVendorClassConfig($classNode, 'orm');
-        $this->addVendorClassConfig($classNode, 'mongodb');
+        $rootNode
+            ->append($this->getVendorNode('orm'))
+            ->append($this->getVendorNode('mongodb'))
+            ->children()
+                ->scalarNode('default_locale')
+                    ->cannotBeEmpty()
+                    ->defaultValue('en')
+                ->end()
+                ->arrayNode('class')
+                    ->append($this->getVendorClassNode('orm'))
+                    ->append($this->getVendorClassNode('mongodb'))
+                ->end()
+            ->end()
+        ;
 
         return $treeBuilder->buildTree();
     }
 
-    private function addVendorConfig(ArrayNodeDefinition $node, $name)
+    private function getVendorNode($name)
     {
+        $treeBuilder = new TreeBuilder();
+        $node = $treeBuilder->root($name);
+
         $node
-            ->children()
-                ->arrayNode($name)
-                    ->useAttributeAsKey('id')
-                    ->prototype('array')
-                        ->performNoDeepMerging()
-                        ->children()
-                            ->scalarNode('translatable')->defaultTrue()->end()
-                            ->scalarNode('timestampable')->defaultTrue()->end()
-                            ->scalarNode('sluggable')->defaultTrue()->end()
-                            ->scalarNode('tree')->defaultTrue()->end()
-                            ->scalarNode('loggable')->defaultTrue()->end()
-                        ->end()
-                    ->end()
+            ->useAttributeAsKey('id')
+            ->prototype('array')
+                ->performNoDeepMerging()
+                ->children()
+                    ->scalarNode('translatable')->defaultTrue()->end()
+                    ->scalarNode('timestampable')->defaultTrue()->end()
+                    ->scalarNode('sluggable')->defaultTrue()->end()
+                    ->scalarNode('tree')->defaultTrue()->end()
+                    ->scalarNode('loggable')->defaultTrue()->end()
                 ->end()
-            ->end();
+            ->end()
+        ;
+
+        return $node;
     }
 
-    private function addVendorClassConfig(ArrayNodeDefinition $node, $name)
+    private function getVendorClassNode($name)
     {
+        $treeBuilder = new TreeBuilder();
+        $node = $treeBuilder->root($name);
+
         $node
             ->children()
-                ->arrayNode($name)
-                    ->children()
-                        ->scalarNode('translatable')->end()
-                        ->scalarNode('timestampable')->end()
-                        ->scalarNode('sluggable')->end()
-                        ->scalarNode('tree')->end()
-                        ->scalarNode('loggable')->end()
-                    ->end()
-                ->end()
-            ->end();
+                ->scalarNode('translatable')->end()
+                ->scalarNode('timestampable')->end()
+                ->scalarNode('sluggable')->end()
+                ->scalarNode('tree')->end()
+                ->scalarNode('loggable')->end()
+            ->end()
+        ;
+
+        return $node;
     }
 }

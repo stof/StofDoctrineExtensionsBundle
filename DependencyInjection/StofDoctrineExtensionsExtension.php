@@ -22,6 +22,8 @@ class StofDoctrineExtensionsExtension extends Extension
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
+        $container->setParameter('stof_doctrine_extensions.default_locale', $config['default_locale']);
+
         if ($config['orm']) {
             $loader->load('orm.xml');
 
