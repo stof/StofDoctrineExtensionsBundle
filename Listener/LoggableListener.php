@@ -4,7 +4,8 @@ namespace Stof\DoctrineExtensionsBundle\Listener;
 
 use Gedmo\Loggable\LoggableListener as BaseLoggableListener;
 use Gedmo\Loggable\Mapping\Event\LoggableAdapter;
-use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
 /**
@@ -13,18 +14,16 @@ use Symfony\Component\HttpKernel\Event\GetResponseEvent;
  * @author jules BOUSSEKEYT
  * @author Christophe Coevoet <stof@notk.org>
  */
-class LoggableListener extends BaseLoggableListener
+class LoggableListener extends BaseLoggableListener implements ContainerAwareInterface
 {
     /**
-     * @var SecurityContextInterface
+     * @var ContainerInterface
      */
-    protected $securityContext;
+    protected $container;
 
-    /**
-     * @param SecurityContextInterface $securityContext
-     */
-    public function setSecurityContext(SecurityContextInterface $securityContext = null) {
-        $this->securityContext = $securityContext;
+    public function setContainer(ContainerInterface $container = null)
+    {
+        $this->container = $container;
     }
 
     /**
@@ -34,8 +33,9 @@ class LoggableListener extends BaseLoggableListener
      */
     public function onCoreRequest(GetResponseEvent $event)
     {
-        if (null !== $this->securityContext && null !== $this->securityContext->getToken() && $this->securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-            $this->setUsername($this->securityContext->getToken()->getUsername());
+        $securityContext = $this->container->get('security.context', ContainerInterface::NULL_ON_INVALID_REFERENCE);
+        if (null !== $securityContext && null !== $securityContext->getToken() && $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            $this->setUsername($securityContext->getToken()->getUsername());
         }
     }
 
