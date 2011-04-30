@@ -30,7 +30,7 @@ class StofDoctrineExtensionsExtension extends Extension
                 $listener = sprintf('stof_doctrine_extensions.listener.%s', $ext);
                 if ($enabled && $container->hasDefinition($listener)) {
                     $definition = $container->getDefinition($listener);
-                    $definition->addTag(sprintf('doctrine.dbal.%s_event_subscriber', $name));
+                    $definition->addTag('doctrine.event_subscriber',array('connection' => $name));
                     if ('loggable' === $ext) {
                         $definition->addTag('kernel.listener', array('event' => 'onCoreRequest', 'priority' => -150)); // Executed after the security one.
                     }
