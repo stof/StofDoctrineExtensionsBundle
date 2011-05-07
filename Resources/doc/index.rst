@@ -18,11 +18,21 @@ DoctrineExtensions's features
   property change.
 - Loggable - tracks your record changes and is able to manage versions.
 
-All these extensions can be nested together. And most allready use only
+All these extensions can be nested together. And most already use only
 annotations without interface requirement to not to aggregate the
 entity itself and has implemented proper caching for metadata.
 
 See the official blog_ for more details.
+
+Warning
+=======
+
+As the DoctrineExtensions library does not provide an XML driver, you
+have to use either annotations or YAML for your mapping.
+Setting a ``DriverChain`` implementation to load only the gedmo mapping
+from annotations or YAML and the standard mapping from XML would require
+hacking the way the ORM is configured by DoctrineBundle so it will never
+be done in the bundle.
 
 Installation
 ============
@@ -71,6 +81,10 @@ Add DoctrineExtensionsBundle to your application kernel
 Add DoctrineExtensionsBundle to your mapping
 --------------------------------------------
 
+.. note::
+
+    This is not needed if you use the auto_mapping setting.
+
 See the official documentation_ for details.
 
 for ORM::
@@ -90,7 +104,7 @@ or for MongoDB ODM::
             StofDoctrineExtensionsBundle: ~
             # ... your others bundle
 
-.. Note::
+.. note::
 
     This is only necessary if you want to use the Translatable behavior.
 
@@ -225,7 +239,7 @@ or in XML::
 Same is available for MongoDB using ``document-manager`` in the XML
 files instead of ``entity-manager``.
 
-.. Caution::
+.. caution::
 
     If you configure the listeners of an entity manager in several
     config file the last one will be used. So you have to list all the
