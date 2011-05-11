@@ -12,6 +12,9 @@
             <call method="setDefaultLocale">
                 <argument>%stof_doctrine_extensions.default_locale%</argument>
             </call>
+            <call method="setTranslationFallback">
+                <argument>%stof_doctrine_extensions.translation_fallback%</argument>
+            </call>
             <call method="setTranslatableLocaleFromSession">
                 <argument type="service" id="session" on-invalid="ignore" />
             </call>
