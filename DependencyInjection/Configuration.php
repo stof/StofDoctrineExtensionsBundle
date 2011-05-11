@@ -26,7 +26,7 @@ class Configuration implements ConfigurationInterface
                     ->cannotBeEmpty()
                     ->defaultValue('en')
                 ->end()
-                ->booleanNode('translation_fallback')->end()
+                ->booleanNode('translation_fallback')->defaultFalse()->end()
             ->end()
         ;
 
