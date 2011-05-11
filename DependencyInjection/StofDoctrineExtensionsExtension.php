@@ -24,6 +24,7 @@ class StofDoctrineExtensionsExtension extends Extension
         $loader->load('listeners.xml');
 
         $container->setParameter('stof_doctrine_extensions.default_locale', $config['default_locale']);
+        $container->setParameter('stof_doctrine_extensions.translation_fallback', $config['translation_fallback']);
 
         foreach ($config['orm'] as $name => $listeners) {
             foreach ($listeners as $ext => $enabled) {
