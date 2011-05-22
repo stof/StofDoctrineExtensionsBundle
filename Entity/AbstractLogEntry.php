@@ -16,56 +16,56 @@ abstract class AbstractLogEntry
      * @ORM\Id
      * @ORM\GeneratedValue
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string $action
      *
      * @ORM\Column(type="string", length=8)
      */
-    private $action;
+    protected $action;
 
     /**
      * @var string $loggedAt
      *
      * @ORM\Column(name="logged_at", type="datetime")
      */
-    private $loggedAt;
+    protected $loggedAt;
 
     /**
      * @var string $objectId
      *
      * @ORM\Column(name="object_id", length=32, nullable=true)
      */
-    private $objectId;
+    protected $objectId;
 
     /**
      * @var string $objectClass
      *
      * @ORM\Column(name="object_class", type="string", length=255)
      */
-    private $objectClass;
+    protected $objectClass;
 
     /**
      * @var integer $version
      *
      * @ORM\Column(type="integer")
      */
-    private $version;
+    protected $version;
 
     /**
      * @var text $data
      *
      * @ORM\Column(type="text", nullable=true)
      */
-    private $data;
+    protected $data;
 
     /**
      * @var text $data
      *
      * @ORM\Column(length=255, nullable=true)
      */
-    private $username;
+    protected $username;
 
     /**
      * Get action

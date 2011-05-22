@@ -14,14 +14,14 @@ abstract class AbstractLogEntry
      *
      * @MongoDB\Id
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string $action
      *
      * @MongoDB\String
      */
-    private $action;
+    protected $action;
 
     /**
      * @var datetime $loggedAt
@@ -29,14 +29,14 @@ abstract class AbstractLogEntry
      * @MongoDB\Index
      * @MongoDB\Date
      */
-    private $loggedAt;
+    protected $loggedAt;
 
     /**
      * @var string $objectId
      *
      * @MongoDB\String(nullable=true)
      */
-    private $objectId;
+    protected $objectId;
 
     /**
      * @var string $objectClass
@@ -44,21 +44,21 @@ abstract class AbstractLogEntry
      * @MongoDB\Index
      * @MongoDB\String
      */
-    private $objectClass;
+    protected $objectClass;
 
     /**
      * @var integer $version
      *
      * @MongoDB\Int
      */
-    private $version;
+    protected $version;
 
     /**
      * @var text $data
      *
      * @MongoDB\String(nullable=true)
      */
-    private $data;
+    protected $data;
 
     /**
      * @var string $data
@@ -66,7 +66,7 @@ abstract class AbstractLogEntry
      * @MongoDB\Index
      * @MongoDB\String(nullable=true)
      */
-    private $username;
+    protected $username;
 
     /**
      * Get action

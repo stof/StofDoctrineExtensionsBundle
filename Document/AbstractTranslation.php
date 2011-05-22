@@ -16,42 +16,42 @@ abstract class AbstractTranslation
      *
      * @MongoDB\Id
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @MongoDB\String
      */
-    private $locale;
+    protected $locale;
 
     /**
      * @var string
      *
      * @MongoDB\String
      */
-    private $objectClass;
+    protected $objectClass;
 
     /**
      * @var string
      *
      * @MongoDB\String
      */
-    private $field;
+    protected $field;
 
     /**
      * @var string
      *
      * @MongoDB\String(name="foreign_key")
      */
-    private $foreignKey;
+    protected $foreignKey;
 
     /**
      * @var string
      *
      * @MongoDB\String
      */
-    private $content;
+    protected $content;
 
     /**
      * Get id

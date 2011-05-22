@@ -18,42 +18,42 @@ abstract class AbstractTranslation
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @ORM\Column(name="locale", type="string", length=8)
      */
-    private $locale;
+    protected $locale;
 
     /**
      * @var string
      *
      * @ORM\Column(name="object_class", type="string", length=255)
      */
-    private $objectClass;
+    protected $objectClass;
 
     /**
      * @var string
      *
      * @ORM\Column(name="field", type="string", length=32)
      */
-    private $field;
+    protected $field;
 
     /**
      * @var string
      *
      * @ORM\Column(name="foreign_key", type="string", length="64")
      */
-    private $foreignKey;
+    protected $foreignKey;
 
     /**
      * @var string
      *
      * @ORM\Column(name="content", type="text", nullable=true)
      */
-    private $content;
+    protected $content;
 
     /**
      * Get id
