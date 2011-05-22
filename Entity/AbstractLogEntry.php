@@ -2,68 +2,45 @@
 
 namespace Stof\DoctrineExtensionsBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
-/**
- * @ORM\MappedSuperclass
- */
 abstract class AbstractLogEntry
 {
     /**
-     * @var integer $id
-     *
-     * @ORM\Column(type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue
+     * @var integer
      */
     protected $id;
 
     /**
-     * @var string $action
-     *
-     * @ORM\Column(type="string", length=8)
+     * @var string
      */
     protected $action;
 
     /**
-     * @var string $loggedAt
-     *
-     * @ORM\Column(name="logged_at", type="datetime")
+     * @var \DateTime
      */
     protected $loggedAt;
 
     /**
-     * @var string $objectId
-     *
-     * @ORM\Column(name="object_id", length=32, nullable=true)
+     * @var string
      */
     protected $objectId;
 
     /**
-     * @var string $objectClass
-     *
-     * @ORM\Column(name="object_class", type="string", length=255)
+     * @var string
      */
     protected $objectClass;
 
     /**
-     * @var integer $version
-     *
-     * @ORM\Column(type="integer")
+     * @var integer
      */
     protected $version;
 
     /**
-     * @var text $data
-     *
-     * @ORM\Column(type="text", nullable=true)
+     * @var array
      */
     protected $data;
 
     /**
-     * @var text $data
-     *
-     * @ORM\Column(length=255, nullable=true)
+     * @var string
      */
     protected $username;
 
@@ -150,7 +127,7 @@ abstract class AbstractLogEntry
     /**
      * Get loggedAt
      *
-     * @return datetime
+     * @return \DateTime
      */
     public function getLoggedAt()
     {
@@ -159,8 +136,6 @@ abstract class AbstractLogEntry
 
     /**
      * Set loggedAt
-     *
-     * @param string $loggedAt
      */
     public function setLoggedAt()
     {
@@ -174,7 +149,7 @@ abstract class AbstractLogEntry
      */
     public function getData()
     {
-        return is_string($this->data) ? unserialize($this->data) : null;
+        return $this->data;
     }
 
     /**
@@ -184,11 +159,7 @@ abstract class AbstractLogEntry
      */
     public function setData($data)
     {
-        if (is_array($data)) {
-            $this->data = serialize($data);
-        } else {
-            $this->data = $data;
-        }
+        $this->data = $data;
     }
 
     /**

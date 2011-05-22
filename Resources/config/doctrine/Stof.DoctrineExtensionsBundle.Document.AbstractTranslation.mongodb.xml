@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mongo-mapping xmlns="http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping"
+                        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                        xsi:schemaLocation="http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping
+                        http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping.xsd">
+
+    <mapped-superclass name="Stof\DoctrineExtensionsBundle\Document\AbstractTranslation">
+
+        <field fieldName="id" id="true" />
+
+        <field fieldName="locale" type="string" />
+
+        <field fieldName="objectClass" name="object_class" type="string" />
+
+        <field fieldName="field" type="string" />
+
+        <field fieldName="foreignKey" name="foreign_key" type="string" />
+
+        <field fieldName="content" type="string" />
+
+    </mapped-superclass>
+
+</doctrine-mongo-mapping>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                  http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="Stof\DoctrineExtensionsBundle\Entity\LogEntry" table="ext_log_entries" repository-class="Gedmo\Loggable\Entity\Repository\LogEntryRepository">
+
+        <indexes>
+            <index columns="object_class" name="log_class_lookup_idx" />
+            <index columns="logged_at" name="log_date_lookup_idx" />
+            <index columns="username" name="log_user_lookup_idx" />
+        </indexes>
+
+    </entity>
+
+</doctrine-mapping>

@@ -2,56 +2,35 @@
 
 namespace Stof\DoctrineExtensionsBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
-/**
- * Stof\DoctrineExtensionsBundle\Entity\AbstractTranslation
- *
- * @ORM\MappedSuperclass
- */
 abstract class AbstractTranslation
 {
     /**
      * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     protected $id;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="locale", type="string", length=8)
      */
     protected $locale;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="object_class", type="string", length=255)
      */
     protected $objectClass;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="field", type="string", length=32)
      */
     protected $field;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="foreign_key", type="string", length="64")
      */
     protected $foreignKey;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="content", type="text", nullable=true)
      */
     protected $content;
 

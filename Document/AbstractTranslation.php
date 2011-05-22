@@ -2,54 +2,35 @@
 
 namespace Stof\DoctrineExtensionsBundle\Document;
 
-use Doctrine\ODM\MongoDB\Mapping as MongoDB;
-
-/**
-* Stof\DoctrineExtensionsBundle\Document\AbstractTranslation
-*
-* @MongoDB\MappedSuperclass
-*/
 abstract class AbstractTranslation
 {
     /**
      * @var integer
-     *
-     * @MongoDB\Id
      */
     protected $id;
 
     /**
      * @var string
-     *
-     * @MongoDB\String
      */
     protected $locale;
 
     /**
      * @var string
-     *
-     * @MongoDB\String
      */
     protected $objectClass;
 
     /**
      * @var string
-     *
-     * @MongoDB\String
      */
     protected $field;
 
     /**
      * @var string
-     *
-     * @MongoDB\String(name="foreign_key")
      */
     protected $foreignKey;
 
     /**
      * @var string
-     *
-     * @MongoDB\String
      */
     protected $content;
 

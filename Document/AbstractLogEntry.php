@@ -2,69 +2,45 @@
 
 namespace Stof\DoctrineExtensionsBundle\Document;
 
-use Doctrine\ODM\MongoDB\Mapping as MongoDB;
-
-/**
- * @MongoDB\MappedSuperclass
- */
 abstract class AbstractLogEntry
 {
     /**
-     * @var integer $id
-     *
-     * @MongoDB\Id
+     * @var integer
      */
     protected $id;
 
     /**
-     * @var string $action
-     *
-     * @MongoDB\String
+     * @var string
      */
     protected $action;
 
     /**
-     * @var datetime $loggedAt
-     *
-     * @MongoDB\Index
-     * @MongoDB\Date
+     * @var \DateTime
      */
     protected $loggedAt;
 
     /**
-     * @var string $objectId
-     *
-     * @MongoDB\String(nullable=true)
+     * @var string
      */
     protected $objectId;
 
     /**
-     * @var string $objectClass
-     *
-     * @MongoDB\Index
-     * @MongoDB\String
+     * @var string
      */
     protected $objectClass;
 
     /**
-     * @var integer $version
-     *
-     * @MongoDB\Int
+     * @var integer
      */
     protected $version;
 
     /**
-     * @var text $data
-     *
-     * @MongoDB\String(nullable=true)
+     * @var string
      */
     protected $data;
 
     /**
-     * @var string $data
-     *
-     * @MongoDB\Index
-     * @MongoDB\String(nullable=true)
+     * @var string
      */
     protected $username;
 
@@ -151,7 +127,7 @@ abstract class AbstractLogEntry
     /**
      * Get loggedAt
      *
-     * @return datetime
+     * @return \DateTime
      */
     public function getLoggedAt()
     {
@@ -160,8 +136,6 @@ abstract class AbstractLogEntry
 
     /**
      * Set loggedAt
-     *
-     * @param string $loggedAt
      */
     public function setLoggedAt()
     {
@@ -175,7 +149,7 @@ abstract class AbstractLogEntry
      */
     public function getData()
     {
-        return is_string($this->data) ? unserialize($this->data) : null;
+        return $this->data;
     }
 
     /**
@@ -185,11 +159,7 @@ abstract class AbstractLogEntry
      */
     public function setData($data)
     {
-        if (is_array($data)) {
-            $this->data = serialize($data);
-        } else {
-            $this->data = $data;
-        }
+        $this->data = $data;
     }
 
     /**

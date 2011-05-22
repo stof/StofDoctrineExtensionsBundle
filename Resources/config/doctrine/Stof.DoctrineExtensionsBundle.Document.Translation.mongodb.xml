@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mongo-mapping xmlns="http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping"
+                        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                        xsi:schemaLocation="http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping
+                        http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping.xsd">
+
+    <document name="Stof\DoctrineExtensionsBundle\Document\Translation" repository-class="Gedmo\Translatable\Document\Repository\TranslationRepository">
+
+        <indexes>
+            <index>
+                <option name="name" value="translations_lookup_idx" />
+                <key name="locale" />
+                <key name="object_class" />
+                <key name="foreign_key" />
+            </index>
+            <index>
+                <option name="name" value="lookup_unique_idx" />
+                <option name="unique" value="true" />
+                <key name="locale" />
+                <key name="object_class" />
+                <key name="foreign_key" />
+                <key name="field" />
+            </index>
+        </indexes>
+
+    </document>
+
+</doctrine-mongo-mapping>
