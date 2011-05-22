@@ -5,10 +5,25 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="stof_doctrine_extensions.listener.timestampable" class="%stof_doctrine_extensions.listener.timestampable.class%" public="false"/>
-        <service id="stof_doctrine_extensions.listener.tree" class="%stof_doctrine_extensions.listener.tree.class%" public="false"/>
-        <service id="stof_doctrine_extensions.listener.sluggable" class="%stof_doctrine_extensions.listener.sluggable.class%" public="false"/>
+        <service id="stof_doctrine_extensions.listener.timestampable" class="%stof_doctrine_extensions.listener.timestampable.class%" public="false">
+            <call method="setAnnotationReader">
+                <argument type="service" id="annotation_reader" />
+            </call>
+        </service>
+        <service id="stof_doctrine_extensions.listener.tree" class="%stof_doctrine_extensions.listener.tree.class%" public="false">
+            <call method="setAnnotationReader">
+                <argument type="service" id="annotation_reader" />
+            </call>
+        </service>
+        <service id="stof_doctrine_extensions.listener.sluggable" class="%stof_doctrine_extensions.listener.sluggable.class%" public="false">
+            <call method="setAnnotationReader">
+                <argument type="service" id="annotation_reader" />
+            </call>
+        </service>
         <service id="stof_doctrine_extensions.listener.translatable" class="%stof_doctrine_extensions.listener.translatable.class%" public="false">
+            <call method="setAnnotationReader">
+                <argument type="service" id="annotation_reader" />
+            </call>
             <call method="setDefaultLocale">
                 <argument>%stof_doctrine_extensions.default_locale%</argument>
             </call>
@@ -22,6 +37,9 @@
         <service id="stof_doctrine_extensions.listener.loggable" class="%stof_doctrine_extensions.listener.loggable.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container" />
+            </call>
+            <call method="setAnnotationReader">
+                <argument type="service" id="annotation_reader" />
             </call>
         </service>
     </services>

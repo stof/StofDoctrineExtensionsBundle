@@ -149,6 +149,24 @@ Use the DoctrineExtensions library
 
 All explanations about this library are available on the official blog_
 
+As bundle uses the new annotation implementation (as all Symfony2 code)
+the annotations are a bit different.
+
+Instead of::
+
+    /**
+     * @gedmo:Tree
+     */
+
+use::
+
+    use Gedmo\Mapping\Annotation as Gedmo;
+    /**
+     * @Gedmo\Tree
+     */
+
+This applies for all annotations of the library.
+
 The default entity for translations is
 ``Stof\DoctrineExtensionsBundle\Entity\Translation``. The default
 document is ``Stof\DoctrineExtensionsBundle\Document\Translation``.
