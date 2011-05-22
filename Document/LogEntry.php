@@ -2,8 +2,10 @@
 
 namespace Stof\DoctrineExtensionsBundle\Document;
 
+use Doctrine\ODM\MongoDB\Mapping as MongoDB;
+
 /**
- * @mongodb:Document(repositoryClass="Gedmo\Loggable\Document\Repository\LogEntryRepository")
+ * @MongoDB\Document(repositoryClass="Gedmo\Loggable\Document\Repository\LogEntryRepository")
  */
 class LogEntry extends AbstractLogEntry
 {

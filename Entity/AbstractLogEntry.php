@@ -2,66 +2,68 @@
 
 namespace Stof\DoctrineExtensionsBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
- * @orm:MappedSuperclass
+ * @ORM\MappedSuperclass
  */
 abstract class AbstractLogEntry
 {
     /**
      * @var integer $id
      *
-     * @orm:Column(type="integer")
-     * @orm:Id
-     * @orm:GeneratedValue
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue
      */
     private $id;
 
     /**
      * @var string $action
      *
-     * @orm:Column(type="string", length=8)
+     * @ORM\Column(type="string", length=8)
      */
     private $action;
 
     /**
      * @var string $loggedAt
      *
-     * @orm:Column(name="logged_at", type="datetime")
+     * @ORM\Column(name="logged_at", type="datetime")
      */
     private $loggedAt;
 
     /**
      * @var string $objectId
      *
-     * @orm:Column(name="object_id", length=32, nullable=true)
+     * @ORM\Column(name="object_id", length=32, nullable=true)
      */
     private $objectId;
 
     /**
      * @var string $objectClass
      *
-     * @orm:Column(name="object_class", type="string", length=255)
+     * @ORM\Column(name="object_class", type="string", length=255)
      */
     private $objectClass;
 
     /**
      * @var integer $version
      *
-     * @orm:Column(type="integer")
+     * @ORM\Column(type="integer")
      */
     private $version;
 
     /**
      * @var text $data
      *
-     * @orm:Column(type="text", nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
     private $data;
 
     /**
      * @var text $data
      *
-     * @orm:Column(length=255, nullable=true)
+     * @ORM\Column(length=255, nullable=true)
      */
     private $username;
 

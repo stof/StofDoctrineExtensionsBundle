@@ -169,18 +169,19 @@ Here is an example for the ORM::
 
     namespace Application\MyBundle\Entity;
 
-    use Stof\DoctrineExtensionsBundle\Entity\AbstractTranslation
+    use Stof\DoctrineExtensionsBundle\Entity\AbstractTranslation;
+    use Doctrine\ORM\Mapping as ORM;
 
     /**
      * Application\MyBundle\Entity\MyTranslationEntity
      *
-     * @orm:Entity(repositoryClass="Gedmo\Translatable\Entity\Repository\TranslationRepository")
-     * @orm:Table(
+     * @ORM\Entity(repositoryClass="Gedmo\Translatable\Entity\Repository\TranslationRepository")
+     * @ORM\Table(
      *         name="ext_translations",
-     *         indexes={@orm:index(name="translations_lookup_idx", columns={
+     *         indexes={@ORM\index(name="translations_lookup_idx", columns={
      *             "locale", "object_class", "foreign_key"
      *         })},
-     *         uniqueConstraints={@orm:UniqueConstraint(name="lookup_unique_idx", columns={
+     *         uniqueConstraints={@ORM\UniqueConstraint(name="lookup_unique_idx", columns={
      *             "locale", "object_class", "foreign_key", "field"
      *         })}
      * )

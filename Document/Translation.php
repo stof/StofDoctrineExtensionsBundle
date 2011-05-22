@@ -2,19 +2,21 @@
 
 namespace Stof\DoctrineExtensionsBundle\Document;
 
+use Doctrine\ODM\MongoDB\Mapping as MongoDB;
+
 /**
  * Stof\DoctrineExtensionsBundle\Document\Translation
  *
- * @mongodb:Document(repositoryClass="Gedmo\Translatable\Document\Repository\TranslationRepository")
- * @mongodb:UniqueIndex(name="lookup_unique_idx", keys={
+ * @MongoDB\Document(repositoryClass="Gedmo\Translatable\Document\Repository\TranslationRepository")
+ * @MongoDB\UniqueIndex(name="lookup_unique_idx", keys={
  *         "locale",
  *         "object_class",
  *         "foreign_key",
  *         "field"
  * })
- * @mongodb:Index(name="translations_lookup_idx", keys={
- *      "locale", 
- *      "object_class", 
+ * @MongoDB\Index(name="translations_lookup_idx", keys={
+ *      "locale",
+ *      "object_class",
  *      "foreign_key"
  * })
  */

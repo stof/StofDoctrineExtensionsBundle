@@ -2,73 +2,75 @@
 
 namespace Stof\DoctrineExtensionsBundle\Document;
 
+use Doctrine\ODM\MongoDB\Mapping as MongoDB;
+
 /**
- * @mongodb:MappedSuperclass
+ * @MongoDB\MappedSuperclass
  */
 abstract class AbstractLogEntry
 {
     /**
      * @var integer $id
      *
-     * @mongodb:Id
+     * @MongoDB\Id
      */
     private $id;
-    
+
     /**
      * @var string $action
      *
-     * @mongodb:String
+     * @MongoDB\String
      */
     private $action;
-    
+
     /**
      * @var datetime $loggedAt
      *
-     * @mongodb:Index
-     * @mongodb:Date
+     * @MongoDB\Index
+     * @MongoDB\Date
      */
     private $loggedAt;
-    
+
     /**
      * @var string $objectId
      *
-     * @mongodb:String(nullable=true)
+     * @MongoDB\String(nullable=true)
      */
     private $objectId;
-    
+
     /**
      * @var string $objectClass
      *
-     * @mongodb:Index
-     * @mongodb:String
+     * @MongoDB\Index
+     * @MongoDB\String
      */
     private $objectClass;
-    
+
     /**
      * @var integer $version
-     *  
-     * @mongodb:Int
+     *
+     * @MongoDB\Int
      */
     private $version;
-    
-    /** 
+
+    /**
      * @var text $data
-     * 
-     * @mongodb:String(nullable=true)
+     *
+     * @MongoDB\String(nullable=true)
      */
     private $data;
-    
-    /** 
+
+    /**
      * @var string $data
-     * 
-     * @mongodb:Index
-     * @mongodb:String(nullable=true)
+     *
+     * @MongoDB\Index
+     * @MongoDB\String(nullable=true)
      */
     private $username;
-    
+
     /**
      * Get action
-     * 
+     *
      * @return string
      */
     public function getAction()
@@ -85,10 +87,10 @@ abstract class AbstractLogEntry
     {
         $this->action = $action;
     }
-    
+
     /**
      * Get object class
-     * 
+     *
      * @return string
      */
     public function getObjectClass()
@@ -98,17 +100,17 @@ abstract class AbstractLogEntry
 
     /**
      * Set object class
-     * 
+     *
      * @param string $objectClass
      */
     public function setObjectClass($objectClass)
     {
         $this->objectClass = $objectClass;
     }
-    
+
     /**
      * Get object id
-     * 
+     *
      * @return string
      */
     public function getObjectId()
@@ -118,17 +120,17 @@ abstract class AbstractLogEntry
 
     /**
      * Set object id
-     * 
+     *
      * @param string $objectId
      */
     public function setObjectId($objectId)
     {
         $this->objectId = $objectId;
     }
-    
+
     /**
      * Get username
-     * 
+     *
      * @return string
      */
     public function getUsername()
@@ -138,17 +140,17 @@ abstract class AbstractLogEntry
 
     /**
      * Set username
-     * 
+     *
      * @param string $username
      */
     public function setUsername($username)
     {
         $this->username = $username;
     }
-    
+
     /**
      * Get loggedAt
-     * 
+     *
      * @return datetime
      */
     public function getLoggedAt()
@@ -158,17 +160,17 @@ abstract class AbstractLogEntry
 
     /**
      * Set loggedAt
-     * 
+     *
      * @param string $loggedAt
      */
     public function setLoggedAt()
     {
         $this->loggedAt = new \DateTime();
     }
-    
+
     /**
      * Get data
-     * 
+     *
      * @return array or null
      */
     public function getData()
@@ -178,7 +180,7 @@ abstract class AbstractLogEntry
 
     /**
      * Set data
-     * 
+     *
      * @param array $data
      */
     public function setData($data)
@@ -189,20 +191,20 @@ abstract class AbstractLogEntry
             $this->data = $data;
         }
     }
-    
+
     /**
      * Set current version
-     *  
+     *
      * @param integer $version
      */
     public function setVersion($version)
     {
         $this->version = $version;
     }
-    
+
     /**
      * Get current version
-     *  
+     *
      * @return integer
      */
     public function getVersion()

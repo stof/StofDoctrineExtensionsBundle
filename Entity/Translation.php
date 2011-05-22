@@ -2,16 +2,18 @@
 
 namespace Stof\DoctrineExtensionsBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * Stof\DoctrineExtensionsBundle\Entity\Translation
  *
- * @orm:Entity(repositoryClass="Gedmo\Translatable\Entity\Repository\TranslationRepository")
- * @orm:Table(
+ * @ORM\Entity(repositoryClass="Gedmo\Translatable\Entity\Repository\TranslationRepository")
+ * @ORM\Table(
  *         name="ext_translations",
- *         indexes={@orm:index(name="translations_lookup_idx", columns={
+ *         indexes={@ORM\index(name="translations_lookup_idx", columns={
  *             "locale", "object_class", "foreign_key"
  *         })},
- *         uniqueConstraints={@orm:UniqueConstraint(name="lookup_unique_idx", columns={
+ *         uniqueConstraints={@ORM\UniqueConstraint(name="lookup_unique_idx", columns={
  *             "locale", "object_class", "foreign_key", "field"
  *         })}
  * )

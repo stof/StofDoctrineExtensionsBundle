@@ -2,15 +2,17 @@
 
 namespace Stof\DoctrineExtensionsBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
- * @orm:MappedSuperclass
+ * @ORM\MappedSuperclass
  */
 abstract class AbstractClosure
 {
     /**
-     * @orm:Id
-     * @orm:GeneratedValue
-     * @orm:Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
      */
     private $id;
 
@@ -27,7 +29,7 @@ abstract class AbstractClosure
     protected $descendant;
 
     /**
-     * @orm:Column(type="integer")
+     * @ORM\Column(type="integer")
      */
     private $depth;
 
