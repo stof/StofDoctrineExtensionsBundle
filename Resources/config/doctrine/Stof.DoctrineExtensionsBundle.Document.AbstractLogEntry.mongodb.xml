@@ -16,7 +16,7 @@
 
         <field fieldName="objectClass" type="string" index="true" />
 
-        <field fieldName="version" type="integer" />
+        <field fieldName="version" type="int" />
 
         <field fieldName="data" type="string" nullable="true" />
 
