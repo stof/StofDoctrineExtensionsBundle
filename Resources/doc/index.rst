@@ -106,7 +106,15 @@ or for MongoDB ODM::
 
 .. note::
 
-    This is only necessary if you want to use the Translatable behavior.
+    The mapping is only needed when using the ``Translatable`` or the
+    ``Loggable`` behaviors. If you don't use any of them, you can disable
+    it to avoid creating the tables even when using auto_mapping::
+
+        doctrine:
+            orm:
+                auto_mapping: true
+                mappings:
+                    StofDoctrineExtensionsBundle: false
 
 Configure the bundle
 ====================
