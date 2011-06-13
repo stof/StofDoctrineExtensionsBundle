@@ -49,6 +49,7 @@ class Configuration implements ConfigurationInterface
             ->prototype('array')
                 ->performNoDeepMerging()
                 ->children()
+
                     ->scalarNode('translatable')->defaultFalse()->end()
                     ->scalarNode('timestampable')->defaultFalse()->end()
                     ->scalarNode('blameable')->defaultFalse()->end()
@@ -59,6 +60,7 @@ class Configuration implements ConfigurationInterface
                     ->scalarNode('softdeleteable')->defaultFalse()->end()
                     ->scalarNode('uploadable')->defaultFalse()->end()
                     ->scalarNode('reference_integrity')->defaultFalse()->end()
+                    ->scalarNode('references')->cannotBeEmpty()->end()
                 ->end()
             ->end()
         ;
@@ -113,6 +115,10 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('reference_integrity')
                     ->cannotBeEmpty()
                     ->defaultValue('Gedmo\\ReferenceIntegrity\\ReferenceIntegrityListener')
+                ->end()
+                ->scalarNode('references')
+                    ->cannotBeEmpty()
+                    ->defaultValue('Stof\\DoctrineExtensionsBundle\\Listener\\ReferencesListener')
                 ->end()
             ->end()
         ;

@@ -14,6 +14,11 @@
     </parameters>
     <services>
         <!-- Doctrine listeners -->
+        <service id="stof_doctrine_extensions.listener.references" class="%stof_doctrine_extensions.listener.references.class%" public="false">
+            <call method="setAnnotationReader">
+                <argument type="service" id="annotation_reader" />
+            </call>
+        </service>
         <service id="stof_doctrine_extensions.listener.timestampable" class="%stof_doctrine_extensions.listener.timestampable.class%" public="false">
             <call method="setAnnotationReader">
                 <argument type="service" id="annotation_reader" />
