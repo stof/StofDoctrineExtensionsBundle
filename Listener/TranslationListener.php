@@ -4,7 +4,7 @@ namespace Stof\DoctrineExtensionsBundle\Listener;
 
 use Gedmo\Translatable\TranslationListener as BaseTranslationListener;
 use Gedmo\Translatable\Mapping\Event\TranslatableAdapter;
-use Symfony\Component\HttpFoundation\Session;
+use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
 /**
  * TranslationListener
@@ -29,12 +29,14 @@ class TranslationListener extends BaseTranslationListener
     /**
      * Set the translation listener locale from the session.
      *
-     * @param Session $session
-     * @return void
+     * This method should be attached to the core.request event.
+     *
+     * @param GetResponseEvent $event
      */
-    public function setTranslatableLocaleFromSession(Session $session = null)
+    public function onCoreRequest(GetResponseEvent $event)
     {
-        if ($session !== null) {
+        $session = $event->getRequest()->getSession();
+        if (null !== $session) {
             $this->setTranslatableLocale($session->getLocale());
         }
     }
