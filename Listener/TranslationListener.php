@@ -29,11 +29,11 @@ class TranslationListener extends BaseTranslationListener
     /**
      * Set the translation listener locale from the session.
      *
-     * This method should be attached to the core.request event.
+     * This method should be attached to the kernel.request event.
      *
      * @param GetResponseEvent $event
      */
-    public function onCoreRequest(GetResponseEvent $event)
+    public function onKernelRequest(GetResponseEvent $event)
     {
         $session = $event->getRequest()->getSession();
         if (null !== $session) {
