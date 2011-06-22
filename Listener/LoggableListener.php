@@ -31,7 +31,7 @@ class LoggableListener extends BaseLoggableListener implements ContainerAwareInt
      *
      * @param GetResponseEvent $event
      */
-    public function onCoreRequest(GetResponseEvent $event)
+    public function onKernelRequest(GetResponseEvent $event)
     {
         $securityContext = $this->container->get('security.context', ContainerInterface::NULL_ON_INVALID_REFERENCE);
         if (null !== $securityContext && null !== $securityContext->getToken() && $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
