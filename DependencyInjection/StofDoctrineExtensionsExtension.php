@@ -33,7 +33,7 @@ class StofDoctrineExtensionsExtension extends Extension
                     $definition = $container->getDefinition($listener);
                     $definition->addTag('doctrine.event_subscriber',array('connection' => $name));
                     if ('loggable' === $ext) {
-                        $definition->addTag('kernel.listener', array('event' => 'core.request', 'method' => 'onCoreRequest')); // Executed after the security one.
+                        $definition->addTag('kernel.event_listener', array('event' => 'kernel.request', 'method' => 'onKernelRequest')); // Executed after the security one.
                     }
                 }
             }
@@ -48,7 +48,7 @@ class StofDoctrineExtensionsExtension extends Extension
                     $definition = $container->getDefinition($listener);
                     $definition->addTag(sprintf('doctrine.odm.mongodb.%s_event_subscriber', $name));
                     if ('loggable' === $ext) {
-                        $definition->addTag('kernel.listener', array('event' => 'core.request', 'method' => 'onCoreRequest')); // Executed after the security one.
+                        $definition->addTag('kernel.event_listener', array('event' => 'kernel.request', 'method' => 'onKernelRequest')); // Executed after the security one.
                     }
                 }
             }
