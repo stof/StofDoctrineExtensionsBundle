@@ -49,7 +49,7 @@ Add DoctrineExtensionsBundle to your src/Bundle dir
 
 ::
 
-    git submodule add git://github.com/stof/DoctrineExtensionsBundle.git vendor/bundles/Stof/DoctrineExtensionsBundle
+    git submodule add git://github.com/stof/StofDoctrineExtensionsBundle.git vendor/bundles/Stof/DoctrineExtensionsBundle
 
 Register the DoctrineExtensions and Stof namespaces
 ---------------------------------------------------
