@@ -10,8 +10,8 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class StofDoctrineExtensionsExtension extends Extension
 {
-    protected $entityManagers   = array();
-    protected $documentManagers = array();
+    private $entityManagers   = array();
+    private $documentManagers = array();
 
     public function load(array $configs, ContainerBuilder $container)
     {
@@ -31,7 +31,7 @@ class StofDoctrineExtensionsExtension extends Extension
                 $listener = sprintf('stof_doctrine_extensions.listener.%s', $ext);
                 if ($enabled && $container->hasDefinition($listener)) {
                     $definition = $container->getDefinition($listener);
-                    $definition->addTag('doctrine.event_subscriber',array('connection' => $name));
+                    $definition->addTag('doctrine.event_subscriber', array('connection' => $name));
                     if ('loggable' === $ext) {
                         $definition->addTag('kernel.event_listener', array('event' => 'kernel.request', 'method' => 'onKernelRequest')); // Executed after the security one.
                     }
@@ -73,10 +73,5 @@ class StofDoctrineExtensionsExtension extends Extension
                 throw new \InvalidArgumentException(sprintf('Invalid %s config: document manager "%s" not found', $this->getAlias(), $name));
             }
         }
-    }
-
-    public function getNamespace()
-    {
-        return 'http://symfony.com/schema/dic/stof_doctrine_extensions';
     }
 }
