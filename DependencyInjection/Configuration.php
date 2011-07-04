@@ -48,6 +48,7 @@ class Configuration implements ConfigurationInterface
                     ->scalarNode('sluggable')->defaultTrue()->end()
                     ->scalarNode('tree')->defaultTrue()->end()
                     ->scalarNode('loggable')->defaultTrue()->end()
+                    ->scalarNode('sortable')->defaultTrue()->end()
                 ->end()
             ->end()
         ;
@@ -82,6 +83,10 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('loggable')
                     ->cannotBeEmpty()
                     ->defaultValue('Stof\\DoctrineExtensionsBundle\\Listener\\LoggableListener')
+                ->end()
+                ->scalarNode('sortable')
+                    ->cannotBeEmpty()
+                    ->defaultValue('Gedmo\\Sortable\\SortableListener')
                 ->end()
             ->end()
         ;
