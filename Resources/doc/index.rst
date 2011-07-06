@@ -152,6 +152,50 @@ or in XML::
         </stof_doctrine_extensions:config>
     </container>
 
+Activate the extensions you want
+================================
+
+By default the bundle does not attach any listener.
+For each of your entity manager, declare the extensions you want to enable::
+
+    # app/config.yml
+    stof_doctrine_extensions:
+        default_locale: en_US
+        orm:
+            default:
+                tree: true
+                timestampable: false # not needed: listeners are not enabled by default
+            other:
+                timestampable: true
+
+or in XML::
+
+    <!-- app/config.xml -->
+    <container xmlns:doctrine_extensions="http://symfony.com/schema/dic/stof_doctrine_extensions">
+        <stof_doctrine_extensions:config default-locale="en_US">
+            <stof_doctrine_extensions:orm>
+                <stof_doctrine_extensions:entity-manager
+                    id="default"
+                    tree="true"
+                    timestampable="false"
+                />
+                <stof_doctrine_extensions:entity-manager
+                    id="other"
+                    timestampable="true"
+                />
+            </stof_doctrine_extensions:orm>
+        </stof_doctrine_extensions:config>
+    </container>
+
+Same is available for MongoDB using ``document-manager`` in the XML
+files instead of ``entity-manager``.
+
+.. caution::
+
+    If you configure the listeners of an entity manager in several
+    config file the last one will be used. So you have to list all the
+    listeners you want to detach.
+
 Use the DoctrineExtensions library
 ==================================
 
@@ -224,53 +268,6 @@ You can also create your own repositoryClass by extending
 
 Advanced use
 ============
-
-Advanced configuration
-----------------------
-
-By default the bundle attachs all 4 listeners to the entity managers
-listed in the configuration. You can change this behavior by disabling
-some of them explicitely.
-
-in YAML::
-
-    # app/config.yml
-    stof_doctrine_extensions:
-        default_locale: en_US
-        orm:
-            default:
-                tree: false
-                timestampable: true # not needed: listeners are enabled by default
-            other:
-                timestampable: false
-
-or in XML::
-
-    <!-- app/config.xml -->
-    <container xmlns:doctrine_extensions="http://symfony.com/schema/dic/stof_doctrine_extensions">
-        <stof_doctrine_extensions:config default-locale="en_US">
-            <stof_doctrine_extensions:orm>
-                <stof_doctrine_extensions:entity-manager
-                    id="default"
-                    tree="false"
-                    timestampable="true"
-                />
-                <stof_doctrine_extensions:entity-manager
-                    id="other"
-                    timestampable="false"
-                />
-            </stof_doctrine_extensions:orm>
-        </stof_doctrine_extensions:config>
-    </container>
-
-Same is available for MongoDB using ``document-manager`` in the XML
-files instead of ``entity-manager``.
-
-.. caution::
-
-    If you configure the listeners of an entity manager in several
-    config file the last one will be used. So you have to list all the
-    listeners you want to detach.
 
 Overriding the listeners
 ------------------------
