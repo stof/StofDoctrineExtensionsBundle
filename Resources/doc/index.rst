@@ -99,10 +99,12 @@ for ORM::
 or for MongoDB ODM::
 
     # app/config.yml
-    doctrine_mongo_db:
-        mappings:
-            StofDoctrineExtensionsBundle: ~
-            # ... your others bundle
+    doctrine_mongodb:
+        document_managers:
+            default:
+                mappings:
+                    StofDoctrineExtensionsBundle: ~
+                    # ... your others bundle
 
 .. note::
 
