@@ -3,7 +3,7 @@ Provides integration for DoctrineExtensions_ for your Symfony2 Project.
 Features
 ========
 
-This bundle allows to easyly use DoctrineExtensions_ in your Symfony2
+This bundle allows to easily use DoctrineExtensions_ in your Symfony2
 project by configuring it through a ``ListenerManager`` and the DIC.
 
 DoctrineExtensions's features
@@ -232,7 +232,7 @@ When you have a great number of entries for an entity you should create
 a dedicated translation entity to have good performances. The only
 difference when using it with Symfony2 is the mapped-superclass to use.
 
-The simpliest way to do it is to copy the default translation entity
+The simplest way to do it is to copy the default translation entity
 and just change the namespace and the class name.
 
 Here is an example for the ORM::
