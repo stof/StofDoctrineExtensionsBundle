@@ -303,4 +303,4 @@ or in XML::
 
 .. _DoctrineExtensions: http://github.com/l3pp4rd/DoctrineExtensions
 .. _blog:               http://gediminasm.org/articles
-.. _documentation:      http://docs.symfony-reloaded.org/master/guides/doctrine/orm/overview.html
+.. _documentation:      http://symfony.com/doc/current/reference/configuration/doctrine.html#configuration-overview
