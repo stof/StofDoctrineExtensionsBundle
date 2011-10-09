@@ -9,3 +9,10 @@ For documentation, see:
 License:
 
     Resources/meta/LICENSE
+
+
+> Note:
+>
+> The master branch of the bundle is in sync with Symfony master branch which
+> contains a BC break. If you are using a 2.0.x version of Symfony, you need
+> to use the 1.0.0 tag of the bundle.
