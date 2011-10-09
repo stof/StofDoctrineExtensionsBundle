@@ -35,9 +35,9 @@ class TranslationListener extends BaseTranslationListener
      */
     public function onKernelRequest(GetResponseEvent $event)
     {
-        $session = $event->getRequest()->getSession();
-        if (null !== $session) {
-            $this->setTranslatableLocale($session->getLocale());
+        $request = $event->getRequest();
+        if (null !== $request) {
+            $this->setTranslatableLocale($request->getLocale());
         }
     }
 }
