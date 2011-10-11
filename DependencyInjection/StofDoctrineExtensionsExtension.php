@@ -26,10 +26,15 @@ class StofDoctrineExtensionsExtension extends Extension
         $container->setParameter('stof_doctrine_extensions.default_locale', $config['default_locale']);
         $container->setParameter('stof_doctrine_extensions.translation_fallback', $config['translation_fallback']);
 
+        $useTranslatable = false;
+
         foreach ($config['orm'] as $name => $listeners) {
             foreach ($listeners as $ext => $enabled) {
                 $listener = sprintf('stof_doctrine_extensions.listener.%s', $ext);
                 if ($enabled && $container->hasDefinition($listener)) {
+                    if ('translatable' === $ext) {
+                        $useTranslatable = true;
+                    }
                     $definition = $container->getDefinition($listener);
                     $definition->addTag('doctrine.event_subscriber', array('connection' => $name));
                     if ('loggable' === $ext) {
@@ -45,6 +50,9 @@ class StofDoctrineExtensionsExtension extends Extension
             foreach ($listeners as $ext => $enabled) {
                 $listener = sprintf('stof_doctrine_extensions.listener.%s', $ext);
                 if ($enabled && $container->hasDefinition($listener)) {
+                    if ('translatable' === $ext) {
+                        $useTranslatable = true;
+                    }
                     $definition = $container->getDefinition($listener);
                     $definition->addTag(sprintf('doctrine.odm.mongodb.%s_event_subscriber', $name));
                     if ('loggable' === $ext) {
@@ -53,6 +61,11 @@ class StofDoctrineExtensionsExtension extends Extension
                 }
             }
             $this->documentManagers[$name] = $listeners;
+        }
+
+        if ($useTranslatable) {
+            $container->getDefinition('stof_doctrine_extensions.listener.translatable')
+                ->addTag('kernel.event_listener', array('event' => 'kernel.request', 'method' => 'onKernelRequest', 'priority' => -10)); // Registered after the RouterListener
         }
 
         foreach ($config['class'] as $listener => $class) {
