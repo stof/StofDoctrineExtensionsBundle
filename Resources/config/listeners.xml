@@ -30,7 +30,6 @@
             <call method="setTranslationFallback">
                 <argument>%stof_doctrine_extensions.translation_fallback%</argument>
             </call>
-            <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" priority="-10" /><!-- Registered after the RouterListener -->
         </service>
         <service id="stof_doctrine_extensions.listener.loggable" class="%stof_doctrine_extensions.listener.loggable.class%">
             <call method="setContainer">
