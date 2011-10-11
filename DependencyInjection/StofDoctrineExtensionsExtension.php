@@ -27,6 +27,7 @@ class StofDoctrineExtensionsExtension extends Extension
         $container->setParameter('stof_doctrine_extensions.translation_fallback', $config['translation_fallback']);
 
         $useTranslatable = false;
+        $useLoggable = false;
 
         foreach ($config['orm'] as $name => $listeners) {
             foreach ($listeners as $ext => $enabled) {
@@ -34,12 +35,11 @@ class StofDoctrineExtensionsExtension extends Extension
                 if ($enabled && $container->hasDefinition($listener)) {
                     if ('translatable' === $ext) {
                         $useTranslatable = true;
+                    } elseif ('loggable' === $ext) {
+                        $useLoggable = true;
                     }
                     $definition = $container->getDefinition($listener);
                     $definition->addTag('doctrine.event_subscriber', array('connection' => $name));
-                    if ('loggable' === $ext) {
-                        $definition->addTag('kernel.event_listener', array('event' => 'kernel.request', 'method' => 'onKernelRequest')); // Executed after the security one.
-                    }
                 }
             }
 
@@ -52,12 +52,11 @@ class StofDoctrineExtensionsExtension extends Extension
                 if ($enabled && $container->hasDefinition($listener)) {
                     if ('translatable' === $ext) {
                         $useTranslatable = true;
+                    } elseif ('loggable' === $ext) {
+                        $useLoggable = true;
                     }
                     $definition = $container->getDefinition($listener);
                     $definition->addTag(sprintf('doctrine.odm.mongodb.%s_event_subscriber', $name));
-                    if ('loggable' === $ext) {
-                        $definition->addTag('kernel.event_listener', array('event' => 'kernel.request', 'method' => 'onKernelRequest')); // Executed after the security one.
-                    }
                 }
             }
             $this->documentManagers[$name] = $listeners;
@@ -66,6 +65,10 @@ class StofDoctrineExtensionsExtension extends Extension
         if ($useTranslatable) {
             $container->getDefinition('stof_doctrine_extensions.listener.translatable')
                 ->addTag('kernel.event_listener', array('event' => 'kernel.request', 'method' => 'onKernelRequest', 'priority' => -10)); // Registered after the RouterListener
+        }
+        if ($useLoggable) {
+            $container->getDefinition('stof_doctrine_extensions.listener.loggable')
+                ->addTag('kernel.event_listener', array('event' => 'kernel.request', 'method' => 'onKernelRequest')); // Executed after the security one.
         }
 
         foreach ($config['class'] as $listener => $class) {
