@@ -1,0 +1,27 @@
+{
+    "name": "stof/doctrine-extensions-bundle",
+    "type": "symfony-bundle",
+    "description": "Symfony StofDoctrineExtensionsBundle",
+    "keywords": [],
+    "homepage": "https://github.com/stof/StofDoctrineExtensionsBundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Christophe Coevoet",
+            "email": "stof@notk.org"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.2",
+        "symfony/framework-bundle": "2.0.*",
+        "gedmo/doctrine-extensions": ">=2.1"
+    },
+    "suggest": {
+        "symfony/doctrine-bundle": "*",
+        "symfony/mongodb-odm-bundle": "*"
+    },
+    "autoload": {
+        "psr-0": { "Stof\\DoctrineExtensionsBundle": "" }
+    },
+    "target-dir": "Stof/DoctrineExtensionsBundle"
+}
