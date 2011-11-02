@@ -2,13 +2,13 @@ This bundle provides integration for
 [DoctrineExtensions](http://github.com/l3pp4rd/DoctrineExtensions) in
 your Symfony2 Project.
 
-For documentation, see:
+For documentation, see: 
 
-    Resources/doc/index.rst
+[`Resources/doc/index.rst`](https://github.com/stof/StofDoctrineExtensionsBundle/blob/master/Resources/doc/index.rst)
 
 License:
 
-    Resources/meta/LICENSE
+[`Resources/meta/LICENSE`](https://github.com/stof/StofDoctrineExtensionsBundle/blob/master/Resources/meta/LICENSE)
 
 
 > Note:
