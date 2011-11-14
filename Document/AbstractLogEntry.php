@@ -2,6 +2,9 @@
 
 namespace Stof\DoctrineExtensionsBundle\Document;
 
+/**
+ *
+ */
 abstract class AbstractLogEntry
 {
     /**
