@@ -2,9 +2,9 @@
 
 namespace Stof\DoctrineExtensionsBundle\Document;
 
+/**
+ * All required columns are mapped through inherited superclass
+ */
 class Translation extends AbstractTranslation
 {
-    /**
-     * All required columns are mapped through inherited superclass
-     */
 }

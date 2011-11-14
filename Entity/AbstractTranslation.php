@@ -2,6 +2,9 @@
 
 namespace Stof\DoctrineExtensionsBundle\Entity;
 
+/**
+ *
+ */
 abstract class AbstractTranslation
 {
     /**
