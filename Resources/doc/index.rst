@@ -37,18 +37,27 @@ be done in the bundle.
 Installation
 ============
 
-Add DoctrineExtensions to your vendor dir
------------------------------------------
+Bring in the vendor libraries
+-----------------------------
+
+This can be done in two different ways:
+
+**Method #1**) Use the bin/vendor script
+
+::
+
+    [gedmo-doctrine-extensions]
+        git=http://github.com/l3pp4rd/DoctrineExtensions.git
+
+    [DoctrineExtensionsBundle]
+        git=http://github.com/stof/StofDoctrineExtensionsBundle.git
+        target=/bundles/Stof/DoctrineExtensionsBundle
+
+**Method #2**) Use git submodules
 
 ::
 
     git submodule add git://github.com/l3pp4rd/DoctrineExtensions.git vendor/gedmo-doctrine-extensions
-
-Add DoctrineExtensionsBundle to your vendor/bundles dir
----------------------------------------------------
-
-::
-
     git submodule add git://github.com/stof/StofDoctrineExtensionsBundle.git vendor/bundles/Stof/DoctrineExtensionsBundle
 
 Register the DoctrineExtensions and Stof namespaces
