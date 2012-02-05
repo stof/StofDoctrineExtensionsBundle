@@ -98,7 +98,7 @@ See the official documentation_ for details.
 
 for ORM::
 
-    # app/config.yml
+    # app/config/config.yml
     doctrine:
         orm:
             mappings:
@@ -107,7 +107,7 @@ for ORM::
 
 or for MongoDB ODM::
 
-    # app/config.yml
+    # app/config/config.yml
     doctrine_mongodb:
         document_managers:
             default:
