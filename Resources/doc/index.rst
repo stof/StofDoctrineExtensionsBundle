@@ -141,7 +141,7 @@ will default to ``en``.
 
 in YAML::
 
-    # app/config.yml
+    # app/config/config.yml
     stof_doctrine_extensions:
         default_locale: en_US
         orm:
@@ -151,7 +151,7 @@ in YAML::
 
 or in XML::
 
-    <!-- app/config.xml -->
+    <!-- app/config/config.xml -->
     <container xmlns:stof_doctrine_extensions="http://symfony.com/schema/dic/stof_doctrine_extensions">
         <stof_doctrine_extensions:config default-locale="en_US">
             <stof_doctrine_extensions:orm>
@@ -169,7 +169,7 @@ Activate the extensions you want
 By default the bundle does not attach any listener.
 For each of your entity manager, declare the extensions you want to enable::
 
-    # app/config.yml
+    # app/config/config.yml
     stof_doctrine_extensions:
         default_locale: en_US
         orm:
@@ -181,7 +181,7 @@ For each of your entity manager, declare the extensions you want to enable::
 
 or in XML::
 
-    <!-- app/config.xml -->
+    <!-- app/config/config.xml -->
     <container xmlns:doctrine_extensions="http://symfony.com/schema/dic/stof_doctrine_extensions">
         <stof_doctrine_extensions:config default-locale="en_US">
             <stof_doctrine_extensions:orm>
@@ -289,7 +289,7 @@ in the configuration.
 
 in YAML::
 
-    # app/config.yml
+    # app/config/config.yml
     stof_doctrine_extensions:
         class:
             tree:           MyBundle\TreeListener
@@ -300,7 +300,7 @@ in YAML::
 
 or in XML::
 
-    <!-- app/config.xml -->
+    <!-- app/config/config.xml -->
     <container xmlns:doctrine_extensions="http://symfony.com/schema/dic/stof_doctrine_extensions">
         <stof_doctrine_extensions:config>
             <stof_doctrine_extensions:class
