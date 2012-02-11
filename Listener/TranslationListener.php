@@ -2,8 +2,7 @@
 
 namespace Stof\DoctrineExtensionsBundle\Listener;
 
-use Gedmo\Translatable\TranslationListener as BaseTranslationListener;
-use Gedmo\Translatable\Mapping\Event\TranslatableAdapter;
+use Gedmo\Translatable\TranslatableListener as BaseTranslationListener;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
 /**
@@ -13,19 +12,6 @@ use Symfony\Component\HttpKernel\Event\GetResponseEvent;
  */
 class TranslationListener extends BaseTranslationListener
 {
-    public function getTranslationClass(TranslatableAdapter $ea, $class)
-    {
-        $class = parent::getTranslationClass($ea, $class);
-
-        if ($class === 'Gedmo\\Translatable\\Entity\\Translation') {
-            return 'Stof\\DoctrineExtensionsBundle\\Entity\\Translation';
-        } elseif ($class === 'Gedmo\\Translatable\\Document\\Translation') {
-            return 'Stof\\DoctrineExtensionsBundle\\Document\\Translation';
-        }
-
-        return $class;
-    }
-
     /**
      * Set the translation listener locale from the request.
      *

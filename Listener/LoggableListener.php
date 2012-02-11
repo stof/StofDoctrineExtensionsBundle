@@ -3,7 +3,6 @@
 namespace Stof\DoctrineExtensionsBundle\Listener;
 
 use Gedmo\Loggable\LoggableListener as BaseLoggableListener;
-use Gedmo\Loggable\Mapping\Event\LoggableAdapter;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
@@ -37,18 +36,5 @@ class LoggableListener extends BaseLoggableListener implements ContainerAwareInt
         if (null !== $securityContext && null !== $securityContext->getToken() && $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             $this->setUsername($securityContext->getToken()->getUsername());
         }
-    }
-
-    protected function getLogEntryClass(LoggableAdapter $ea, $class)
-    {
-        $class = parent::getLogEntryClass($ea, $class);
-
-        if ($class === 'Gedmo\\Loggable\\Entity\\LogEntry') {
-            return 'Stof\\DoctrineExtensionsBundle\\Entity\\LogEntry';
-        } elseif ($class === 'Gedmo\\Loggable\\Document\\LogEntry') {
-            return 'Stof\\DoctrineExtensionsBundle\\Document\\LogEntry';
-        }
-
-        return $class;
     }
 }

@@ -49,7 +49,7 @@ This can be done in two different ways:
     [gedmo-doctrine-extensions]
         git=http://github.com/l3pp4rd/DoctrineExtensions.git
 
-    [DoctrineExtensionsBundle]
+    [StofDoctrineExtensionsBundle]
         git=http://github.com/stof/StofDoctrineExtensionsBundle.git
         target=/bundles/Stof/DoctrineExtensionsBundle
 
@@ -87,45 +87,55 @@ Add DoctrineExtensionsBundle to your application kernel
         );
     }
 
-Add DoctrineExtensionsBundle to your mapping
---------------------------------------------
+Add the extensions to your mapping
+----------------------------------
 
-.. note::
+Some of the extensions uses their own entities to do their work. You need
+to register their mapping in Doctrine when you want to use them.
 
-    This is not needed if you use the auto_mapping setting.
-
-See the official documentation_ for details.
-
-for ORM::
+::
 
     # app/config/config.yml
     doctrine:
         orm:
-            mappings:
-                StofDoctrineExtensionsBundle: ~
-                # ... your others bundle
-
-or for MongoDB ODM::
-
-    # app/config/config.yml
-    doctrine_mongodb:
-        document_managers:
-            default:
-                mappings:
-                    StofDoctrineExtensionsBundle: ~
-                    # ... your others bundle
+            entity_managers:
+                default:
+                    mappings:
+                        gedmo_translatable:
+                            type: annotation
+                            prefix: Gedmo\Translatable\Entity
+                            dir: "%kernel.root_dir%/../vendor/gedmo-doctrine-extensions/lib/Gedmo/Translatable/Entity"
+                            alias: GedmoTranslatable # this one is optional and will default to the name set for the mapping
+                        gedmo_translator:
+                            type: annotation
+                            prefix: Gedmo\Translator\Entity
+                            dir: "%kernel.root_dir%/../vendor/gedmo-doctrine-extensions/lib/Gedmo/Translator/Entity"
+                            alias: GedmoTranslator # this one is optional and will default to the name set for the mapping
+                        gedmo_loggable:
+                            type: annotation
+                            prefix: Gedmo\Loggable\Entity
+                            dir: "%kernel.root_dir%/../vendor/gedmo-doctrine-extensions/lib/Gedmo/Loggable/Entity"
+                            alias: GedmoLoggable # this one is optional and will default to the name set for the mapping
+                        gedmo_tree:
+                            type: annotation
+                            prefix: Gedmo\Tree\Entity
+                            dir: "%kernel.root_dir%/../vendor/gedmo-doctrine-extensions/lib/Gedmo/Tree/Entity"
+                            alias: GedmoTree # this one is optional and will default to the name set for the mapping
 
 .. note::
 
-    The mapping is only needed when using the ``Translatable`` or the
-    ``Loggable`` behaviors. If you don't use any of them, you can disable
-    it to avoid creating the tables even when using auto_mapping::
+    If you are using the short syntax for the ORM configuration, the `mappings`
+    key is directly under `orm:`
 
-        doctrine:
-            orm:
-                auto_mapping: true
-                mappings:
-                    StofDoctrineExtensionsBundle: false
+.. note::
+
+    If you are using several entity managers, take care to register the entities
+    for the right ones.
+
+.. note::
+
+    The mapping for MongoDB is similar. The ODM documents are in the `Document`
+    subnamespace of each extension instead of `Entity`.
 
 Configure the bundle
 ====================
@@ -212,71 +222,6 @@ Use the DoctrineExtensions library
 
 All explanations about this library are available on the official blog_
 
-As bundle uses the new annotation implementation (as all Symfony2 code)
-the annotations are a bit different.
-
-Instead of::
-
-    /**
-     * @gedmo:Tree
-     */
-
-use::
-
-    use Gedmo\Mapping\Annotation as Gedmo;
-    /**
-     * @Gedmo\Tree
-     */
-
-This applies for all annotations of the library.
-
-The default entity for translations is
-``Stof\DoctrineExtensionsBundle\Entity\Translation``. The default
-document is ``Stof\DoctrineExtensionsBundle\Document\Translation``.
-
-Creating your own translation entity
-------------------------------------
-
-When you have a great number of entries for an entity you should create
-a dedicated translation entity to have good performances. The only
-difference when using it with Symfony2 is the mapped-superclass to use.
-
-The simplest way to do it is to copy the default translation entity
-and just change the namespace and the class name.
-
-Here is an example for the ORM::
-
-    // src/Application/MyBundle/Entity/MyTranslationEntity.php
-
-    namespace Application\MyBundle\Entity;
-
-    use Stof\DoctrineExtensionsBundle\Entity\AbstractTranslation;
-    use Doctrine\ORM\Mapping as ORM;
-
-    /**
-     * Application\MyBundle\Entity\MyTranslationEntity
-     *
-     * @ORM\Entity(repositoryClass="Gedmo\Translatable\Entity\Repository\TranslationRepository")
-     * @ORM\Table(
-     *         name="ext_translations",
-     *         indexes={@ORM\index(name="translations_lookup_idx", columns={
-     *             "locale", "object_class", "foreign_key"
-     *         })},
-     *         uniqueConstraints={@ORM\UniqueConstraint(name="lookup_unique_idx", columns={
-     *             "locale", "object_class", "foreign_key", "field"
-     *         })}
-     * )
-     */
-    class TranslationEntity extends AbstractTranslation
-    {
-    }
-
-Same is doable for the ODM.
-
-You can also create your own repositoryClass by extending
-``Gedmo\Translatable\Entity\Repository\TranslationRepository`` or
-``Gedmo\Translatable\Document\Repository\TranslationRepository``
-
 Advanced use
 ============
 
@@ -311,5 +256,4 @@ or in XML::
     </container>
 
 .. _DoctrineExtensions: http://github.com/l3pp4rd/DoctrineExtensions
-.. _blog:               http://gediminasm.org/articles
-.. _documentation:      http://symfony.com/doc/current/reference/configuration/doctrine.html#configuration-overview
+.. _blog:               http://gediminasm.org/
