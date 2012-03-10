@@ -63,12 +63,14 @@ class StofDoctrineExtensionsExtension extends Extension
         }
 
         if ($useTranslatable) {
-            $container->getDefinition('stof_doctrine_extensions.listener.translatable')
-                ->addTag('kernel.event_listener', array('event' => 'kernel.request', 'method' => 'onKernelRequest', 'priority' => -10)); // Registered after the RouterListener
+            $container->getDefinition('stof_doctrine_extensions.event_listener.locale')
+                ->setPublic(true)
+                ->addTag('kernel.event_subscriber');
         }
         if ($useLoggable) {
-            $container->getDefinition('stof_doctrine_extensions.listener.loggable')
-                ->addTag('kernel.event_listener', array('event' => 'kernel.request', 'method' => 'onKernelRequest')); // Executed after the security one.
+            $container->getDefinition('stof_doctrine_extensions.event_listener.logger')
+                ->setPublic(true)
+                ->addTag('kernel.event_subscriber');
         }
 
         foreach ($config['class'] as $listener => $class) {
