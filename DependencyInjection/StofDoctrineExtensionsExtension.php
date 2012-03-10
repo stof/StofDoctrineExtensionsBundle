@@ -56,7 +56,7 @@ class StofDoctrineExtensionsExtension extends Extension
                         $useLoggable = true;
                     }
                     $definition = $container->getDefinition($listener);
-                    $definition->addTag(sprintf('doctrine.odm.mongodb.%s_event_subscriber', $name));
+                    $definition->addTag('doctrine.odm.mongodb.event_subscriber', array('connection' => $name));
                 }
             }
             $this->documentManagers[$name] = $listeners;
