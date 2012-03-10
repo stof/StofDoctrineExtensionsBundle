@@ -16,7 +16,7 @@ use Symfony\Component\Security\Core\SecurityContextInterface;
 class LoggerListener implements EventSubscriberInterface
 {
     private $securityContext;
-    
+
     private $loggableListener;
 
     public function __construct(LoggableListener $loggableListener, SecurityContextInterface $securityContext = null)
@@ -38,7 +38,7 @@ class LoggerListener implements EventSubscriberInterface
 
         $token = $this->securityContext->getToken();
         if (null !== $token && $this->securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-            $this->loggableListener->setUsername($token->getUsername());
+            $this->loggableListener->setUsername($token);
         }
     }
 
