@@ -35,6 +35,9 @@
             <call method="setTranslationFallback">
                 <argument>%stof_doctrine_extensions.translation_fallback%</argument>
             </call>
+            <call method="setPersistDefaultLocaleTranslation">
+                <argument>%stof_doctrine_extensions.persist_default_translation%</argument>
+            </call>
         </service>
         <service id="stof_doctrine_extensions.listener.loggable" class="%stof_doctrine_extensions.listener.loggable.class%" public="false">
             <call method="setAnnotationReader">
