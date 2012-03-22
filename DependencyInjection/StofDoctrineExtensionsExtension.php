@@ -3,6 +3,8 @@
 namespace Stof\DoctrineExtensionsBundle\DependencyInjection;
 
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use Symfony\Component\DependencyInjection\DefinitionDecorator;
+use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\Config\FileLocator;
@@ -12,6 +14,7 @@ class StofDoctrineExtensionsExtension extends Extension
 {
     private $entityManagers   = array();
     private $documentManagers = array();
+    private $filters = array();
 
     public function load(array $configs, ContainerBuilder $container)
     {
@@ -32,6 +35,14 @@ class StofDoctrineExtensionsExtension extends Extension
 
         foreach ($config['orm'] as $name => $listeners) {
             foreach ($listeners as $ext => $enabled) {
+                if ('soft_deleteable' === $ext) {
+                    $this->filters[] = array(
+                        'name' => $name,
+                        'ext' => $ext,
+                        'extClass' => $config['class']['soft_deleteable_filter'],
+                    );
+                }
+
                 $listener = sprintf('stof_doctrine_extensions.listener.%s', $ext);
                 if ($enabled && $container->hasDefinition($listener)) {
                     if ('translatable' === $ext) {
@@ -74,8 +85,8 @@ class StofDoctrineExtensionsExtension extends Extension
                 ->addTag('kernel.event_subscriber');
         }
 
-        foreach ($config['class'] as $listener => $class) {
-            $container->setParameter(sprintf('stof_doctrine_extensions.listener.%s.class', $listener), $class);
+        foreach ($config['class'] as $extension => $class) {
+            $container->setParameter(sprintf('stof_doctrine_extensions.listener.%s.class', $extension), $class);
         }
     }
 
@@ -91,6 +102,14 @@ class StofDoctrineExtensionsExtension extends Extension
             if (!$container->hasDefinition(sprintf('doctrine.odm.mongodb.%s_document_manager', $name))) {
                 throw new \InvalidArgumentException(sprintf('Invalid %s config: document manager "%s" not found', $this->getAlias(), $name));
             }
+        }
+    }
+
+    public function configFilters(ContainerBuilder $container)
+    {
+        foreach ($this->filters as $filterConfig) {
+            $ormConfDef = $container->getDefinition(sprintf('doctrine.orm.%s_configuration', $filterConfig['name']));
+            $ormConfDef->addMethodCall('addFilter', array($filterConfig['ext'], $filterConfig['extClass']));
         }
     }
 }
