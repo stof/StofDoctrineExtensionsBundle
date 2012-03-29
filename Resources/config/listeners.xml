@@ -25,6 +25,16 @@
                 <argument type="service" id="annotation_reader" />
             </call>
         </service>
+        <service id="stof_doctrine_extensions.listener.loggable" class="%stof_doctrine_extensions.listener.loggable.class%" public="false">
+            <call method="setAnnotationReader">
+                <argument type="service" id="annotation_reader" />
+            </call>
+        </service>
+        <service id="stof_doctrine_extensions.listener.sortable" class="%stof_doctrine_extensions.listener.sortable.class%" public="false">
+            <call method="setAnnotationReader">
+                <argument type="service" id="annotation_reader" />
+            </call>
+        </service>
         <service id="stof_doctrine_extensions.listener.translatable" class="%stof_doctrine_extensions.listener.translatable.class%" public="false">
             <call method="setAnnotationReader">
                 <argument type="service" id="annotation_reader" />
@@ -37,16 +47,6 @@
             </call>
             <call method="setPersistDefaultLocaleTranslation">
                 <argument>%stof_doctrine_extensions.persist_default_translation%</argument>
-            </call>
-        </service>
-        <service id="stof_doctrine_extensions.listener.loggable" class="%stof_doctrine_extensions.listener.loggable.class%" public="false">
-            <call method="setAnnotationReader">
-                <argument type="service" id="annotation_reader" />
-            </call>
-        </service>
-        <service id="stof_doctrine_extensions.listener.sortable" class="%stof_doctrine_extensions.listener.sortable.class%" public="false">
-            <call method="setAnnotationReader">
-                <argument type="service" id="annotation_reader" />
             </call>
         </service>
 
