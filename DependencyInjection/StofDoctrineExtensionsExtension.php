@@ -34,13 +34,16 @@ class StofDoctrineExtensionsExtension extends Extension
             foreach ($listeners as $ext => $enabled) {
                 $listener = sprintf('stof_doctrine_extensions.listener.%s', $ext);
                 if ($enabled && $container->hasDefinition($listener)) {
+                    $attributes = array('connection' => $name);
                     if ('translatable' === $ext) {
                         $useTranslatable = true;
+                        // the translatable listener must be registered after others to work with them properly
+                        $attributes['priority'] = -10;
                     } elseif ('loggable' === $ext) {
                         $useLoggable = true;
                     }
                     $definition = $container->getDefinition($listener);
-                    $definition->addTag('doctrine.event_subscriber', array('connection' => $name));
+                    $definition->addTag('doctrine.event_subscriber', $attributes);
                 }
             }
 
@@ -51,13 +54,16 @@ class StofDoctrineExtensionsExtension extends Extension
             foreach ($listeners as $ext => $enabled) {
                 $listener = sprintf('stof_doctrine_extensions.listener.%s', $ext);
                 if ($enabled && $container->hasDefinition($listener)) {
+                    $attributes = array('connection' => $name);
                     if ('translatable' === $ext) {
                         $useTranslatable = true;
+                        // the translatable listener must be registered after others to work with them properly
+                        $attributes['priority'] = -10;
                     } elseif ('loggable' === $ext) {
                         $useLoggable = true;
                     }
                     $definition = $container->getDefinition($listener);
-                    $definition->addTag('doctrine.odm.mongodb.event_subscriber', array('connection' => $name));
+                    $definition->addTag('doctrine.odm.mongodb.event_subscriber', $attributes);
                 }
             }
             $this->documentManagers[$name] = $listeners;
