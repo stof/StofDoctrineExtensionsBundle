@@ -42,16 +42,18 @@ Bring in the vendor libraries
 
 This can be done in two different ways:
 
-**Method #1**) Use the bin/vendor script
+**Method #1**) Use composer
 
 ::
 
-    [gedmo-doctrine-extensions]
-        git=http://github.com/l3pp4rd/DoctrineExtensions.git
+    "require": {
+        "php": ">=5.3.2",
+        "symfony/symfony": "2.1.*",
+        "_comment":"your ther packages",
 
-    [StofDoctrineExtensionsBundle]
-        git=http://github.com/stof/StofDoctrineExtensionsBundle.git
-        target=/bundles/Stof/DoctrineExtensionsBundle
+        "stof/doctrine-extensions-bundle":"dev-master",
+    }
+
 
 **Method #2**) Use git submodules
 
@@ -62,6 +64,8 @@ This can be done in two different ways:
 
 Register the DoctrineExtensions and Stof namespaces
 ---------------------------------------------------
+
+Only required, when using submodules.
 
 ::
 
@@ -104,22 +108,22 @@ to register their mapping in Doctrine when you want to use them.
                         gedmo_translatable:
                             type: annotation
                             prefix: Gedmo\Translatable\Entity
-                            dir: "%kernel.root_dir%/../vendor/gedmo-doctrine-extensions/lib/Gedmo/Translatable/Entity"
+                            dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Translatable/Entity"
                             alias: GedmoTranslatable # this one is optional and will default to the name set for the mapping
                         gedmo_translator:
                             type: annotation
                             prefix: Gedmo\Translator\Entity
-                            dir: "%kernel.root_dir%/../vendor/gedmo-doctrine-extensions/lib/Gedmo/Translator/Entity"
+                            dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Translator/Entity"
                             alias: GedmoTranslator # this one is optional and will default to the name set for the mapping
                         gedmo_loggable:
                             type: annotation
                             prefix: Gedmo\Loggable\Entity
-                            dir: "%kernel.root_dir%/../vendor/gedmo-doctrine-extensions/lib/Gedmo/Loggable/Entity"
+                            dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Loggable/Entity"
                             alias: GedmoLoggable # this one is optional and will default to the name set for the mapping
                         gedmo_tree:
                             type: annotation
                             prefix: Gedmo\Tree\Entity
-                            dir: "%kernel.root_dir%/../vendor/gedmo-doctrine-extensions/lib/Gedmo/Tree/Entity"
+                            dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Tree/Entity"
                             alias: GedmoTree # this one is optional and will default to the name set for the mapping
 
 .. note::
