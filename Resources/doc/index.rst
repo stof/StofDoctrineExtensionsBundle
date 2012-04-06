@@ -161,12 +161,12 @@ doctrine filter.
 
 .. note::
 
-    If you are using the short syntax for the ORM configuration, the `mappings`
+    If you are using the short syntax for the ORM configuration, the `filters`
     key is directly under `orm:`
 
 .. note::
 
-    If you are using several entity managers, take care to register the entities
+    If you are using several entity managers, take care to register the filter
     for the right ones.
 
 To disable the behaviour, e.g. for admin users who may see deleted items,
