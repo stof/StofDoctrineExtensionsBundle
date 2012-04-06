@@ -246,6 +246,7 @@ in YAML::
             sluggable:      ~
             translatable:   ~
             loggable:       ~
+            softdeleteable: ~
 
 or in XML::
 
