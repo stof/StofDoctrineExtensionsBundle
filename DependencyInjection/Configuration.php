@@ -50,6 +50,7 @@ class Configuration implements ConfigurationInterface
                     ->scalarNode('tree')->defaultFalse()->end()
                     ->scalarNode('loggable')->defaultFalse()->end()
                     ->scalarNode('sortable')->defaultFalse()->end()
+                    ->scalarNode('softdeleteable')->defaultFalse()->end()
                 ->end()
             ->end()
         ;
@@ -88,6 +89,10 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('sortable')
                     ->cannotBeEmpty()
                     ->defaultValue('Gedmo\\Sortable\\SortableListener')
+                ->end()
+                ->scalarNode('softdeleteable')
+                    ->cannotBeEmpty()
+                    ->defaultValue('Gedmo\\SoftDeleteable\\SoftDeleteableListener')
                 ->end()
             ->end()
         ;
