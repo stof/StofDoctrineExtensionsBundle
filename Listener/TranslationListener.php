@@ -2,7 +2,7 @@
 
 namespace Stof\DoctrineExtensionsBundle\Listener;
 
-use Gedmo\Translatable\TranslationListener as BaseTranslationListener;
+use Gedmo\Translatable\TranslatableListener as BaseTranslationListener;
 use Gedmo\Translatable\Mapping\Event\TranslatableAdapter;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
