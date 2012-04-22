@@ -138,12 +138,13 @@ Then after changing your form definition to:
                      'field'                => 'description',
                      'personal_translation' => 'ExampleBundle\Entity\Translation\ProductTranslation',
                      'property_path'        => 'translations',
+                     'widget'               => 'textarea',
                 ))
             ->end()
         ;
     }
 
-you have a simple 18n form.
+you have a simple i18n form.
 
 
 Validation
