@@ -9,6 +9,7 @@ Product Entity
 -------------
 
 ::
+
     namespace ExampleBundle\Entity
     
     use Doctrine\ORM\Mapping as ORM;
@@ -68,6 +69,7 @@ Product Translation
 -------------------
 
 ::
+
     namespace ExampleBundle\Entity\Translation;
 
     use Doctrine\ORM\Mapping as ORM;
@@ -99,6 +101,7 @@ Simple (Sonata) Form
 --------------------
 
 ::
+
     protected function configureFormFields(FormMapper $formMapper)    {
         $formMapper
             ->with('General')
@@ -111,6 +114,7 @@ To simple transform it into an i18n form use the follow files from https://gist.
 integrate it into your bundle
 
 ::
+
     https://gist.github.com/2437078
 
     <Bundle>/Form/TranslatedFieldType.php
@@ -120,6 +124,7 @@ integrate it into your bundle
 Then after changing your form definition to:
 
 ::
+
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
@@ -148,6 +153,7 @@ Every field can have its own Validation, but it needs to be provided on the Pers
 in the example you can provide a Validation with annotation like:
 
 ::
+
     class ProductTranslation extends AbstractPersonalTranslation
     {
         /**
@@ -164,6 +170,7 @@ Adding or Changing a Language
 =============================
 In the file
 ::
+
     <Bundle>/Form/TranslatedFieldType.php
 
 To change all the languages application-wide you can adjust
