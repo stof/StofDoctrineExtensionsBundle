@@ -110,21 +110,25 @@ to register their mapping in Doctrine when you want to use them.
                             prefix: Gedmo\Translatable\Entity
                             dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Translatable/Entity"
                             alias: GedmoTranslatable # this one is optional and will default to the name set for the mapping
+                            is_bundle: false
                         gedmo_translator:
                             type: annotation
                             prefix: Gedmo\Translator\Entity
                             dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Translator/Entity"
                             alias: GedmoTranslator # this one is optional and will default to the name set for the mapping
+                            is_bundle: false
                         gedmo_loggable:
                             type: annotation
                             prefix: Gedmo\Loggable\Entity
                             dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Loggable/Entity"
                             alias: GedmoLoggable # this one is optional and will default to the name set for the mapping
+                            is_bundle: false
                         gedmo_tree:
                             type: annotation
                             prefix: Gedmo\Tree\Entity
                             dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Tree/Entity"
                             alias: GedmoTree # this one is optional and will default to the name set for the mapping
+                            is_bundle: false
 
 .. note::
 
