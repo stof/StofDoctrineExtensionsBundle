@@ -49,9 +49,9 @@ This can be done in two different ways:
     "require": {
         "php": ">=5.3.2",
         "symfony/symfony": "2.1.*",
-        "_comment":"your ther packages",
+        "_comment": "your other packages",
 
-        "stof/doctrine-extensions-bundle":"dev-master",
+        "stof/doctrine-extensions-bundle": "dev-master",
     }
 
 
