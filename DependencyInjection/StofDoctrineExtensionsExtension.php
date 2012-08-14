@@ -63,7 +63,7 @@ class StofDoctrineExtensionsExtension extends Extension
                         $useLoggable = true;
                     }
                     $definition = $container->getDefinition($listener);
-                    $definition->addTag('doctrine.odm.mongodb.event_subscriber', $attributes);
+                    $definition->addTag('doctrine_mongodb.odm.event_subscriber', $attributes);
                 }
             }
             $this->documentManagers[$name] = $listeners;
@@ -94,7 +94,7 @@ class StofDoctrineExtensionsExtension extends Extension
         }
 
         foreach (array_keys($this->documentManagers) as $name) {
-            if (!$container->hasDefinition(sprintf('doctrine.odm.mongodb.%s_document_manager', $name))) {
+            if (!$container->hasDefinition(sprintf('doctrine_mongodb.odm.%s_document_manager', $name))) {
                 throw new \InvalidArgumentException(sprintf('Invalid %s config: document manager "%s" not found', $this->getAlias(), $name));
             }
         }
