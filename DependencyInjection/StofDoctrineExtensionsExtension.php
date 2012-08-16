@@ -7,11 +7,13 @@ use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Reference;
 
 class StofDoctrineExtensionsExtension extends Extension
 {
     private $entityManagers   = array();
     private $documentManagers = array();
+    private $defaultFilePath  = false;
 
     public function load(array $configs, ContainerBuilder $container)
     {
@@ -23,7 +25,12 @@ class StofDoctrineExtensionsExtension extends Extension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('listeners.xml');
 
+        $uploadableConfig = $config['uploadable'];
+
+        $this->defaultFilePath = $uploadableConfig['default_file_path'];
+
         $container->setParameter('stof_doctrine_extensions.default_locale', $config['default_locale']);
+        $container->setParameter('stof_doctrine_extensions.default_file_path', $uploadableConfig['default_file_path']);
         $container->setParameter('stof_doctrine_extensions.translation_fallback', $config['translation_fallback']);
         $container->setParameter('stof_doctrine_extensions.persist_default_translation', $config['persist_default_translation']);
 
@@ -80,6 +87,26 @@ class StofDoctrineExtensionsExtension extends Extension
                 ->addTag('kernel.event_subscriber');
         }
 
+        if ($this->defaultFilePath) {
+            $container->getDefinition('stof_doctrine_extensions.listener.uploadable')
+                ->addMethodCall('setDefaultPath', array($this->defaultFilePath));
+        }
+
+        if ($uploadableConfig['mime_type_guesser_class']) {
+            if (!class_exists($uploadableConfig['mime_type_guesser_class'])) {
+                $msg = 'Class "%s" configured to use as the mime type guesser in the Uploadable extension does not exist.';
+
+                throw new \InvalidArgumentException(sprintf($msg,
+                    $uploadableConfig['mime_type_guesser_class']
+                ));
+            } else {
+                $container->setParameter(
+                    'stof_doctrine_extensions.uploadable.mime_type_guesser.class',
+                    $uploadableConfig['mime_type_guesser_class']
+                );
+            }
+        }
+
         foreach ($config['class'] as $listener => $class) {
             $container->setParameter(sprintf('stof_doctrine_extensions.listener.%s.class', $listener), $class);
         }
@@ -97,6 +124,14 @@ class StofDoctrineExtensionsExtension extends Extension
             if (!$container->hasDefinition(sprintf('doctrine.odm.mongodb.%s_document_manager', $name))) {
                 throw new \InvalidArgumentException(sprintf('Invalid %s config: document manager "%s" not found', $this->getAlias(), $name));
             }
+        }
+
+        if (!empty($this->defaultFilePath) && !is_dir($this->defaultFilePath)) {
+            $msg = 'Invalid directory "%s" set set as the default file path for the Uploadable extension.';
+
+            throw new \InvalidArgumentException(sprintf($msg,
+                $this->defaultFilePath
+            ));
         }
     }
 }

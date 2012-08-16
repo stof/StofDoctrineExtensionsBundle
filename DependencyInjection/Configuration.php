@@ -21,6 +21,7 @@ class Configuration implements ConfigurationInterface
             ->append($this->getVendorNode('orm'))
             ->append($this->getVendorNode('mongodb'))
             ->append($this->getClassNode())
+            ->append($this->getUploadableNode())
             ->children()
                 ->scalarNode('default_locale')
                     ->cannotBeEmpty()
@@ -51,6 +52,7 @@ class Configuration implements ConfigurationInterface
                     ->scalarNode('loggable')->defaultFalse()->end()
                     ->scalarNode('sortable')->defaultFalse()->end()
                     ->scalarNode('softdeleteable')->defaultFalse()->end()
+                    ->scalarNode('uploadable')->defaultFalse()->end()
                 ->end()
             ->end()
         ;
@@ -93,6 +95,32 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('softdeleteable')
                     ->cannotBeEmpty()
                     ->defaultValue('Gedmo\\SoftDeleteable\\SoftDeleteableListener')
+                ->end()
+                ->scalarNode('uploadable')
+                    ->cannotBeEmpty()
+                    ->defaultValue('Gedmo\\Uploadable\\UploadableListener')
+                ->end()
+            ->end()
+        ;
+
+        return $node;
+    }
+
+    private function getUploadableNode()
+    {
+        $treeBuilder = new TreeBuilder();
+        $node = $treeBuilder->root('uploadable');
+
+        $node
+            ->addDefaultsIfNotSet()
+            ->children()
+                ->scalarNode('default_file_path')
+                    ->cannotBeEmpty()
+                    ->defaultValue(false)
+                ->end()
+                ->scalarNode('mime_type_guesser_class')
+                    ->cannotBeEmpty()
+                    ->defaultValue(false)
                 ->end()
             ->end()
         ;
