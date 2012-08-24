@@ -11,7 +11,7 @@ class UploadableManager
     private $listener;
     private $fileInfoClass;
 
-    public function __construct(UploadableListener $listener, $fileInfoClass = null)
+    public function __construct(UploadableListener $listener, $fileInfoClass)
     {
         $this->listener = $listener;
         $this->fileInfoClass = $fileInfoClass;
