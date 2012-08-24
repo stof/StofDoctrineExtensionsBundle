@@ -7,16 +7,9 @@ use Gedmo\Uploadable\MimeType\MimeTypeGuesserInterface;
 
 class MimeTypeGuesserAdapter implements MimeTypeGuesserInterface
 {
-    protected $guesser;
-
-    public function __construct()
-    {
-        $this->guesser = MimeTypeGuesser::getInstance();
-    }
-
     public function guess($filePath)
     {
-        return $this->guesser->guess($filePath);
+        return MimeTypeGuesser::getInstance()->guess($filePath);
     }
 
 }

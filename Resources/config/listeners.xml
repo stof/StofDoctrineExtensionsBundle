@@ -7,8 +7,9 @@
     <parameters>
         <parameter key="stof_doctrine_extensions.event_listener.locale.class">Stof\DoctrineExtensionsBundle\EventListener\LocaleListener</parameter>
         <parameter key="stof_doctrine_extensions.event_listener.logger.class">Stof\DoctrineExtensionsBundle\EventListener\LoggerListener</parameter>
-        <parameter key="stof_doctrine_extensions.uploadable.mime_type_guesser.class">Stof\DoctrineExtensionsBundle\Uploadable\MimeTypeGuesserAdapter</parameter>
         <parameter key="stof_doctrine_extensions.uploadable.manager.class">Stof\DoctrineExtensionsBundle\Uploadable\UploadableManager</parameter>
+        <parameter key="stof_doctrine_extensions.uploadable.mime_type_guesser.class" />
+        <parameter key="stof_doctrine_extensions.uploadable.default_file_info.class" />
     </parameters>
     <services>
         <!-- Doctrine listeners -->
@@ -65,6 +66,10 @@
             <call method="setAnnotationReader">
                 <argument type="service" id="annotation_reader" />
             </call>
+
+            <call method="setDefaultFileInfoClass">
+                <argument>%stof_doctrine_extensions.uploadable.default_file_info.class%</argument>
+            </call>
         </service>
 
         <!-- Symfony listeners -->
@@ -78,10 +83,11 @@
         </service>
 
         <!-- Uploadable -->
-        <service id="stof_doctrine_extensions.uploadable.mime_type_guesser" class="%stof_doctrine_extensions.uploadable.mime_type_guesser.class%" />
+        <service id="stof_doctrine_extensions.uploadable.mime_type_guesser" class="%stof_doctrine_extensions.uploadable.mime_type_guesser.class%" public="false" />
 
         <service id="stof_doctrine_extensions.uploadable.manager" class="%stof_doctrine_extensions.uploadable.manager.class%">
             <argument type="service" id="stof_doctrine_extensions.listener.uploadable" />
+            <argument>%stof_doctrine_extensions.uploadable.default_file_info.class%</argument>
         </service>
     </services>
 </container>
