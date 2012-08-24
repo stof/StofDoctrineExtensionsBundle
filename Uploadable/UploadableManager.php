@@ -14,13 +14,6 @@ class UploadableManager
     public function __construct(UploadableListener $listener, $fileInfoClass = null)
     {
         $this->listener = $listener;
-
-        if ($fileInfoClass && (!is_string($fileInfoClass) || !class_exists($fileInfoClass))) {
-            $msg = 'Second argument must be a string containing a fully qualified class which implements FileInfoInterface.';
-
-            throw new \InvalidArgumentException($msg);
-        }
-
         $this->fileInfoClass = $fileInfoClass;
     }
 
@@ -36,7 +29,9 @@ class UploadableManager
     public function markEntityToUpload($entity, $fileInfo)
     {
         if (is_object($fileInfo) && $fileInfo instanceof UploadedFile) {
-            $fileInfo = new $this->fileInfoClass($fileInfo);
+            $fileInfoClass = $this->fileInfoClass;
+
+            $fileInfo = new $fileInfoClass($fileInfo);
         }
 
         $this->listener->addEntityFileInfo($entity, $fileInfo);
