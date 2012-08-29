@@ -23,5 +23,10 @@
     "autoload": {
         "psr-0": { "Stof\\DoctrineExtensionsBundle": "" }
     },
-    "target-dir": "Stof/DoctrineExtensionsBundle"
+    "target-dir": "Stof/DoctrineExtensionsBundle",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.1.x-dev"
+        }
+    }
 }
