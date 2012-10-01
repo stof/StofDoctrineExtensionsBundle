@@ -42,7 +42,7 @@ class LoggerListener implements EventSubscriberInterface
         }
     }
 
-    static public function getSubscribedEvents()
+    public static function getSubscribedEvents()
     {
         return array(
             KernelEvents::REQUEST => 'onKernelRequest',
