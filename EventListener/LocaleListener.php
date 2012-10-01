@@ -33,7 +33,7 @@ class LocaleListener implements EventSubscriberInterface
         $this->translatableListener->setTranslatableLocale($event->getRequest()->getLocale());
     }
 
-    static public function getSubscribedEvents()
+    public static function getSubscribedEvents()
     {
         return array(
             KernelEvents::REQUEST => 'onKernelRequest',
