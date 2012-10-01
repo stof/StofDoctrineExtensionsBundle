@@ -34,6 +34,9 @@ class Configuration implements ConfigurationInterface
         return $treeBuilder;
     }
 
+    /**
+     * @param string $name
+     */
     private function getVendorNode($name)
     {
         $treeBuilder = new TreeBuilder();
