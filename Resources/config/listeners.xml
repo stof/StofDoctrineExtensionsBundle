@@ -7,6 +7,9 @@
     <parameters>
         <parameter key="stof_doctrine_extensions.event_listener.locale.class">Stof\DoctrineExtensionsBundle\EventListener\LocaleListener</parameter>
         <parameter key="stof_doctrine_extensions.event_listener.logger.class">Stof\DoctrineExtensionsBundle\EventListener\LoggerListener</parameter>
+        <parameter key="stof_doctrine_extensions.uploadable.manager.class">Stof\DoctrineExtensionsBundle\Uploadable\UploadableManager</parameter>
+        <parameter key="stof_doctrine_extensions.uploadable.mime_type_guesser.class" />
+        <parameter key="stof_doctrine_extensions.uploadable.default_file_info.class" />
     </parameters>
     <services>
         <!-- Doctrine listeners -->
@@ -57,6 +60,17 @@
                 <argument type="service" id="annotation_reader" />
             </call>
         </service>
+        <service id="stof_doctrine_extensions.listener.uploadable" class="%stof_doctrine_extensions.listener.uploadable.class%" public="false">
+            <argument type="service" id="stof_doctrine_extensions.uploadable.mime_type_guesser" />
+
+            <call method="setAnnotationReader">
+                <argument type="service" id="annotation_reader" />
+            </call>
+
+            <call method="setDefaultFileInfoClass">
+                <argument>%stof_doctrine_extensions.uploadable.default_file_info.class%</argument>
+            </call>
+        </service>
 
         <!-- Symfony listeners -->
         <service id="stof_doctrine_extensions.event_listener.locale" class="%stof_doctrine_extensions.event_listener.locale.class%" public="false">
@@ -66,6 +80,14 @@
         <service id="stof_doctrine_extensions.event_listener.logger" class="%stof_doctrine_extensions.event_listener.logger.class%" public="false">
             <argument type="service" id="stof_doctrine_extensions.listener.loggable" />
             <argument type="service" id="security.context" on-invalid="null" />
+        </service>
+
+        <!-- Uploadable -->
+        <service id="stof_doctrine_extensions.uploadable.mime_type_guesser" class="%stof_doctrine_extensions.uploadable.mime_type_guesser.class%" public="false" />
+
+        <service id="stof_doctrine_extensions.uploadable.manager" class="%stof_doctrine_extensions.uploadable.manager.class%">
+            <argument type="service" id="stof_doctrine_extensions.listener.uploadable" />
+            <argument>%stof_doctrine_extensions.uploadable.default_file_info.class%</argument>
         </service>
     </services>
 </container>

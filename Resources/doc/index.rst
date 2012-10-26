@@ -17,6 +17,7 @@ DoctrineExtensions's features
 - Timestampable - updates date fields on create, update and even
   property change.
 - Loggable - tracks your record changes and is able to manage versions.
+- Uploadable - allows you to handle file uploads.
 
 All these extensions can be nested together. And most already use only
 annotations without interface requirement to not to aggregate the
@@ -179,6 +180,42 @@ disable the filter. Here is an example::
     $filters = $em->getFilters();
     $filters->disable('softdeleteable');
 
+Using Uploadable extension
+--------------------------
+
+If you want to use the Uploadable extension, first read the documentation in DoctrineExtensions. Once everything is
+ready, use the form component as usual. Then, after you verify the form is valid, do the following::
+
+    $document = new Document();
+    $form = $this->createFormBuilder($document)
+        ->add('name')
+        ->add('myFile')
+        ->getForm()
+    ;
+
+    if ($this->getRequest()->getMethod() === 'POST') {
+        $form->bindRequest($this->getRequest());
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getEntityManager();
+
+            $em->persist($document);
+
+            $uploadableManager = $this->get('stof_doctrine_extensions.uploadable.manager');
+
+            // Here, "getMyFile" returns the "UploadedFile" instance that the form bound in your $myFile property
+            $uploadableManager->markEntityToUpload($document, $document->getMyFile());
+
+            $em->flush();
+
+            $this->redirect($this->generateUrl(...));
+        }
+    }
+
+    return array('form' => $form->createView());
+
+And that's it. The Uploadable extension handles the rest of the stuff. Remember to read its documentation!
+
 Configure the bundle
 ====================
 
@@ -196,6 +233,17 @@ in YAML::
     # app/config/config.yml
     stof_doctrine_extensions:
         default_locale: en_US
+
+        # Only used if you activated the Uploadable extension
+        uploadable:
+            # Default file path: This is one of the three ways you can configure the path for the Uploadable extension
+            default_file_path:       %kernel.root_dir%/../web/uploads
+
+            # Mime type guesser class: Optional. By default, we provide an adapter for the one present in the HttpFoundation component of Symfony
+            mime_type_guesser_class: Stof\DoctrineExtensionsBundle\Uploadable\MimeTypeGuesserAdapter
+
+            # Default file info class implementing FileInfoInterface: Optional. By default we provide a class which is prepared to receive an UploadedFile instance.
+            default_file_info_class: Stof\DoctrineExtensionsBundle\Uploadable\UploadedFileInfo
         orm:
             default: ~
         mongodb:
@@ -285,6 +333,7 @@ in YAML::
             translatable:   ~
             loggable:       ~
             softdeleteable: ~
+            uploadable:     ~
 
 or in XML::
 

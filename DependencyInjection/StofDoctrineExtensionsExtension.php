@@ -7,11 +7,13 @@ use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Reference;
 
 class StofDoctrineExtensionsExtension extends Extension
 {
     private $entityManagers   = array();
     private $documentManagers = array();
+    private $defaultFilePath  = false;
 
     public function load(array $configs, ContainerBuilder $container)
     {
@@ -23,7 +25,10 @@ class StofDoctrineExtensionsExtension extends Extension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('listeners.xml');
 
+        $uploadableConfig = $config['uploadable'];
+
         $container->setParameter('stof_doctrine_extensions.default_locale', $config['default_locale']);
+        $container->setParameter('stof_doctrine_extensions.default_file_path', $uploadableConfig['default_file_path']);
         $container->setParameter('stof_doctrine_extensions.translation_fallback', $config['translation_fallback']);
         $container->setParameter('stof_doctrine_extensions.persist_default_translation', $config['persist_default_translation']);
 
@@ -78,6 +83,27 @@ class StofDoctrineExtensionsExtension extends Extension
             $container->getDefinition('stof_doctrine_extensions.event_listener.logger')
                 ->setPublic(true)
                 ->addTag('kernel.event_subscriber');
+        }
+
+        if ($uploadableConfig['default_file_path']) {
+            $container->getDefinition('stof_doctrine_extensions.listener.uploadable')
+                ->addMethodCall('setDefaultPath', array($uploadableConfig['default_file_path']));
+        }
+
+        // Default FileInfoInterface class
+        $container->setParameter('stof_doctrine_extensions.uploadable.default_file_info.class', $uploadableConfig['default_file_info_class']);
+
+        if ($uploadableConfig['mime_type_guesser_class']) {
+            if (!class_exists($uploadableConfig['mime_type_guesser_class'])) {
+                $msg = 'Class "%s" configured to use as the mime type guesser in the Uploadable extension does not exist.';
+
+                throw new \InvalidArgumentException(sprintf($msg, $uploadableConfig['mime_type_guesser_class']));
+            }
+
+            $container->setParameter(
+                'stof_doctrine_extensions.uploadable.mime_type_guesser.class',
+                $uploadableConfig['mime_type_guesser_class']
+            );
         }
 
         foreach ($config['class'] as $listener => $class) {
