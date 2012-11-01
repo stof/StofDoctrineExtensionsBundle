@@ -9,8 +9,7 @@ project by configuring it through a ``ListenerManager`` and the DIC.
 DoctrineExtensions's features
 -----------------------------
 
-- **Tree** - this extension automates the tree handling process and adds some tree specific functions on repository.
-(**closure**, **nestedset** or **materialized path**)
+- **Tree** - this extension automates the tree handling process and adds some tree specific functions on repository. (**closure**, **nestedset** or **materialized path**)
 - **Translatable** - gives you a very handy solution for translating records into diferent languages. Easy to setup, easier to use.
 - **Sluggable** - urlizes your specified fields into single unique slug
 - **Timestampable** - updates date fields on create, update and even property change.
