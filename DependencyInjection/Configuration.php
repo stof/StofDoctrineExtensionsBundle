@@ -22,6 +22,7 @@ class Configuration implements ConfigurationInterface
             ->append($this->getVendorNode('mongodb'))
             ->append($this->getClassNode())
             ->append($this->getUploadableNode())
+            ->append($this->getBlameableNode())
             ->children()
                 ->scalarNode('default_locale')
                     ->cannotBeEmpty()
@@ -50,6 +51,7 @@ class Configuration implements ConfigurationInterface
                 ->children()
                     ->scalarNode('translatable')->defaultFalse()->end()
                     ->scalarNode('timestampable')->defaultFalse()->end()
+                    ->scalarNode('blameable')->defaultFalse()->end()
                     ->scalarNode('sluggable')->defaultFalse()->end()
                     ->scalarNode('tree')->defaultFalse()->end()
                     ->scalarNode('loggable')->defaultFalse()->end()
@@ -78,6 +80,10 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('timestampable')
                     ->cannotBeEmpty()
                     ->defaultValue('Gedmo\\Timestampable\\TimestampableListener')
+                ->end()
+                ->scalarNode('blameable')
+                    ->cannotBeEmpty()
+                    ->defaultValue('Gedmo\\Blameable\\BlameableListener')
                 ->end()
                 ->scalarNode('sluggable')
                     ->cannotBeEmpty()
@@ -128,6 +134,24 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('default_file_info_class')
                     ->cannotBeEmpty()
                     ->defaultValue('Stof\\DoctrineExtensionsBundle\\Uploadable\\UploadedFileInfo')
+                ->end()
+            ->end()
+        ;
+
+        return $node;
+    }
+
+    private function getBlameableNode()
+    {
+        $treeBuilder = new TreeBuilder();
+        $node = $treeBuilder->root('blameable');
+
+        $node
+            ->addDefaultsIfNotSet()
+            ->children()
+                ->scalarNode('adapter_class')
+                    ->cannotBeEmpty()
+                    ->defaultValue('Gedmo\\Blameable\\Mapping\\Event\\Adapter\\ORM')
                 ->end()
             ->end()
         ;

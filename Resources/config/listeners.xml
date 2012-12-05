@@ -7,15 +7,24 @@
     <parameters>
         <parameter key="stof_doctrine_extensions.event_listener.locale.class">Stof\DoctrineExtensionsBundle\EventListener\LocaleListener</parameter>
         <parameter key="stof_doctrine_extensions.event_listener.logger.class">Stof\DoctrineExtensionsBundle\EventListener\LoggerListener</parameter>
+        <parameter key="stof_doctrine_extensions.event_listener.blameable.class">Stof\DoctrineExtensionsBundle\EventListener\BlameableListener</parameter>
         <parameter key="stof_doctrine_extensions.uploadable.manager.class">Stof\DoctrineExtensionsBundle\Uploadable\UploadableManager</parameter>
         <parameter key="stof_doctrine_extensions.uploadable.mime_type_guesser.class" />
         <parameter key="stof_doctrine_extensions.uploadable.default_file_info.class" />
-    </parameters>
+        <parameter key="stof_doctrine_extensions.blameable.adapter.class">Stof\DoctrineExtensionsBundle\Blameable\SecurityAwareORMAdapter</parameter>    </parameters>
     <services>
         <!-- Doctrine listeners -->
         <service id="stof_doctrine_extensions.listener.timestampable" class="%stof_doctrine_extensions.listener.timestampable.class%" public="false">
             <call method="setAnnotationReader">
                 <argument type="service" id="annotation_reader" />
+            </call>
+        </service>
+        <service id="stof_doctrine_extensions.listener.blameable" class="%stof_doctrine_extensions.listener.blameable.class%" public="false">
+            <call method="setAnnotationReader">
+                <argument type="service" id="annotation_reader" />
+            </call>
+            <call method="setAdapter">
+                <argument type="service" id="stof_doctrine_extensions.blameable.adapter"/>
             </call>
         </service>
         <service id="stof_doctrine_extensions.listener.tree" class="%stof_doctrine_extensions.listener.tree.class%" public="false">
@@ -82,6 +91,11 @@
             <argument type="service" id="security.context" on-invalid="null" />
         </service>
 
+        <service id="stof_doctrine_extensions.event_listener.blameable" class="%stof_doctrine_extensions.event_listener.blameable.class%" public="false">
+            <argument type="service" id="stof_doctrine_extensions.blameable.adapter" />
+            <argument type="service" id="security.context" on-invalid="null" />
+        </service>
+
         <!-- Uploadable -->
         <service id="stof_doctrine_extensions.uploadable.mime_type_guesser" class="%stof_doctrine_extensions.uploadable.mime_type_guesser.class%" public="false" />
 
@@ -89,5 +103,8 @@
             <argument type="service" id="stof_doctrine_extensions.listener.uploadable" />
             <argument>%stof_doctrine_extensions.uploadable.default_file_info.class%</argument>
         </service>
+
+        <!-- Blameable -->
+        <service id="stof_doctrine_extensions.blameable.adapter" class="%stof_doctrine_extensions.blameable.adapter.class%" public="false" />
     </services>
 </container>
