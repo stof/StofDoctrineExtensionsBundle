@@ -8,14 +8,14 @@ use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
-use Gedmo\Blameable\Mapping\Event\BlameableAdapter;
+use Gedmo\Blameable\BlameableListener;
 
 /**
  * BlameableListener
  *
  * @author David Buchmann <mail@davidbu.ch>
  */
-class BlameableListener implements EventSubscriberInterface
+class BlameListener implements EventSubscriberInterface
 {
     /**
      * @var SecurityContextInterface
@@ -23,13 +23,13 @@ class BlameableListener implements EventSubscriberInterface
     private $securityContext;
 
     /**
-     * @var BlameableAdapter
+     * @var BlameableListener
      */
-    private $blameableAdapter;
+    private $blameableListener;
 
-    public function __construct(BlameableAdapter $blameableAdapter, SecurityContextInterface $securityContext = null)
+    public function __construct(BlameableListener $blameableListener, SecurityContextInterface $securityContext = null)
     {
-        $this->blameableAdapter = $blameableAdapter;
+        $this->blameableListener = $blameableListener;
         $this->securityContext = $securityContext;
     }
 
@@ -46,7 +46,7 @@ class BlameableListener implements EventSubscriberInterface
 
         $token = $this->securityContext->getToken();
         if (null !== $token && $this->securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-            $this->blameableAdapter->setUserValue($token->getUser());
+            $this->blameableListener->setUserValue($token->getUser());
         }
     }
 

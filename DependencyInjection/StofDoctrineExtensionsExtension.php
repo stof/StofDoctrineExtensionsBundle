@@ -90,11 +90,10 @@ class StofDoctrineExtensionsExtension extends Extension
                 ->addTag('kernel.event_subscriber');
         }
         if ($useBlameable) {
-            $container->getDefinition('stof_doctrine_extensions.event_listener.blameable')
+            $container->getDefinition('stof_doctrine_extensions.event_listener.blame')
                 ->setPublic(true)
                 ->addTag('kernel.event_subscriber');
         }
-        $container->setParameter('stof_doctrine_extensions.blameable.adapter.class', $config['blameable']['adapter_class']);
 
         if ($uploadableConfig['default_file_path']) {
             $container->getDefinition('stof_doctrine_extensions.listener.uploadable')
