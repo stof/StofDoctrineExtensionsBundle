@@ -7,6 +7,7 @@
     <parameters>
         <parameter key="stof_doctrine_extensions.event_listener.locale.class">Stof\DoctrineExtensionsBundle\EventListener\LocaleListener</parameter>
         <parameter key="stof_doctrine_extensions.event_listener.logger.class">Stof\DoctrineExtensionsBundle\EventListener\LoggerListener</parameter>
+        <parameter key="stof_doctrine_extensions.event_listener.blame.class">Stof\DoctrineExtensionsBundle\EventListener\BlameListener</parameter>
         <parameter key="stof_doctrine_extensions.uploadable.manager.class">Stof\DoctrineExtensionsBundle\Uploadable\UploadableManager</parameter>
         <parameter key="stof_doctrine_extensions.uploadable.mime_type_guesser.class" />
         <parameter key="stof_doctrine_extensions.uploadable.default_file_info.class" />
@@ -14,6 +15,11 @@
     <services>
         <!-- Doctrine listeners -->
         <service id="stof_doctrine_extensions.listener.timestampable" class="%stof_doctrine_extensions.listener.timestampable.class%" public="false">
+            <call method="setAnnotationReader">
+                <argument type="service" id="annotation_reader" />
+            </call>
+        </service>
+        <service id="stof_doctrine_extensions.listener.blameable" class="%stof_doctrine_extensions.listener.blameable.class%" public="false">
             <call method="setAnnotationReader">
                 <argument type="service" id="annotation_reader" />
             </call>
@@ -82,6 +88,11 @@
             <argument type="service" id="security.context" on-invalid="null" />
         </service>
 
+        <service id="stof_doctrine_extensions.event_listener.blame" class="%stof_doctrine_extensions.event_listener.blame.class%" public="false">
+            <argument type="service" id="stof_doctrine_extensions.listener.blameable" />
+            <argument type="service" id="security.context" on-invalid="null" />
+        </service>
+
         <!-- Uploadable -->
         <service id="stof_doctrine_extensions.uploadable.mime_type_guesser" class="%stof_doctrine_extensions.uploadable.mime_type_guesser.class%" public="false" />
 
@@ -89,5 +100,6 @@
             <argument type="service" id="stof_doctrine_extensions.listener.uploadable" />
             <argument>%stof_doctrine_extensions.uploadable.default_file_info.class%</argument>
         </service>
+
     </services>
 </container>

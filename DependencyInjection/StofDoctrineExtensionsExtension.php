@@ -34,6 +34,7 @@ class StofDoctrineExtensionsExtension extends Extension
 
         $useTranslatable = false;
         $useLoggable = false;
+        $useBlameable = false;
 
         foreach ($config['orm'] as $name => $listeners) {
             foreach ($listeners as $ext => $enabled) {
@@ -46,6 +47,8 @@ class StofDoctrineExtensionsExtension extends Extension
                         $attributes['priority'] = -10;
                     } elseif ('loggable' === $ext) {
                         $useLoggable = true;
+                    } elseif ('blameable' === $ext) {
+                        $useBlameable = true;
                     }
                     $definition = $container->getDefinition($listener);
                     $definition->addTag('doctrine.event_subscriber', $attributes);
@@ -66,6 +69,8 @@ class StofDoctrineExtensionsExtension extends Extension
                         $attributes['priority'] = -10;
                     } elseif ('loggable' === $ext) {
                         $useLoggable = true;
+                    } elseif ('blameable' === $ext) {
+                        $useBlameable = true;
                     }
                     $definition = $container->getDefinition($listener);
                     $definition->addTag('doctrine_mongodb.odm.event_subscriber', $attributes);
@@ -81,6 +86,11 @@ class StofDoctrineExtensionsExtension extends Extension
         }
         if ($useLoggable) {
             $container->getDefinition('stof_doctrine_extensions.event_listener.logger')
+                ->setPublic(true)
+                ->addTag('kernel.event_subscriber');
+        }
+        if ($useBlameable) {
+            $container->getDefinition('stof_doctrine_extensions.event_listener.blame')
                 ->setPublic(true)
                 ->addTag('kernel.event_subscriber');
         }
