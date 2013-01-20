@@ -36,4 +36,13 @@ class UploadableManager
 
         $this->listener->addEntityFileInfo($entity, $fileInfo);
     }
+    
+    /**
+	 * @return \Gedmo\Uploadable\UploadableListener
+	 */
+	public function getUploadableListener()
+	{
+		return $this->listener;
+	}
+    
 }
