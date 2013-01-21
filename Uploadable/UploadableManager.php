@@ -38,11 +38,11 @@ class UploadableManager
     }
     
     /**
-	 * @return \Gedmo\Uploadable\UploadableListener
-	 */
-	public function getUploadableListener()
-	{
-		return $this->listener;
-	}
-    
+     * @return \Gedmo\Uploadable\UploadableListener
+     */
+    public function getUploadableListener()
+    {
+        return $this->listener;
+    }
+
 }
