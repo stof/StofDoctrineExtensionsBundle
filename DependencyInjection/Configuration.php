@@ -57,6 +57,7 @@ class Configuration implements ConfigurationInterface
                     ->scalarNode('sortable')->defaultFalse()->end()
                     ->scalarNode('softdeleteable')->defaultFalse()->end()
                     ->scalarNode('uploadable')->defaultFalse()->end()
+                    ->scalarNode('reference_integrity')->defaultFalse()->end()
                 ->end()
             ->end()
         ;
@@ -107,6 +108,10 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('uploadable')
                     ->cannotBeEmpty()
                     ->defaultValue('Gedmo\\Uploadable\\UploadableListener')
+                ->end()
+                ->scalarNode('reference_integrity')
+                    ->cannotBeEmpty()
+                    ->defaultValue('Gedmo\\ReferenceIntegrity\\ReferenceIntegrityListener')
                 ->end()
             ->end()
         ;
