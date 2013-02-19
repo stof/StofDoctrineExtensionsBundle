@@ -19,6 +19,7 @@ DoctrineExtensions's features
 - **Translator** - explicit way to handle translations
 - **Softdeleteable** - allows to implicitly remove records
 - **Uploadable** - provides file upload handling in entity fields
+- **Reference Integrity** - provides reference integrity for MongoDB, supports 'nullify' and 'restrict'
 
 All these extensions can be nested together. And most already use only
 annotations without interface requirement to not to aggregate the
