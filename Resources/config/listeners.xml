@@ -77,6 +77,11 @@
                 <argument>%stof_doctrine_extensions.uploadable.default_file_info.class%</argument>
             </call>
         </service>
+        <service id="stof_doctrine_extensions.listener.reference_integrity" class="%stof_doctrine_extensions.listener.reference_integrity.class%" public="false">
+            <call method="setAnnotationReader">
+                <argument type="service" id="annotation_reader" />
+            </call>
+        </service>
 
         <!-- Symfony listeners -->
         <service id="stof_doctrine_extensions.event_listener.locale" class="%stof_doctrine_extensions.event_listener.locale.class%" public="false">
