@@ -31,6 +31,7 @@ class StofDoctrineExtensionsExtension extends Extension
         $container->setParameter('stof_doctrine_extensions.default_file_path', $uploadableConfig['default_file_path']);
         $container->setParameter('stof_doctrine_extensions.translation_fallback', $config['translation_fallback']);
         $container->setParameter('stof_doctrine_extensions.persist_default_translation', $config['persist_default_translation']);
+        $container->setParameter('stof_doctrine_extensions.skip_on_load', $config['skip_on_load']);
 
         $useTranslatable = false;
         $useLoggable = false;
