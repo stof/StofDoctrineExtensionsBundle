@@ -50,6 +50,9 @@
             <call method="setPersistDefaultLocaleTranslation">
                 <argument>%stof_doctrine_extensions.persist_default_translation%</argument>
             </call>
+            <call method="setSkipOnLoad">
+                <argument>%stof_doctrine_extensions.skip_translation_on_load%</argument>
+            </call>
         </service>
         <service id="stof_doctrine_extensions.listener.loggable" class="%stof_doctrine_extensions.listener.loggable.class%" public="false">
             <call method="setAnnotationReader">
