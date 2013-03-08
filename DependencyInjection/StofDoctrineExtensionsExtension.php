@@ -119,9 +119,9 @@ class StofDoctrineExtensionsExtension extends Extension
 
         $sluggableConfig = $config['sluggable'];
 
-        if($sluggableConfig['managed_filters']) {
+        if ($sluggableConfig['managed_filters']) {
             $sluggableListener = $container->getDefinition('stof_doctrine_extensions.listener.sluggable');
-            foreach($sluggableConfig['managed_filters'] as $filter => $settings) {
+            foreach ($sluggableConfig['managed_filters'] as $filter => $settings) {
                 $sluggableListener->addMethodCall('addManagedFilter', array($filter, $settings['disabled']));
             }
         }
