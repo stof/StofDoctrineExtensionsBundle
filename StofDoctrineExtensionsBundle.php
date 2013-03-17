@@ -15,5 +15,11 @@ class StofDoctrineExtensionsBundle extends Bundle
     {
         parent::build($container);
         $container->addCompilerPass(new ValidateExtensionConfigurationPass());
+
+    }
+
+    public function boot()
+    {
+        \Gedmo\Uploadable\Mapping\Validator::$validateWritableDirectory = $this->container->getParameter('stof_doctrine_extensions.uploadable.mapping.validator.validate_writable_directory');
     }
 }
