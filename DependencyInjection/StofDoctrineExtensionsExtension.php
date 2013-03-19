@@ -117,7 +117,7 @@ class StofDoctrineExtensionsExtension extends Extension
             );
 
             $container->setParameter(
-                'stof_doctrine_extensions.uploadable.mapping.validator.validate_writable_directory',
+                'stof_doctrine_extensions.uploadable.validate_writable_directory',
                 $uploadableConfig['validate_writable_directory']
             );
         }
