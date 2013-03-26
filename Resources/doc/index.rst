@@ -47,6 +47,8 @@ This can be done in two different ways:
 
 **Method #1**) Use composer
 
+Add doctrine-extensions-bundle in your composer.json:
+
 ::
 
     "require": {
@@ -57,7 +59,11 @@ This can be done in two different ways:
         "stof/doctrine-extensions-bundle": "dev-master",
     }
 
+Now tell composer to download the bundle by running the command:
 
+::
+
+    $ php composer.phar update stof/doctrine-extensions-bundle
 **Method #2**) Use git submodules
 
 ::
