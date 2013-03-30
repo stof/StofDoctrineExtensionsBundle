@@ -40,44 +40,18 @@ be done in the bundle.
 Installation
 ============
 
-Bring in the vendor libraries
+Add stof/doctrine-extensions-bundle to composer.json
 -----------------------------
-
-This can be done in two different ways:
-
-**Method #1**) Use composer
 
 ::
 
     "require": {
         "php": ">=5.3.2",
-        "symfony/symfony": "2.1.*",
+        "symfony/symfony": "~2.1",
         "_comment": "your other packages",
 
         "stof/doctrine-extensions-bundle": "dev-master",
     }
-
-
-**Method #2**) Use git submodules
-
-::
-
-    git submodule add git://github.com/l3pp4rd/DoctrineExtensions.git vendor/gedmo-doctrine-extensions
-    git submodule add git://github.com/stof/StofDoctrineExtensionsBundle.git vendor/bundles/Stof/DoctrineExtensionsBundle
-
-Register the DoctrineExtensions and Stof namespaces
----------------------------------------------------
-
-Only required, when using submodules.
-
-::
-
-    // app/autoload.php
-    $loader->registerNamespaces(array(
-        'Stof'  => __DIR__.'/../vendor/bundles',
-        'Gedmo' => __DIR__.'/../vendor/gedmo-doctrine-extensions/lib',
-        // your other namespaces
-    ));
 
 Add DoctrineExtensionsBundle to your application kernel
 -------------------------------------------------------
