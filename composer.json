@@ -13,12 +13,12 @@
     ],
     "require": {
         "php": ">=5.3.2",
-        "symfony/framework-bundle": ">=2.1,<2.3-dev",
+        "symfony/framework-bundle": "~2.1",
         "gedmo/doctrine-extensions": "2.3.*"
     },
     "suggest": {
-        "doctrine/doctrine-bundle": "*",
-        "doctrine/mongodb-odm-bundle": "2.1.*"
+        "doctrine/doctrine-bundle": "to use the ORM extensions",
+        "doctrine/mongodb-odm-bundle": "to use the MongoDB ODM extensions"
     },
     "autoload": {
         "psr-0": { "Stof\\DoctrineExtensionsBundle": "" }
