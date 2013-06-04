@@ -25,7 +25,7 @@ All these extensions can be nested together. And most already use only
 annotations without interface requirement to not to aggregate the
 entity itself and has implemented proper caching for metadata.
 
-See the official blog_ for more details.
+See the official documentation_ for more details.
 
 Warning
 =======
@@ -286,7 +286,7 @@ files instead of ``entity-manager``.
 Use the DoctrineExtensions library
 ==================================
 
-All explanations about this library are available on the official blog_
+All explanations about this library are available on the official documentation_.
 
 Advanced use
 ============
@@ -303,7 +303,7 @@ in YAML::
     # app/config/config.yml
     stof_doctrine_extensions:
         class:
-            tree:           MyBundle\TreeListener
+            tree:           MyBundle\TreeListenerb
             timestampable:  MyBundle\TimestampableListener
             blameable:      ~
             sluggable:      ~
@@ -325,4 +325,4 @@ or in XML::
     </container>
 
 .. _DoctrineExtensions: http://github.com/l3pp4rd/DoctrineExtensions
-.. _blog:               http://gediminasm.org/
+.. _documentation:      https://github.com/l3pp4rd/DoctrineExtensions/tree/master/doc/
