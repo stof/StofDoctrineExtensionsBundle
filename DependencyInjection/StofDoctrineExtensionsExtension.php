@@ -117,6 +117,15 @@ class StofDoctrineExtensionsExtension extends Extension
             );
         }
 
+        $sluggableConfig = $config['sluggable'];
+
+        if ($sluggableConfig['managed_filters']) {
+            $sluggableListener = $container->getDefinition('stof_doctrine_extensions.listener.sluggable');
+            foreach ($sluggableConfig['managed_filters'] as $filter => $settings) {
+                $sluggableListener->addMethodCall('addManagedFilter', array($filter, $settings['disabled']));
+            }
+        }
+
         foreach ($config['class'] as $listener => $class) {
             $container->setParameter(sprintf('stof_doctrine_extensions.listener.%s.class', $listener), $class);
         }
