@@ -2,6 +2,9 @@ This bundle provides integration for
 [DoctrineExtensions](http://github.com/l3pp4rd/DoctrineExtensions) in
 your Symfony2 Project.
 
+[![Total Downloads](https://poser.pugx.org/stof/doctrine-extensions-bundle/downloads.png)](https://packagist.org/packages/stof/doctrine-extensions-bundle)
+[![Latest Stable Version](https://poser.pugx.org/stof/doctrine-extensions-bundle/v/stable.png)](https://packagist.org/packages/stof/doctrine-extensions-bundle)
+
 For documentation, see:
 
 [`Resources/doc/index.rst`](https://github.com/stof/StofDoctrineExtensionsBundle/blob/master/Resources/doc/index.rst)
