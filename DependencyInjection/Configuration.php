@@ -140,6 +140,7 @@ class Configuration implements ConfigurationInterface
                     ->cannotBeEmpty()
                     ->defaultValue('Stof\\DoctrineExtensionsBundle\\Uploadable\\UploadedFileInfo')
                 ->end()
+                ->booleanNode('validate_writable_directory')->defaultTrue()->end()
             ->end()
         ;
 
