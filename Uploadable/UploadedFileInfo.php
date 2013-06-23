@@ -44,6 +44,6 @@ class UploadedFileInfo implements FileInfoInterface
      */
     public function isUploadedFile()
     {
-        return true;
+        return is_uploaded_file($this->uploadedFile->getPathname());
     }
 }
