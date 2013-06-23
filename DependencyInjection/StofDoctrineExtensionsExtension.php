@@ -115,6 +115,11 @@ class StofDoctrineExtensionsExtension extends Extension
                 'stof_doctrine_extensions.uploadable.mime_type_guesser.class',
                 $uploadableConfig['mime_type_guesser_class']
             );
+
+            $container->setParameter(
+                'stof_doctrine_extensions.uploadable.validate_writable_directory',
+                $uploadableConfig['validate_writable_directory']
+            );
         }
 
         foreach ($config['class'] as $listener => $class) {
