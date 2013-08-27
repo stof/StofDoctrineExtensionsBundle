@@ -47,7 +47,6 @@ class Configuration implements ConfigurationInterface
         $node
             ->useAttributeAsKey('id')
             ->prototype('array')
-                ->performNoDeepMerging()
                 ->children()
                     ->scalarNode('translatable')->defaultFalse()->end()
                     ->scalarNode('timestampable')->defaultFalse()->end()
