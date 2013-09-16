@@ -12,7 +12,6 @@ class StofDoctrineExtensionsExtension extends Extension
 {
     private $entityManagers   = array();
     private $documentManagers = array();
-    private $defaultFilePath  = false;
 
     public function load(array $configs, ContainerBuilder $container)
     {
