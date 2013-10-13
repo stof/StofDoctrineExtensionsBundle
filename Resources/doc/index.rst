@@ -303,7 +303,7 @@ in YAML::
     # app/config/config.yml
     stof_doctrine_extensions:
         class:
-            tree:           MyBundle\TreeListenerb
+            tree:           MyBundle\TreeListener
             timestampable:  MyBundle\TimestampableListener
             blameable:      ~
             sluggable:      ~
