@@ -220,6 +220,12 @@ in YAML::
 
             # Default file info class implementing FileInfoInterface: Optional. By default we provide a class which is prepared to receive an UploadedFile instance.
             default_file_info_class: Stof\DoctrineExtensionsBundle\Uploadable\UploadedFileInfo
+	# Only used if you activate the Sluggable extension
+        sluggable:
+            # Allows the Sluggable listener to be configured with a set of filters to enable or disable prior to slug generation
+            managed_filters:
+                # Whether to use softdeletable filter when generating slug
+                softdeleteable: { disabled: true } # if null, filter will be disabled
         orm:
             default: ~
         mongodb:
