@@ -43,7 +43,7 @@ Installation
 Add stof/doctrine-extensions-bundle to composer.json
 -----------------------------
 
-::
+.. code-block:: json
 
     "require": {
         "php": ">=5.3.2",
@@ -56,7 +56,7 @@ Add stof/doctrine-extensions-bundle to composer.json
 Add DoctrineExtensionsBundle to your application kernel
 -------------------------------------------------------
 
-::
+.. code-block:: php
 
     // app/AppKernel.php
     public function registerBundles()
@@ -74,7 +74,7 @@ Add the extensions to your mapping
 Some of the extensions uses their own entities to do their work. You need
 to register their mapping in Doctrine when you want to use them.
 
-::
+.. code-block:: yaml
 
     # app/config/config.yml
     doctrine:
@@ -128,7 +128,7 @@ Enable the softdeleteable filter
 If you want to use the SoftDeleteable behavior, you have to enable the
 doctrine filter.
 
-::
+.. code-block:: yaml
 
     # app/config/config.yml
     doctrine:
@@ -151,7 +151,9 @@ doctrine filter.
     for the right ones.
 
 To disable the behaviour, e.g. for admin users who may see deleted items,
-disable the filter. Here is an example::
+disable the filter. Here is an example:
+
+.. code-block:: php
 
     $filters = $em->getFilters();
     $filters->disable('softdeleteable');
@@ -160,7 +162,9 @@ Using Uploadable extension
 --------------------------
 
 If you want to use the Uploadable extension, first read the documentation in DoctrineExtensions. Once everything is
-ready, use the form component as usual. Then, after you verify the form is valid, do the following::
+ready, use the form component as usual. Then, after you verify the form is valid, do the following:
+
+.. code-block:: php
 
     $document = new Document();
     $form = $this->createFormBuilder($document)
@@ -204,7 +208,9 @@ This bundle needs a default locale used if the translation does not
 exists in the asked language. If you don't provide it explicitly, it
 will default to ``en``.
 
-in YAML::
+in YAML:
+
+.. code-block:: yaml
 
     # app/config/config.yml
     stof_doctrine_extensions:
@@ -225,7 +231,9 @@ in YAML::
         mongodb:
             default: ~
 
-or in XML::
+or in XML:
+
+.. code-block:: xml
 
     <!-- app/config/config.xml -->
     <container xmlns:stof_doctrine_extensions="http://symfony.com/schema/dic/stof_doctrine_extensions">
@@ -243,7 +251,9 @@ Activate the extensions you want
 ================================
 
 By default the bundle does not attach any listener.
-For each of your entity manager, declare the extensions you want to enable::
+For each of your entity manager, declare the extensions you want to enable:
+
+.. code-block:: yaml
 
     # app/config/config.yml
     stof_doctrine_extensions:
@@ -255,7 +265,9 @@ For each of your entity manager, declare the extensions you want to enable::
             other:
                 timestampable: true
 
-or in XML::
+or in XML:
+
+.. code-block:: xml
 
     <!-- app/config/config.xml -->
     <container xmlns:doctrine_extensions="http://symfony.com/schema/dic/stof_doctrine_extensions">
@@ -298,7 +310,9 @@ You can change the listeners used by extending the Gedmo listeners (or
 the listeners of the bundle for translations) and giving the class name
 in the configuration.
 
-in YAML::
+in YAML:
+
+.. code-block:: yaml
 
     # app/config/config.yml
     stof_doctrine_extensions:
@@ -312,7 +326,9 @@ in YAML::
             softdeleteable: ~
             uploadable:     ~
 
-or in XML::
+or in XML:
+
+.. code-block:: xml
 
     <!-- app/config/config.xml -->
     <container xmlns:doctrine_extensions="http://symfony.com/schema/dic/stof_doctrine_extensions">
