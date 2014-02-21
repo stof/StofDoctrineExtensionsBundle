@@ -2,7 +2,6 @@
 
 namespace Stof\DoctrineExtensionsBundle\EventListener;
 
-use Gedmo\Loggable\LoggableListener;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
