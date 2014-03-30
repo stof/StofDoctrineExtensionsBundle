@@ -34,6 +34,7 @@ class StofDoctrineExtensionsExtension extends Extension
         $useTranslatable = false;
         $useLoggable = false;
         $useBlameable = false;
+        $useIpTraceable = false;
 
         foreach ($config['orm'] as $name => $listeners) {
             foreach ($listeners as $ext => $enabled) {
@@ -50,6 +51,8 @@ class StofDoctrineExtensionsExtension extends Extension
                         $useBlameable = true;
                     } elseif ('uploadable' === $ext) {
                         $attributes['priority'] = -5;
+                    } elseif ('ip_traceable' === $ext) {
+                        $useIpTraceable = true;
                     }
                     $definition = $container->getDefinition($listener);
                     $definition->addTag('doctrine.event_subscriber', $attributes);
@@ -92,6 +95,11 @@ class StofDoctrineExtensionsExtension extends Extension
         }
         if ($useBlameable) {
             $container->getDefinition('stof_doctrine_extensions.event_listener.blame')
+                ->setPublic(true)
+                ->addTag('kernel.event_subscriber');
+        }
+        if ($useIpTraceable) {
+            $container->getDefinition('stof_doctrine_extensions.event_listener.ip_trace')
                 ->setPublic(true)
                 ->addTag('kernel.event_subscriber');
         }
