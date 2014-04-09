@@ -1,5 +1,5 @@
 This bundle provides integration for
-[DoctrineExtensions](http://github.com/l3pp4rd/DoctrineExtensions) in
+[DoctrineExtensions](https://github.com/Atlantic18/DoctrineExtensions) in
 your Symfony2 Project.
 
 [![Total Downloads](https://poser.pugx.org/stof/doctrine-extensions-bundle/downloads.png)](https://packagist.org/packages/stof/doctrine-extensions-bundle)
