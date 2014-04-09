@@ -80,7 +80,7 @@ class StofDoctrineExtensionsExtension extends Extension
             $this->documentManagers[$name] = $listeners;
         }
 
-        if ($useTranslatable) {
+        if ($useTranslatable && $config['use_request_locale']) {
             $container->getDefinition('stof_doctrine_extensions.event_listener.locale')
                 ->setPublic(true)
                 ->addTag('kernel.event_subscriber');
