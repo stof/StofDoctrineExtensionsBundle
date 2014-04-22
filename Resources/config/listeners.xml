@@ -107,7 +107,6 @@
 
         <service id="stof_doctrine_extensions.event_listener.ip_trace" class="%stof_doctrine_extensions.event_listener.ip_trace.class%" public="false">
             <argument type="service" id="stof_doctrine_extensions.listener.ip_traceable" />
-            <argument type="service" id="security.context" on-invalid="null" />
         </service>
 
         <!-- Uploadable -->
