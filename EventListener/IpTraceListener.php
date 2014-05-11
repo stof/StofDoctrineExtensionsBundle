@@ -5,7 +5,7 @@ namespace Stof\DoctrineExtensionsBundle\EventListener;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 use Gedmo\IpTraceable\IpTraceableListener;
 
@@ -33,10 +33,12 @@ class IpTraceListener implements EventSubscriberInterface
      */
     public function onKernelRequest(GetResponseEvent $event)
     {
-        $ip = $event->request->getClientIp();
+        if (HttpKernelInterface::MASTER_REQUEST !== $event->getRequestType()) {
+            $ip = $event->getRequest()->getClientIp();
 
-        if (null !== $ip) {
-            $this->ipTraceableListener->setIpValue($ip);
+            if (null !== $ip) {
+                $this->ipTraceableListener->setIpValue($ip);
+            }
         }
     }
 
