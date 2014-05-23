@@ -340,5 +340,5 @@ or in XML:
         </stof_doctrine_extensions:config>
     </container>
 
-.. _DoctrineExtensions: http://github.com/l3pp4rd/DoctrineExtensions
-.. _documentation:      https://github.com/l3pp4rd/DoctrineExtensions/tree/master/doc/
+.. _DoctrineExtensions: https://github.com/Atlantic18/DoctrineExtensions
+.. _documentation:      https://github.com/Atlantic18/DoctrineExtensions/tree/master/doc/
