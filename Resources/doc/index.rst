@@ -27,16 +27,6 @@ entity itself and has implemented proper caching for metadata.
 
 See the official documentation_ for more details.
 
-Warning
-=======
-
-As the DoctrineExtensions library does not provide an XML driver, you
-have to use either annotations or YAML for your mapping.
-Setting a ``DriverChain`` implementation to load only the gedmo mapping
-from annotations or YAML and the standard mapping from XML would require
-hacking the way the ORM is configured by DoctrineBundle so it will never
-be done in the bundle.
-
 Installation
 ============
 
