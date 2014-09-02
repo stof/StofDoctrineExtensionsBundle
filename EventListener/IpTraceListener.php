@@ -19,7 +19,7 @@ class IpTraceListener implements EventSubscriberInterface
     /**
      * @var IpTraceableListener
      */
-    private $ipTraceableListener;
+    protected $ipTraceableListener;
 
     public function __construct(IpTraceableListener $ipTraceableListener)
     {
