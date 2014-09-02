@@ -33,7 +33,7 @@ class IpTraceListener implements EventSubscriberInterface
      */
     public function onKernelRequest(GetResponseEvent $event)
     {
-        if (HttpKernelInterface::MASTER_REQUEST !== $event->getRequestType()) {
+        if (HttpKernelInterface::MASTER_REQUEST === $event->getRequestType()) {
             $ip = $event->getRequest()->getClientIp();
 
             if (null !== $ip) {
