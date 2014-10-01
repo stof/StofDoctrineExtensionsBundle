@@ -22,6 +22,7 @@ class Configuration implements ConfigurationInterface
             ->append($this->getVendorNode('mongodb'))
             ->append($this->getClassNode())
             ->append($this->getUploadableNode())
+            ->append($this->getSluggableNode())
             ->children()
                 ->scalarNode('default_locale')
                     ->cannotBeEmpty()
@@ -140,6 +141,28 @@ class Configuration implements ConfigurationInterface
                     ->defaultValue('Stof\\DoctrineExtensionsBundle\\Uploadable\\UploadedFileInfo')
                 ->end()
                 ->booleanNode('validate_writable_directory')->defaultTrue()->end()
+            ->end()
+        ;
+
+        return $node;
+    }
+
+    private function getSluggableNode()
+    {
+        $treeBuilder = new TreeBuilder();
+        $node = $treeBuilder->root('sluggable');
+
+        $node
+            ->addDefaultsIfNotSet()
+            ->children()
+                ->arrayNode('managed_filters')
+                    ->useAttributeAsKey('name')
+                    ->prototype('array')
+                        ->children()
+                            ->scalarNode('disabled')->defaultValue(true)->end()
+                        ->end()
+                    ->end()
+                ->end()
             ->end()
         ;
 
