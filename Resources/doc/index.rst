@@ -13,6 +13,7 @@ DoctrineExtensions's features
 - **Translatable** - gives you a very handy solution for translating records into diferent languages. Easy to setup, easier to use.
 - **Sluggable** - urlizes your specified fields into single unique slug
 - **Timestampable** - updates date fields on create, update and even property change.
+- **IpTraceable** - updates ip fields on create, update and even property change.
 - **Blameable** - updates string or assocation fields on create, update and even property change with a user name resp. reference.
 - **Loggable** - helps tracking changes and history of objects, also supports version managment.
 - **Sortable** - makes any document or entity sortable
@@ -31,7 +32,7 @@ Installation
 ============
 
 Add stof/doctrine-extensions-bundle to composer.json
------------------------------
+----------------------------------------------------
 
 .. code-block:: json
 
@@ -309,6 +310,7 @@ in YAML:
         class:
             tree:           MyBundle\TreeListener
             timestampable:  MyBundle\TimestampableListener
+            iptraceable:    ~
             blameable:      ~
             sluggable:      ~
             translatable:   ~

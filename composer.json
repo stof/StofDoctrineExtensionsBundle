@@ -2,7 +2,7 @@
     "name": "stof/doctrine-extensions-bundle",
     "type": "symfony-bundle",
     "description": "Integration of the gedmo/doctrine-extensions with Symfony2",
-    "keywords": ["tree", "behaviors", "doctrine2", "extensions", "gedmo", "sluggable","loggable", "translatable", "nestedset", "sortable", "timestampable"],
+    "keywords": ["tree", "behaviors", "doctrine2", "extensions", "gedmo", "sluggable","loggable", "translatable", "nestedset", "sortable", "timestampable", "iptraceable"],
     "homepage": "https://github.com/stof/StofDoctrineExtensionsBundle",
     "license": "MIT",
     "authors": [

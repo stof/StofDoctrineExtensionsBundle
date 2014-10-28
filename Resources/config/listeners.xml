@@ -8,6 +8,7 @@
         <parameter key="stof_doctrine_extensions.event_listener.locale.class">Stof\DoctrineExtensionsBundle\EventListener\LocaleListener</parameter>
         <parameter key="stof_doctrine_extensions.event_listener.logger.class">Stof\DoctrineExtensionsBundle\EventListener\LoggerListener</parameter>
         <parameter key="stof_doctrine_extensions.event_listener.blame.class">Stof\DoctrineExtensionsBundle\EventListener\BlameListener</parameter>
+        <parameter key="stof_doctrine_extensions.event_listener.iptrace.class">Stof\DoctrineExtensionsBundle\EventListener\IpTraceListener</parameter>
         <parameter key="stof_doctrine_extensions.uploadable.manager.class">Stof\DoctrineExtensionsBundle\Uploadable\UploadableManager</parameter>
         <parameter key="stof_doctrine_extensions.uploadable.mime_type_guesser.class" />
         <parameter key="stof_doctrine_extensions.uploadable.default_file_info.class" />
@@ -15,6 +16,11 @@
     <services>
         <!-- Doctrine listeners -->
         <service id="stof_doctrine_extensions.listener.timestampable" class="%stof_doctrine_extensions.listener.timestampable.class%" public="false">
+            <call method="setAnnotationReader">
+                <argument type="service" id="annotation_reader" />
+            </call>
+        </service>
+        <service id="stof_doctrine_extensions.listener.iptraceable" class="%stof_doctrine_extensions.listener.iptraceable.class%" public="false">
             <call method="setAnnotationReader">
                 <argument type="service" id="annotation_reader" />
             </call>
@@ -99,6 +105,11 @@
         <service id="stof_doctrine_extensions.event_listener.blame" class="%stof_doctrine_extensions.event_listener.blame.class%" public="false">
             <argument type="service" id="stof_doctrine_extensions.listener.blameable" />
             <argument type="service" id="security.context" on-invalid="null" />
+        </service>
+
+        <service id="stof_doctrine_extensions.event_listener.iptrace" class="%stof_doctrine_extensions.event_listener.iptrace.class%" scope="request" public="false">
+            <argument type="service" id="stof_doctrine_extensions.listener.iptraceable" />
+            <argument type="service" id="request" on-invalid="null" />
         </service>
 
         <!-- Uploadable -->
