@@ -10,11 +10,11 @@ DoctrineExtensions's features
 -----------------------------
 
 - **Tree** - this extension automates the tree handling process and adds some tree specific functions on repository. (**closure**, **nestedset** or **materialized path**)
-- **Translatable** - gives you a very handy solution for translating records into diferent languages. Easy to setup, easier to use.
+- **Translatable** - gives you a very handy solution for translating records into different languages. Easy to setup, easier to use.
 - **Sluggable** - urlizes your specified fields into single unique slug
 - **Timestampable** - updates date fields on create, update and even property change.
-- **Blameable** - updates string or assocation fields on create, update and even property change with a user name resp. reference.
-- **Loggable** - helps tracking changes and history of objects, also supports version managment.
+- **Blameable** - updates string or association fields on create, update and even property change with a user name resp. reference.
+- **Loggable** - helps tracking changes and history of objects, also supports version management.
 - **Sortable** - makes any document or entity sortable
 - **Translator** - explicit way to handle translations
 - **Softdeleteable** - allows to implicitly remove records
@@ -30,21 +30,17 @@ See the official documentation_ for more details.
 Installation
 ============
 
-Add stof/doctrine-extensions-bundle to composer.json
------------------------------
+Step 1: Download the bundle using Composer
+------------------------------------------
 
-.. code-block:: json
+Open your command console, browse to your project and execute the following:
 
-    "require": {
-        "php": ">=5.3.2",
-        "symfony/symfony": "~2.1",
-        "_comment": "your other packages",
+```bash
+$ composer require stof/doctrine-extensions-bundle
+```
 
-        "stof/doctrine-extensions-bundle": "~1.1@dev",
-    }
-
-Add DoctrineExtensionsBundle to your application kernel
--------------------------------------------------------
+Step 2: Enable the bundle in your application kernel
+----------------------------------------------------
 
 .. code-block:: php
 
@@ -58,8 +54,8 @@ Add DoctrineExtensionsBundle to your application kernel
         );
     }
 
-Add the extensions to your mapping
-----------------------------------
+Step 3: Add the extensions to your mapping
+------------------------------------------
 
 Some of the extensions uses their own entities to do their work. You need
 to register their mapping in Doctrine when you want to use them.
@@ -140,7 +136,7 @@ doctrine filter.
     If you are using several entity managers, take care to register the filter
     for the right ones.
 
-To disable the behaviour, e.g. for admin users who may see deleted items,
+To disable the behavior, e.g. for admin users who may see deleted items,
 disable the filter. Here is an example:
 
 .. code-block:: php
@@ -151,8 +147,9 @@ disable the filter. Here is an example:
 Using Uploadable extension
 --------------------------
 
-If you want to use the Uploadable extension, first read the documentation in DoctrineExtensions. Once everything is
-ready, use the form component as usual. Then, after you verify the form is valid, do the following:
+If you want to use the Uploadable extension, first read the documentation in
+DoctrineExtensions. Once everything is ready, use the form component as usual.
+Then, after you verify the form is valid, do the following:
 
 .. code-block:: php
 
@@ -282,7 +279,7 @@ files instead of ``entity-manager``.
 .. caution::
 
     If you configure the listeners of an entity manager in several
-    config file the last one will be used. So you have to list all the
+    configuration file the last one will be used. So you have to list all the
     listeners you want to detach.
 
 Use the DoctrineExtensions library
