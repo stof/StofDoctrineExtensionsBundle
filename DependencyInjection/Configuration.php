@@ -2,6 +2,7 @@
 
 namespace Stof\DoctrineExtensionsBundle\DependencyInjection;
 
+use Symfony\Component\Config\Definition\Builder\NodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -20,8 +21,10 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->append($this->getVendorNode('orm'))
             ->append($this->getVendorNode('mongodb'))
+            ->append($this->getVendorNode('phpcr'))
             ->append($this->getClassNode())
             ->append($this->getUploadableNode())
+            ->append($this->getReferencesNode())
             ->children()
                 ->scalarNode('default_locale')
                     ->cannotBeEmpty()
@@ -38,6 +41,8 @@ class Configuration implements ConfigurationInterface
 
     /**
      * @param string $name
+     *
+     * @return NodeDefinition
      */
     private function getVendorNode($name)
     {
@@ -57,6 +62,7 @@ class Configuration implements ConfigurationInterface
                     ->scalarNode('sortable')->defaultFalse()->end()
                     ->scalarNode('softdeleteable')->defaultFalse()->end()
                     ->scalarNode('uploadable')->defaultFalse()->end()
+                    ->scalarNode('references')->defaultFalse()->end()
                     ->scalarNode('reference_integrity')->defaultFalse()->end()
                 ->end()
             ->end()
@@ -109,6 +115,10 @@ class Configuration implements ConfigurationInterface
                     ->cannotBeEmpty()
                     ->defaultValue('Gedmo\\Uploadable\\UploadableListener')
                 ->end()
+                ->scalarNode('references')
+                    ->cannotBeEmpty()
+                    ->defaultValue('Gedmo\\References\\ReferencesListener')
+                ->end()
                 ->scalarNode('reference_integrity')
                     ->cannotBeEmpty()
                     ->defaultValue('Gedmo\\ReferenceIntegrity\\ReferenceIntegrityListener')
@@ -140,6 +150,27 @@ class Configuration implements ConfigurationInterface
                     ->defaultValue('Stof\\DoctrineExtensionsBundle\\Uploadable\\UploadedFileInfo')
                 ->end()
                 ->booleanNode('validate_writable_directory')->defaultTrue()->end()
+            ->end()
+        ;
+
+        return $node;
+    }
+
+    private function getReferencesNode()
+    {
+        $treeBuilder = new TreeBuilder();
+        $node = $treeBuilder->root('references');
+
+        $node
+            ->addDefaultsIfNotSet()
+            ->children()
+                ->scalarNode('entity_manager')
+                    ->cannotBeEmpty()
+                    ->defaultValue('doctrine.orm.entity_manager')
+                ->end()
+                ->scalarNode('document_manager')
+                    ->cannotBeEmpty()
+                ->end()
             ->end()
         ;
 

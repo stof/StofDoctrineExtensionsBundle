@@ -2,6 +2,8 @@
 
 namespace Stof\DoctrineExtensionsBundle\DependencyInjection;
 
+use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
@@ -34,6 +36,7 @@ class StofDoctrineExtensionsExtension extends Extension
         $useTranslatable = false;
         $useLoggable = false;
         $useBlameable = false;
+        $useReferences = false;
 
         foreach ($config['orm'] as $name => $listeners) {
             foreach ($listeners as $ext => $enabled) {
@@ -48,6 +51,8 @@ class StofDoctrineExtensionsExtension extends Extension
                         $useLoggable = true;
                     } elseif ('blameable' === $ext) {
                         $useBlameable = true;
+                    } elseif ('references' === $ext) {
+                        $useReferences = true;
                     }
                     $definition = $container->getDefinition($listener);
                     $definition->addTag('doctrine.event_subscriber', $attributes);
@@ -70,9 +75,34 @@ class StofDoctrineExtensionsExtension extends Extension
                         $useLoggable = true;
                     } elseif ('blameable' === $ext) {
                         $useBlameable = true;
+                    } elseif ('references' === $ext) {
+                        continue;
                     }
                     $definition = $container->getDefinition($listener);
                     $definition->addTag('doctrine_mongodb.odm.event_subscriber', $attributes);
+                }
+            }
+            $this->documentManagers[$name] = $listeners;
+        }
+
+        foreach ($config['phpcr'] as $name => $listeners) {
+            foreach ($listeners as $ext => $enabled) {
+                $listener = sprintf('stof_doctrine_extensions.listener.%s', $ext);
+                if ($enabled && $container->hasDefinition($listener)) {
+                    $attributes = array('connection' => $name);
+                    if ('translatable' === $ext) {
+                        $useTranslatable = true;
+                        // the translatable listener must be registered after others to work with them properly
+                        $attributes['priority'] = -10;
+                    } elseif ('loggable' === $ext) {
+                        $useLoggable = true;
+                    } elseif ('blameable' === $ext) {
+                        $useBlameable = true;
+                    } elseif ('references' === $ext) {
+                        continue;
+                    }
+                    $definition = $container->getDefinition($listener);
+                    $definition->addTag('doctrine_phpcr.event_subscriber', $attributes);
                 }
             }
             $this->documentManagers[$name] = $listeners;
@@ -90,6 +120,16 @@ class StofDoctrineExtensionsExtension extends Extension
         }
         if ($useBlameable) {
             $container->getDefinition('stof_doctrine_extensions.event_listener.blame')
+                ->setPublic(true)
+                ->addTag('kernel.event_subscriber');
+        }
+
+        if ($useReferences) {
+            $referencesConfig = $config['references'];
+            $definition = $container->getDefinition('stof_doctrine_extensions.event_listener.references');
+            $definition->replaceArgument(1, new Reference($referencesConfig['entity_manager']));
+            $definition->replaceArgument(2, new Reference($referencesConfig['document_manager']));
+            $definition
                 ->setPublic(true)
                 ->addTag('kernel.event_subscriber');
         }
@@ -134,7 +174,8 @@ class StofDoctrineExtensionsExtension extends Extension
         }
 
         foreach (array_keys($this->documentManagers) as $name) {
-            if (!$container->hasDefinition(sprintf('doctrine_mongodb.odm.%s_document_manager', $name))) {
+            if (!$container->hasDefinition(sprintf('doctrine_mongodb.odm.%s_document_manager', $name)) &&
+                !$container->hasDefinition(sprintf('doctrine_phpcr.odm.%s_document_manager', $name))) {
                 throw new \InvalidArgumentException(sprintf('Invalid %s config: document manager "%s" not found', $this->getAlias(), $name));
             }
         }
