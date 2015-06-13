@@ -5,6 +5,7 @@ namespace Stof\DoctrineExtensionsBundle\EventListener;
 use Doctrine\ODM\PHPCR\DocumentManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Gedmo\References\ReferencesListener;
+use Symfony\Component\Console\ConsoleEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -49,9 +50,9 @@ class ReferenceListener implements EventSubscriberInterface
     }
 
     /**
-     * @param \Symfony\Component\HttpKernel\Event\GetResponseEvent $event
+     * Register object managers on references listener
      */
-    public function onKernelRequest(GetResponseEvent $event)
+    public function onInit()
     {
         $this->referencesListener->registerManager('document', $this->documentManager);
         $this->referencesListener->registerManager('entity', $this->entityManager);
@@ -60,7 +61,8 @@ class ReferenceListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            KernelEvents::REQUEST => 'onKernelRequest',
+            KernelEvents::REQUEST => 'onInit',
+            ConsoleEvents::COMMAND => 'onInit'
         );
     }
 }
