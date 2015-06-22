@@ -33,6 +33,12 @@ Installation
 Add stof/doctrine-extensions-bundle to composer.json
 -----------------------------
 
+.. code-block:: console
+
+    php composer.phar require stof/doctrine-extensions-bundle "~1.1@dev"
+
+or
+
 .. code-block:: json
 
     "require": {
