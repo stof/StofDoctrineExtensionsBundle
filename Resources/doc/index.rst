@@ -30,14 +30,15 @@ See the official documentation_ for more details.
 Installation
 ============
 
-Add stof/doctrine-extensions-bundle to composer.json
+Install stof/doctrine-extensions-bundle
 -----------------------------
 
 .. code-block:: console
 
     php composer.phar require stof/doctrine-extensions-bundle "~1.1@dev"
 
-or
+Or add stof/doctrine-extensions-bundle to composer.json
+-----------------------------
 
 .. code-block:: json
 
