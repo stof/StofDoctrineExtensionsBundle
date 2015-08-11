@@ -48,6 +48,8 @@ class StofDoctrineExtensionsExtension extends Extension
                         $useLoggable = true;
                     } elseif ('blameable' === $ext) {
                         $useBlameable = true;
+                    } elseif ('uploadable' === $ext) {
+                        $attributes['priority'] = -5;
                     }
                     $definition = $container->getDefinition($listener);
                     $definition->addTag('doctrine.event_subscriber', $attributes);
