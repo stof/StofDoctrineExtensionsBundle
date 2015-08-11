@@ -60,10 +60,8 @@ file of your project:
 
 .. code-block:: php
 
-    <?php
     // app/AppKernel.php
 
-    // ...
     class AppKernel extends Kernel
     {
         public function registerBundles()
@@ -246,15 +244,15 @@ the asked language. If you don't provide it explicitly, it will default to
     .. code-block:: xml
 
         <!-- app/config/config.xml -->
-        <container xmlns:stof_doctrine_extensions="http://symfony.com/schema/dic/stof_doctrine_extensions">
-            <stof_doctrine_extensions:config default-locale="en_US">
-                <stof_doctrine_extensions:orm>
-                    <stof_doctrine_extensions:entity-manager id="default" />
-                </stof_doctrine_extensions:orm>
-                <stof_doctrine_extensions:mongodb>
-                    <stof_doctrine_extensions:document-manager id="default" />
-                </stof_doctrine_extensions:mongodb>
-            </stof_doctrine_extensions:config>
+        <container xmlns:stof-doctrine-extensions="http://example.org/schema/dic/stof_doctrine_extensions">
+            <stof-doctrine-extensions:config default-locale="en_US">
+                <stof-doctrine-extensions:orm>
+                    <stof-doctrine-extensions:entity-manager id="default" />
+                </stof-doctrine-extensions:orm>
+                <stof-doctrine-extensions:mongodb>
+                    <stof-doctrine-extensions:document-manager id="default" />
+                </stof-doctrine-extensions:mongodb>
+            </stof-doctrine-extensions:config>
         </container>
 
 Activate the extensions you want
@@ -280,20 +278,20 @@ manager, declare the extensions you want to enable:
     .. code-block:: xml
 
         <!-- app/config/config.xml -->
-        <container xmlns:doctrine_extensions="http://symfony.com/schema/dic/stof_doctrine_extensions">
-            <stof_doctrine_extensions:config default-locale="en_US">
-                <stof_doctrine_extensions:orm>
-                    <stof_doctrine_extensions:entity-manager
+        <container xmlns:doctrine_extensions="http://example.org/schema/dic/stof_doctrine_extensions">
+            <stof-doctrine-extensions:config default-locale="en_US">
+                <stof-doctrine-extensions:orm>
+                    <stof-doctrine-extensions:entity-manager
                         id="default"
                         tree="true"
                         timestampable="false"
                     />
-                    <stof_doctrine_extensions:entity-manager
+                    <stof-doctrine-extensions:entity-manager
                         id="other"
                         timestampable="true"
                     />
-                </stof_doctrine_extensions:orm>
-            </stof_doctrine_extensions:config>
+                </stof-doctrine-extensions:orm>
+            </stof-doctrine-extensions:config>
         </container>
 
 Same is available for MongoDB using ``document-manager`` in the XML files
@@ -340,13 +338,13 @@ configuration.
     .. code-block:: xml
 
         <!-- app/config/config.xml -->
-        <container xmlns:doctrine_extensions="http://symfony.com/schema/dic/stof_doctrine_extensions">
-            <stof_doctrine_extensions:config>
-                <stof_doctrine_extensions:class
+        <container xmlns:doctrine_extensions="http://example.org/schema/dic/stof_doctrine_extensions">
+            <stof-doctrine-extensions:config>
+                <stof-doctrine-extensions:class
                     tree="MyBundle\TreeListener"
                     timestampable="MyBundle\TimestampableListener"
                 />
-            </stof_doctrine_extensions:config>
+            </stof-doctrine-extensions:config>
         </container>
 
 .. _`DoctrineExtensions`: https://github.com/Atlantic18/DoctrineExtensions
