@@ -21,6 +21,8 @@ class StofDoctrineExtensionsBundle extends Bundle
 
     public function boot()
     {
-        Validator::$validateWritableDirectory = $this->container->getParameter('stof_doctrine_extensions.uploadable.validate_writable_directory');
+        if ($this->container->hasParameter('stof_doctrine_extensions.uploadable.validate_writable_directory')) {
+            Validator::$validateWritableDirectory = $this->container->getParameter('stof_doctrine_extensions.uploadable.validate_writable_directory');
+        }
     }
 }
