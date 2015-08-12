@@ -93,12 +93,10 @@
 
         <service id="stof_doctrine_extensions.event_listener.logger" class="%stof_doctrine_extensions.event_listener.logger.class%" public="false">
             <argument type="service" id="stof_doctrine_extensions.listener.loggable" />
-            <argument type="service" id="security.context" on-invalid="null" />
         </service>
 
         <service id="stof_doctrine_extensions.event_listener.blame" class="%stof_doctrine_extensions.event_listener.blame.class%" public="false">
             <argument type="service" id="stof_doctrine_extensions.listener.blameable" />
-            <argument type="service" id="security.context" on-invalid="null" />
         </service>
 
         <!-- Uploadable -->
