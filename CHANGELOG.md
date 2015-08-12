@@ -1,3 +1,7 @@
+## 1.2.1 (2015-08-12)
+
+* Fixed the BlameListener
+
 ## 1.2.0 (2015-08-12)
 
 Bugfixes:

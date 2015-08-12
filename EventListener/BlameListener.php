@@ -4,6 +4,7 @@ namespace Stof\DoctrineExtensionsBundle\EventListener;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
@@ -18,10 +19,8 @@ use Gedmo\Blameable\BlameableListener;
  */
 class BlameListener implements EventSubscriberInterface
 {
-    /**
-     * @var SecurityContextInterface
-     */
-    private $securityContext;
+    private $authorizationChecker;
+    private $tokenStorage;
 
     /**
      * @var BlameableListener
@@ -54,12 +53,16 @@ class BlameListener implements EventSubscriberInterface
      */
     public function onKernelRequest(GetResponseEvent $event)
     {
-        if (null === $this->securityContext) {
+        if (HttpKernelInterface::MASTER_REQUEST !== $event->getRequestType()) {
             return;
         }
 
-        $token = $this->securityContext->getToken();
-        if (null !== $token && $this->securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+        if (null === $this->tokenStorage || null === $this->authorizationChecker) {
+            return;
+        }
+
+        $token = $this->tokenStorage->getToken();
+        if (null !== $token && $this->authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             $this->blameableListener->setUserValue($token->getUser());
         }
     }
