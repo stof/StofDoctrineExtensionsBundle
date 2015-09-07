@@ -218,42 +218,42 @@ This bundle needs a default locale used if the translation does not exists in
 the asked language. If you don't provide it explicitly, it will default to
 ``en``.
 
-.. configuration-block::
+.. code-block:: yaml
 
-    .. code-block:: yaml
+    # app/config/config.yml
+    stof_doctrine_extensions:
+        default_locale: en_US
 
-        # app/config/config.yml
-        stof_doctrine_extensions:
-            default_locale: en_US
+        # Only used if you activated the Uploadable extension
+        uploadable:
+            # Default file path: This is one of the three ways you can configure the path for the Uploadable extension
+            default_file_path:       %kernel.root_dir%/../web/uploads
 
-            # Only used if you activated the Uploadable extension
-            uploadable:
-                # Default file path: This is one of the three ways you can configure the path for the Uploadable extension
-                default_file_path:       %kernel.root_dir%/../web/uploads
+            # Mime type guesser class: Optional. By default, we provide an adapter for the one present in the HttpFoundation component of Symfony
+            mime_type_guesser_class: Stof\DoctrineExtensionsBundle\Uploadable\MimeTypeGuesserAdapter
 
-                # Mime type guesser class: Optional. By default, we provide an adapter for the one present in the HttpFoundation component of Symfony
-                mime_type_guesser_class: Stof\DoctrineExtensionsBundle\Uploadable\MimeTypeGuesserAdapter
+            # Default file info class implementing FileInfoInterface: Optional. By default we provide a class which is prepared to receive an UploadedFile instance.
+            default_file_info_class: Stof\DoctrineExtensionsBundle\Uploadable\UploadedFileInfo
+        orm:
+            default: ~
+        mongodb:
+            default: ~
 
-                # Default file info class implementing FileInfoInterface: Optional. By default we provide a class which is prepared to receive an UploadedFile instance.
-                default_file_info_class: Stof\DoctrineExtensionsBundle\Uploadable\UploadedFileInfo
-            orm:
-                default: ~
-            mongodb:
-                default: ~
+Or if you are using .xml:
 
-    .. code-block:: xml
+.. code-block:: xml
 
-        <!-- app/config/config.xml -->
-        <container xmlns:stof-doctrine-extensions="http://example.org/schema/dic/stof_doctrine_extensions">
-            <stof-doctrine-extensions:config default-locale="en_US">
-                <stof-doctrine-extensions:orm>
-                    <stof-doctrine-extensions:entity-manager id="default" />
-                </stof-doctrine-extensions:orm>
-                <stof-doctrine-extensions:mongodb>
-                    <stof-doctrine-extensions:document-manager id="default" />
-                </stof-doctrine-extensions:mongodb>
-            </stof-doctrine-extensions:config>
-        </container>
+    <!-- app/config/config.xml -->
+    <container xmlns:stof-doctrine-extensions="http://example.org/schema/dic/stof_doctrine_extensions">
+        <stof-doctrine-extensions:config default-locale="en_US">
+            <stof-doctrine-extensions:orm>
+                <stof-doctrine-extensions:entity-manager id="default" />
+            </stof-doctrine-extensions:orm>
+            <stof-doctrine-extensions:mongodb>
+                <stof-doctrine-extensions:document-manager id="default" />
+            </stof-doctrine-extensions:mongodb>
+        </stof-doctrine-extensions:config>
+    </container>
 
 Activate the extensions you want
 --------------------------------
@@ -261,38 +261,38 @@ Activate the extensions you want
 By default the bundle does not attach any listener. For each of your entity
 manager, declare the extensions you want to enable:
 
-.. configuration-block::
+.. code-block:: yaml
 
-    .. code-block:: yaml
+    # app/config/config.yml
+    stof_doctrine_extensions:
+        default_locale: en_US
+        orm:
+            default:
+                tree: true
+                timestampable: false # not needed: listeners are not enabled by default
+            other:
+                timestampable: true
 
-        # app/config/config.yml
-        stof_doctrine_extensions:
-            default_locale: en_US
-            orm:
-                default:
-                    tree: true
-                    timestampable: false # not needed: listeners are not enabled by default
-                other:
-                    timestampable: true
+Or if you are using .xml:
 
-    .. code-block:: xml
+.. code-block:: xml
 
-        <!-- app/config/config.xml -->
-        <container xmlns:doctrine_extensions="http://example.org/schema/dic/stof_doctrine_extensions">
-            <stof-doctrine-extensions:config default-locale="en_US">
-                <stof-doctrine-extensions:orm>
-                    <stof-doctrine-extensions:entity-manager
-                        id="default"
-                        tree="true"
-                        timestampable="false"
-                    />
-                    <stof-doctrine-extensions:entity-manager
-                        id="other"
-                        timestampable="true"
-                    />
-                </stof-doctrine-extensions:orm>
-            </stof-doctrine-extensions:config>
-        </container>
+    <!-- app/config/config.xml -->
+    <container xmlns:doctrine_extensions="http://example.org/schema/dic/stof_doctrine_extensions">
+        <stof-doctrine-extensions:config default-locale="en_US">
+            <stof-doctrine-extensions:orm>
+                <stof-doctrine-extensions:entity-manager
+                    id="default"
+                    tree="true"
+                    timestampable="false"
+                />
+                <stof-doctrine-extensions:entity-manager
+                    id="other"
+                    timestampable="true"
+                />
+            </stof-doctrine-extensions:orm>
+        </stof-doctrine-extensions:config>
+    </container>
 
 Same is available for MongoDB using ``document-manager`` in the XML files
 instead of ``entity-manager``.
@@ -319,33 +319,33 @@ You can change the listeners used by extending the Gedmo listeners (or the
 listeners of the bundle for translations) and giving the class name in the
 configuration.
 
-.. configuration-block::
+.. code-block:: yaml
 
-    .. code-block:: yaml
+    # app/config/config.yml
+    stof_doctrine_extensions:
+        class:
+            tree:           MyBundle\TreeListener
+            timestampable:  MyBundle\TimestampableListener
+            blameable:      ~
+            sluggable:      ~
+            translatable:   ~
+            loggable:       ~
+            softdeleteable: ~
+            uploadable:     ~
 
-        # app/config/config.yml
-        stof_doctrine_extensions:
-            class:
-                tree:           MyBundle\TreeListener
-                timestampable:  MyBundle\TimestampableListener
-                blameable:      ~
-                sluggable:      ~
-                translatable:   ~
-                loggable:       ~
-                softdeleteable: ~
-                uploadable:     ~
+Or if you are using .xml:
 
-    .. code-block:: xml
+.. code-block:: xml
 
-        <!-- app/config/config.xml -->
-        <container xmlns:doctrine_extensions="http://example.org/schema/dic/stof_doctrine_extensions">
-            <stof-doctrine-extensions:config>
-                <stof-doctrine-extensions:class
-                    tree="MyBundle\TreeListener"
-                    timestampable="MyBundle\TimestampableListener"
-                />
-            </stof-doctrine-extensions:config>
-        </container>
+    <!-- app/config/config.xml -->
+    <container xmlns:doctrine_extensions="http://example.org/schema/dic/stof_doctrine_extensions">
+        <stof-doctrine-extensions:config>
+            <stof-doctrine-extensions:class
+                tree="MyBundle\TreeListener"
+                timestampable="MyBundle\TimestampableListener"
+            />
+        </stof-doctrine-extensions:config>
+    </container>
 
 .. _`DoctrineExtensions`: https://github.com/Atlantic18/DoctrineExtensions
 .. _`DoctrineExtensions documentation`: https://github.com/Atlantic18/DoctrineExtensions/tree/master/doc/
