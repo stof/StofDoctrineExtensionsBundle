@@ -218,7 +218,7 @@ This bundle needs a default locale used if the translation does not exists in
 the asked language. If you don't provide it explicitly, it will default to
 ``en``.
 
-.. configuration-block::
+For YAML configuration:
 
     .. code-block:: yaml
 
@@ -241,6 +241,8 @@ the asked language. If you don't provide it explicitly, it will default to
             mongodb:
                 default: ~
 
+For XML configuration:
+
     .. code-block:: xml
 
         <!-- app/config/config.xml -->
@@ -261,7 +263,7 @@ Activate the extensions you want
 By default the bundle does not attach any listener. For each of your entity
 manager, declare the extensions you want to enable:
 
-.. configuration-block::
+For YAML configuration:
 
     .. code-block:: yaml
 
@@ -274,6 +276,8 @@ manager, declare the extensions you want to enable:
                     timestampable: false # not needed: listeners are not enabled by default
                 other:
                     timestampable: true
+
+For XML configuration:
 
     .. code-block:: xml
 
@@ -319,7 +323,7 @@ You can change the listeners used by extending the Gedmo listeners (or the
 listeners of the bundle for translations) and giving the class name in the
 configuration.
 
-.. configuration-block::
+For YAML configuration:
 
     .. code-block:: yaml
 
