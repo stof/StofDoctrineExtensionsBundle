@@ -301,6 +301,46 @@ or in XML::
         </stof_doctrine_extensions:config>
     </container>
 
+Functional Tests with multiple database connections
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If you write functional tests with multiple database connections using
+`LiipFunctionalTestBundle`_, you can configure multiple database connections
+like this:
+
+.. code-block:: yaml
+
+        # app/config/config_test.yml
+        
+        doctrine:
+          dbal:
+            default_connection: %testdb%
+            connections:
+              sqlite:
+                driver:   pdo_sqlite
+                path:     %kernel.cache_dir%/test.db
+              mysql:
+                driver:     pdo_mysql
+                dbname:     testdb
+                host:       localhost
+                user:       travis
+              pgsql:
+                driver:     pdo_pgsql
+                dbname:     testdb
+                host:       localhost
+                user:       travis
+                
+        stof_doctrine_extensions:
+          default_locale: en_US
+          orm:
+            %testdb%:
+              tree: true
+
+Then you can set the environment variable ``SYMFONY__TESTDB`` to your configured
+database connection, and the extensions get automatically registered for
+whichever database connection you are using.
+
+.. _`LiipFunctionalTestBundle`: https://github.com/liip/LiipFunctionalTestBundle
 .. _DoctrineExtensions: http://github.com/l3pp4rd/DoctrineExtensions
 .. _blog:               http://gediminasm.org/articles
 .. _documentation:      http://symfony.com/doc/current/reference/configuration/doctrine.html#configuration-overview
