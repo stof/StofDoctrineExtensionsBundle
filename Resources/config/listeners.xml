@@ -34,7 +34,7 @@
                 <argument type="service" id="annotation_reader" />
             </call>
         </service>
-        <service id="stof_doctrine_extensions.listener.translatable" class="%stof_doctrine_extensions.listener.translatable.class%" public="false">
+        <service id="stof_doctrine_extensions.listener.translatable" class="%stof_doctrine_extensions.listener.translatable.class%" public="true">
             <call method="setAnnotationReader">
                 <argument type="service" id="annotation_reader" />
             </call>
