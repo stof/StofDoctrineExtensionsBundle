@@ -19,7 +19,7 @@ class IpTraceListener implements EventSubscriberInterface
     /**
      * @var IpTraceableListener
      */
-    protected $ipTraceableListener;
+    private $ipTraceableListener;
 
     public function __construct(IpTraceableListener $ipTraceableListener)
     {
@@ -33,12 +33,14 @@ class IpTraceListener implements EventSubscriberInterface
      */
     public function onKernelRequest(GetResponseEvent $event)
     {
-        if (HttpKernelInterface::MASTER_REQUEST === $event->getRequestType()) {
-            $ip = $event->getRequest()->getClientIp();
+        if (HttpKernelInterface::MASTER_REQUEST !== $event->getRequestType()) {
+            return;
+        }
+        
+        $ip = $event->getRequest()->getClientIp();
 
-            if (null !== $ip) {
-                $this->ipTraceableListener->setIpValue($ip);
-            }
+        if (null !== $ip) {
+            $this->ipTraceableListener->setIpValue($ip);
         }
     }
 

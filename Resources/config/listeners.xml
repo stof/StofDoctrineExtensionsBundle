@@ -25,7 +25,7 @@
                 <argument type="service" id="annotation_reader" />
             </call>
         </service>
-        <service id="stof_doctrine_extensions.listener.ip_traceable" class="%stof_doctrine_extensions.listener.ip_traceable.class%" public="false">
+        <service id="stof_doctrine_extensions.listener.ip_traceable" class="Gedmo\IpTraceable\IpTraceableListener" public="false">
             <call method="setAnnotationReader">
                 <argument type="service" id="annotation_reader" />
             </call>
