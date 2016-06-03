@@ -184,22 +184,20 @@ Then, after you verify the form is valid, do the following:
         ->getForm()
     ;
 
-    if ($this->getRequest()->getMethod() === 'POST') {
-        $form->bind($this->getRequest());
+    $form->handleRequest($request);
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($document);
+    if ($form->isSubmitted() && $form->isValid()) {
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($document);
 
-            $uploadableManager = $this->get('stof_doctrine_extensions.uploadable.manager');
+        $uploadableManager = $this->get('stof_doctrine_extensions.uploadable.manager');
 
-            // Here, "getMyFile" returns the "UploadedFile" instance that the form bound in your $myFile property
-            $uploadableManager->markEntityToUpload($document, $document->getMyFile());
+        // Here, "getMyFile" returns the "UploadedFile" instance that the form bound in your $myFile property
+        $uploadableManager->markEntityToUpload($document, $document->getMyFile());
 
-            $em->flush();
+        $em->flush();
 
-            $this->redirect($this->generateUrl(...));
-        }
+        $this->redirect($this->generateUrl(...));
     }
 
     return array('form' => $form->createView());
