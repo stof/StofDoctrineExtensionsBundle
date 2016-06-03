@@ -263,36 +263,36 @@ manager, declare the extensions you want to enable:
 
 .. configuration-block::
 
-    .. code-block:: yaml
+.. code-block:: yaml
 
-        # app/config/config.yml
-        stof_doctrine_extensions:
-            default_locale: en_US
-            orm:
-                default:
-                    tree: true
-                    timestampable: false # not needed: listeners are not enabled by default
-                other:
-                    timestampable: true
+    # app/config/config.yml
+    stof_doctrine_extensions:
+        default_locale: en_US
+        orm:
+            default:
+                tree: true
+                timestampable: false # not needed: listeners are not enabled by default
+            other:
+                timestampable: true
 
-    .. code-block:: xml
+.. code-block:: xml
 
-        <!-- app/config/config.xml -->
-        <container xmlns:doctrine_extensions="http://example.org/schema/dic/stof_doctrine_extensions">
-            <stof-doctrine-extensions:config default-locale="en_US">
-                <stof-doctrine-extensions:orm>
-                    <stof-doctrine-extensions:entity-manager
-                        id="default"
-                        tree="true"
-                        timestampable="false"
-                    />
-                    <stof-doctrine-extensions:entity-manager
-                        id="other"
-                        timestampable="true"
-                    />
-                </stof-doctrine-extensions:orm>
-            </stof-doctrine-extensions:config>
-        </container>
+    <!-- app/config/config.xml -->
+    <container xmlns:doctrine_extensions="http://example.org/schema/dic/stof_doctrine_extensions">
+        <stof-doctrine-extensions:config default-locale="en_US">
+            <stof-doctrine-extensions:orm>
+                <stof-doctrine-extensions:entity-manager
+                    id="default"
+                    tree="true"
+                    timestampable="false"
+                />
+                <stof-doctrine-extensions:entity-manager
+                    id="other"
+                    timestampable="true"
+                />
+            </stof-doctrine-extensions:orm>
+        </stof-doctrine-extensions:config>
+    </container>
 
 Same is available for MongoDB using ``document-manager`` in the XML files
 instead of ``entity-manager``.
