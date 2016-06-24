@@ -26,7 +26,7 @@ DoctrineExtensions's features
 - **Sortable** - makes any document or entity sortable
 - **Translator** - explicit way to handle translations
 - **Softdeleteable** - allows to implicitly remove records
-- **Uploadable** - provides file upload handling in entity fields
+- **Uploadable** - provides file upload handling in entity fields - ODM is not yet supported.
 - **Reference Integrity** - provides reference integrity for MongoDB, supports
   ``nullify`` and ``restrict``.
 
