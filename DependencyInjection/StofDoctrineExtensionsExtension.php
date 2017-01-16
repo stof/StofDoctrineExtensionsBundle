@@ -35,6 +35,8 @@ class StofDoctrineExtensionsExtension extends Extension
         $useLoggable = false;
         $useBlameable = false;
 
+        $managers = array();
+
         foreach ($config['orm'] as $name => $listeners) {
             foreach ($listeners as $ext => $enabled) {
                 $listener = sprintf('stof_doctrine_extensions.listener.%s', $ext);
@@ -53,6 +55,10 @@ class StofDoctrineExtensionsExtension extends Extension
                     }
                     $definition = $container->getDefinition($listener);
                     $definition->addTag('doctrine.event_subscriber', $attributes);
+
+                    if ('references' === $ext) {
+                        $managers[$enabled] = sprintf('doctrine.orm.%s_entity_manager', $name);
+                    }
                 }
             }
 
@@ -75,6 +81,10 @@ class StofDoctrineExtensionsExtension extends Extension
                     }
                     $definition = $container->getDefinition($listener);
                     $definition->addTag('doctrine_mongodb.odm.event_subscriber', $attributes);
+
+                    if ('references' === $ext) {
+                        $managers[$enabled] = sprintf('doctrine_mongodb.odm.%s_document_manager', $name);
+                    }
                 }
             }
             $this->documentManagers[$name] = $listeners;
@@ -121,6 +131,10 @@ class StofDoctrineExtensionsExtension extends Extension
                 $uploadableConfig['mime_type_guesser_class']
             );
         }
+
+        $container
+            ->getDefinition('stof_doctrine_extensions.listener.references')
+            ->setArguments(array(new Reference('service_container'), $managers));
 
         foreach ($config['class'] as $listener => $class) {
             $container->setParameter(sprintf('stof_doctrine_extensions.listener.%s.class', $listener), $class);
