@@ -348,5 +348,5 @@ configuration.
         </container>
 
 .. _`DoctrineExtensions`: https://github.com/Atlantic18/DoctrineExtensions
-.. _`DoctrineExtensions documentation`: https://github.com/Atlantic18/DoctrineExtensions/tree/master/doc/
+.. _`DoctrineExtensions documentation`: https://github.com/Atlantic18/DoctrineExtensions/tree/v2.4.x/doc
 .. _`installation chapter`: https://getcomposer.org/doc/00-intro.md
