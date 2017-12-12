@@ -108,7 +108,7 @@ to register their mapping in Doctrine when you want to use them.
                             type: annotation
                             prefix: Gedmo\Loggable\Entity
                             dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Loggable/Entity"
-                            alias: GedmoLoggable # (optional) it will default to the name set for the mappingmapping
+                            alias: GedmoLoggable # (optional) it will default to the name set for the mapping
                             is_bundle: false
                         gedmo_tree:
                             type: annotation
