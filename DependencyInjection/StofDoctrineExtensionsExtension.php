@@ -46,6 +46,7 @@ class StofDoctrineExtensionsExtension extends Extension
                         $attributes['priority'] = -10;
                     } elseif ('loggable' === $ext) {
                         $useLoggable = true;
+                        $attributes['priority'] = 5;
                     } elseif ('blameable' === $ext) {
                         $useBlameable = true;
                     } elseif ('uploadable' === $ext) {
