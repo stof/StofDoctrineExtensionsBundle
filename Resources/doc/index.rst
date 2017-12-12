@@ -21,6 +21,7 @@ DoctrineExtensions's features
   change.
 - **Blameable** - updates string or association fields on create, update and
   even property change with a user name resp. reference.
+- **IpTraceable** - updates string on create, update and even property change with a client IP.
 - **Loggable** - helps tracking changes and history of objects, also supports
   version management.
 - **Sortable** - makes any document or entity sortable

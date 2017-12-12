@@ -51,6 +51,7 @@ class Configuration implements ConfigurationInterface
                     ->scalarNode('translatable')->defaultFalse()->end()
                     ->scalarNode('timestampable')->defaultFalse()->end()
                     ->scalarNode('blameable')->defaultFalse()->end()
+                    ->scalarNode('ip_traceable')->defaultFalse()->end()
                     ->scalarNode('sluggable')->defaultFalse()->end()
                     ->scalarNode('tree')->defaultFalse()->end()
                     ->scalarNode('loggable')->defaultFalse()->end()
