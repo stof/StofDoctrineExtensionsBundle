@@ -132,7 +132,7 @@ to register their mapping in Doctrine when you want to use them.
     The mapping for MongoDB is similar. The ODM documents are in the ``Document``
     subnamespace of each extension instead of ``Entity``.
 
-Enable the ``softdeleteable`` filter
+Enable the ``soft-deleteable`` filter
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If you want to use the SoftDeleteable behavior, you have to enable the
@@ -146,7 +146,7 @@ Doctrine filter.
             entity_managers:
                 default:
                     filters:
-                        softdeleteable:
+                        soft-deleteable:
                             class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
                             enabled: true
 
@@ -166,7 +166,7 @@ disable the filter. Here is an example:
 .. code-block:: php
 
     $filters = $em->getFilters();
-    $filters->disable('softdeleteable');
+    $filters->disable('soft-deleteable');
 
 Using ``Uploadable`` extension
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
