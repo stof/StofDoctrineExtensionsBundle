@@ -30,6 +30,7 @@ class Configuration implements ConfigurationInterface
                 ->booleanNode('translation_fallback')->defaultFalse()->end()
                 ->booleanNode('persist_default_translation')->defaultFalse()->end()
                 ->booleanNode('skip_translation_on_load')->defaultFalse()->end()
+                ->booleanNode('use_request_locale')->defaultTrue()->end()
             ->end()
         ;
 

@@ -226,6 +226,9 @@ the asked language. If you don't provide it explicitly, it will default to
         stof_doctrine_extensions:
             default_locale: en_US
 
+            # If you use Translatable extension, by default the Symfony2 current locale (from the Request) is used to fetch translated query results.
+            use_request_locale: true
+
             # Only used if you activated the Uploadable extension
             uploadable:
                 # Default file path: This is one of the three ways you can configure the path for the Uploadable extension
