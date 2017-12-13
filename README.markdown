@@ -1,3 +1,5 @@
+# StofDoctrineExtensionsBundle
+
 This bundle provides integration for
 [DoctrineExtensions](https://github.com/Atlantic18/DoctrineExtensions) in
 your Symfony2 Project.
