@@ -55,6 +55,10 @@ in the `installation chapter`_ of the Composer documentation.
 Step 2: Enable the Bundle
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
+.. note::
+
+    When using Flex, this step is handled automatically.
+
 Then, enable the bundle by adding the following line in the ``app/AppKernel.php``
 file of your project:
 
@@ -198,7 +202,7 @@ Then, after you verify the form is valid, do the following:
 
             $em->flush();
 
-            $this->redirect($this->generateUrl(...));
+            return $this->redirect($this->generateUrl(...));
         }
     }
 

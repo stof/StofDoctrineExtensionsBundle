@@ -23,7 +23,7 @@ class UploadableManager
      * to upload a file for an entity in the Uploadable extension.
      *
      * @param object $entity   - The entity you are marking to "Upload" as soon as you call "flush".
-     * @param mixed  $fileInfo - The file info object or array. In Symfony 2, this will be typically an UploadedFile instance.
+     * @param mixed  $fileInfo - The file info object or array. In Symfony, this will be typically an UploadedFile instance.
      */
     public function markEntityToUpload($entity, $fileInfo)
     {

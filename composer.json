@@ -16,6 +16,9 @@
         "symfony/framework-bundle": "~2.1|~3.0|~4.0",
         "gedmo/doctrine-extensions": "^2.3.4"
     },
+    "require-dev": {
+        "symfony/security-core": "^2.7 || ^3.3 || ^4.0"
+    },
     "suggest": {
         "doctrine/doctrine-bundle": "to use the ORM extensions",
         "doctrine/mongodb-odm-bundle": "to use the MongoDB ODM extensions"
