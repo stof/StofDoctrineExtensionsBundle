@@ -12,6 +12,7 @@
     </parameters>
     <services>
         <service id="stof_doctrine_extensions.listener.uploadable" class="%stof_doctrine_extensions.listener.uploadable.class%" public="false">
+            <configurator service="stof_doctrine_extensions.uploadable.configurator" method="configure" />
             <argument type="service" id="stof_doctrine_extensions.uploadable.mime_type_guesser" />
 
             <call method="setAnnotationReader">
@@ -31,5 +32,9 @@
         </service>
 
         <service id="Stof\DoctrineExtensionsBundle\Uploadable\UploadableManager" alias="stof_doctrine_extensions.uploadable.manager" public="false" />
+
+        <service id="stof_doctrine_extensions.uploadable.configurator" class="Stof\DoctrineExtensionsBundle\Uploadable\ValidatorConfigurator" public="false">
+            <argument>%stof_doctrine_extensions.uploadable.validate_writable_directory%</argument>
+        </service>
     </services>
 </container>
