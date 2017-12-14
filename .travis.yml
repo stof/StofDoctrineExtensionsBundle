@@ -1,0 +1,46 @@
+language: php
+
+php:
+  - 5.4
+  - 5.5
+  - 5.6
+  - 7.0
+  - 7.1
+  - 7.2
+
+env:
+  global:
+    - SYMFONY_PHPUNIT_DIR=$HOME/.phpunit-bridge
+
+matrix:
+  fast_finish: true
+  include:
+    - php: 5.3
+      dist: precise
+    - php: 7.1
+      env: COMPOSER_FLAGS="--prefer-lowest" SYMFONY_DEPRECATION_HELPER=weak
+    - php: 5.6
+      env: DEPENDENCIES="symfony/lts:^2"
+    - php: 7.1
+      env: DEPENDENCIES="symfony/lts:^3"
+    - php: 7.2
+      env: STABILITY=dev
+
+sudo: false
+
+cache:
+  directories:
+    - $HOME/.composer/cache/files
+    - $HOME/.phpunit-bridge
+
+before_install:
+  - if [[ -v $STABILITY ]]; then composer config minimum-stability $STABILITY; fi;
+  - if [[ -v $DEPENDENCIES ]]; then composer require --no-update $DEPENDENCIES; fi;
+
+install:
+  - composer update --prefer-dist --no-interaction $COMPOSER_FLAGS
+  - vendor/bin/simple-phpunit install
+
+script:
+  - composer validate --strict --no-check-lock
+  - vendor/bin/simple-phpunit -v

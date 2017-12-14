@@ -17,7 +17,8 @@
         "gedmo/doctrine-extensions": "^2.3.4"
     },
     "require-dev": {
-        "symfony/security-core": "^2.7 || ^3.3 || ^4.0"
+        "symfony/phpunit-bridge": "^4.0",
+        "symfony/security-bundle": "^2.7 || ^3.3 || ^4.0"
     },
     "suggest": {
         "doctrine/doctrine-bundle": "to use the ORM extensions",
