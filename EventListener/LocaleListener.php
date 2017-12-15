@@ -22,11 +22,7 @@ class LocaleListener implements EventSubscriberInterface
     }
 
     /**
-     * Set the translation listener locale from the request.
-     *
-     * This method should be attached to the kernel.request event.
-     *
-     * @param \Symfony\Component\HttpKernel\Event\GetResponseEvent $event
+     * @internal
      */
     public function onKernelRequest(GetResponseEvent $event)
     {

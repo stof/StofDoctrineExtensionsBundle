@@ -5,6 +5,9 @@ namespace Stof\DoctrineExtensionsBundle\DependencyInjection\Compiler;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 
+/**
+ * @internal
+ */
 class ValidateExtensionConfigurationPass implements CompilerPassInterface
 {
     /**

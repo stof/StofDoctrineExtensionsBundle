@@ -9,10 +9,9 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
-use Symfony\Component\Security\Core\SecurityContextInterface;
 
 /**
- * LoggableListener
+ * Sets the username from the security context by listening on kernel.request
  *
  * @author Christophe Coevoet <stof@notk.org>
  */
@@ -20,32 +19,17 @@ class LoggerListener implements EventSubscriberInterface
 {
     private $authorizationChecker;
     private $tokenStorage;
-
     private $loggableListener;
 
-    public function __construct(LoggableListener $loggableListener, $tokenStorage = null, AuthorizationCheckerInterface $authorizationChecker = null)
+    public function __construct(LoggableListener $loggableListener, TokenStorageInterface $tokenStorage = null, AuthorizationCheckerInterface $authorizationChecker = null)
     {
         $this->loggableListener = $loggableListener;
-
-        // BC layer for Symfony 2.5 and older
-        if ($tokenStorage instanceof SecurityContextInterface) {
-            $this->tokenStorage = $this->authorizationChecker = $tokenStorage;
-
-            return;
-        }
-
-        if (null !== $tokenStorage && !$tokenStorage instanceof TokenStorageInterface) {
-            throw new \InvalidArgumentException(sprintf('The second argument of the %s constructor should be a Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface or a Symfony\Component\Security\Core\SecurityContextInterface or null.', __CLASS__));
-        }
-
         $this->tokenStorage = $tokenStorage;
         $this->authorizationChecker = $authorizationChecker;
     }
 
     /**
-     * Set the username from the security context by listening on core.request
-     *
-     * @param \Symfony\Component\HttpKernel\Event\GetResponseEvent $event
+     * @internal
      */
     public function onKernelRequest(GetResponseEvent $event)
     {
