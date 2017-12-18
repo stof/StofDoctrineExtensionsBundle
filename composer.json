@@ -18,7 +18,7 @@
     },
     "require-dev": {
         "symfony/phpunit-bridge": "^4.0",
-        "symfony/security-bundle": "^2.7 || ^3.2 || ^4.0"
+        "symfony/security-bundle": "^2.7|^3.2|^4.0"
     },
     "suggest": {
         "doctrine/doctrine-bundle": "to use the ORM extensions",
