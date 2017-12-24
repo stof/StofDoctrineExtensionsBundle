@@ -1,3 +1,19 @@
+## 1.3.0 (2017-12-24)
+
+Features:
+
+* Added support for Symfony 4
+* Added autowiring support for `Stof\DoctrineExtensionsBundle\Uploadable\UploadableManager`
+
+Bugfixes:
+
+* Fixed usage of loggable and soft-deleteable together to ensure soft-deletions are logged
+* Removed the logic running on bundle boot to avoid overhead
+
+Removed:
+
+* Dropped support for unmaintained versions of Symfony
+
 ## 1.2.2 (2016-01-27)
 
 * Added support for Symfony 3
