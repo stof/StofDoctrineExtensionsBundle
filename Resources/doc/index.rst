@@ -10,13 +10,13 @@ Features
 * **Tree** - this extension automates the tree handling process and adds some
   tree specific functions on repository. (``closure``, ``nestedset`` or ``materialized path``).
 * **Translatable** - gives you a very handy solution for translating records
-  into diferent languages. Easy to setup, easier to use.
+  into different languages. Easy to setup, easier to use.
 * **Sluggable** - urlizes your specified fields into single unique slug
 * **Timestampable** - updates date fields on create, update and even property change.
-* **Blameable** - updates string or assocation fields on create, update and even
+* **Blameable** - updates string or association fields on create, update and even
   property change with a user name resp. reference.
 * **Loggable** - helps tracking changes and history of objects, also supports
-  version managment.
+  version management.
 * **Sortable** - makes any document or entity sortable
 * **Translator** - explicit way to handle translations
 * **Softdeleteable** - allows to implicitly remove records

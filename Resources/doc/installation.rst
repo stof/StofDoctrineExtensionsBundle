@@ -4,7 +4,7 @@ Installation
 Installation Using Symfony Flex
 -------------------------------
 
-`Symfony Flex`_ is the new way to manage dependencies on Symfony 3.3 and higher
+`Symfony Flex`_ is the new way to manage dependencies on Symfony 3.4 and higher
 applications. If your project already uses Symfony Flex, execute this command to
 download, register and configure the bundle automatically:
 

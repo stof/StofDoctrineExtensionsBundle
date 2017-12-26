@@ -1,5 +1,5 @@
-SoftDeletable Filter
-====================
+SoftDeleteable Filter
+=====================
 
 If you want to use the SoftDeleteable behavior, you have to enable the
 Doctrine filter.
