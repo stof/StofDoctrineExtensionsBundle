@@ -7,6 +7,7 @@ php:
   - 7.0
   - 7.1
   - 7.2
+  - 7.3
 
 env:
   global:
@@ -24,6 +25,8 @@ matrix:
     - php: 7.1
       env: DEPENDENCIES="symfony/lts:^3"
     - php: 7.2
+      env: STABILITY=dev
+    - php: 7.3
       env: STABILITY=dev
 
 sudo: false
