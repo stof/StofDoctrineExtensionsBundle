@@ -99,25 +99,25 @@ to register their mapping in Doctrine when you want to use them.
                         gedmo_translatable:
                             type: annotation
                             prefix: Gedmo\Translatable\Entity
-                            dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Translatable/Entity"
+                            dir: "%kernel.project_dir%/vendor/gedmo/doctrine-extensions/lib/Gedmo/Translatable/Entity"
                             alias: GedmoTranslatable # (optional) it will default to the name set for the mapping
                             is_bundle: false
                         gedmo_translator:
                             type: annotation
                             prefix: Gedmo\Translator\Entity
-                            dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Translator/Entity"
+                            dir: "%kernel.project_dir%/vendor/gedmo/doctrine-extensions/lib/Gedmo/Translator/Entity"
                             alias: GedmoTranslator # (optional) it will default to the name set for the mapping
                             is_bundle: false
                         gedmo_loggable:
                             type: annotation
                             prefix: Gedmo\Loggable\Entity
-                            dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Loggable/Entity"
+                            dir: "%kernel.project_dir%/vendor/gedmo/doctrine-extensions/lib/Gedmo/Loggable/Entity"
                             alias: GedmoLoggable # (optional) it will default to the name set for the mapping
                             is_bundle: false
                         gedmo_tree:
                             type: annotation
                             prefix: Gedmo\Tree\Entity
-                            dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Tree/Entity"
+                            dir: "%kernel.project_dir%/vendor/gedmo/doctrine-extensions/lib/Gedmo/Tree/Entity"
                             alias: GedmoTree # (optional) it will default to the name set for the mapping
                             is_bundle: false
 
@@ -135,6 +135,10 @@ to register their mapping in Doctrine when you want to use them.
 
     The mapping for MongoDB is similar. The ODM documents are in the ``Document``
     subnamespace of each extension instead of ``Entity``.
+
+.. note::
+
+    Use ``%kernel.root_dir%/../`` instead of ``%kernel.project_dir%/`` if you are using Symfony < 3.3.
 
 Enable the ``softdeleteable`` filter
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -233,7 +237,8 @@ the asked language. If you don't provide it explicitly, it will default to
             # Only used if you activated the Uploadable extension
             uploadable:
                 # Default file path: This is one of the three ways you can configure the path for the Uploadable extension
-                default_file_path:       "%kernel.root_dir%/../web/uploads"
+                default_file_path:       "%kernel.project_dir%/web/uploads" 
+                # default_file_path:       "%kernel.root_dir%/../web/uploads" # for Symfony <3.3
 
                 # Mime type guesser class: Optional. By default, we provide an adapter for the one present in the HttpFoundation component of Symfony
                 mime_type_guesser_class: Stof\DoctrineExtensionsBundle\Uploadable\MimeTypeGuesserAdapter
