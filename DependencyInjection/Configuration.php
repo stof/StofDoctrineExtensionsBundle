@@ -14,8 +14,9 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('stof_doctrine_extensions');
+        $treeBuilder = new TreeBuilder('stof_doctrine_extensions');
+        // Keep compatibility with symfony/config < 4.2
+        $rootNode = \method_exists(TreeBuilder::class, 'getRootNode') ? $treeBuilder->getRootNode() : $treeBuilder->root('stof_doctrine_extensions');
 
         $rootNode
             ->append($this->getVendorNode('orm'))
@@ -41,8 +42,9 @@ class Configuration implements ConfigurationInterface
      */
     private function getVendorNode($name)
     {
-        $treeBuilder = new TreeBuilder();
-        $node = $treeBuilder->root($name);
+        $treeBuilder = new TreeBuilder($name);
+        // Keep compatibility with symfony/config < 4.2
+        $rootNode = \method_exists(TreeBuilder::class, 'getRootNode') ? $treeBuilder->getRootNode() : $treeBuilder->root($name);
 
         $node
             ->useAttributeAsKey('id')
@@ -67,8 +69,9 @@ class Configuration implements ConfigurationInterface
 
     private function getClassNode()
     {
-        $treeBuilder = new TreeBuilder();
-        $node = $treeBuilder->root('class');
+        $treeBuilder = new TreeBuilder('class');
+        // Keep compatibility with symfony/config < 4.2
+        $rootNode = \method_exists(TreeBuilder::class, 'getRootNode') ? $treeBuilder->getRootNode() : $treeBuilder->root('class');
 
         $node
             ->addDefaultsIfNotSet()
@@ -121,8 +124,9 @@ class Configuration implements ConfigurationInterface
 
     private function getUploadableNode()
     {
-        $treeBuilder = new TreeBuilder();
-        $node = $treeBuilder->root('uploadable');
+        $treeBuilder = new TreeBuilder('uploadable');
+        // Keep compatibility with symfony/config < 4.2
+        $rootNode = \method_exists(TreeBuilder::class, 'getRootNode') ? $treeBuilder->getRootNode() : $treeBuilder->root('uploadable');
 
         $node
             ->addDefaultsIfNotSet()
