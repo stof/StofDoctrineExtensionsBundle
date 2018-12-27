@@ -16,7 +16,7 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder('stof_doctrine_extensions');
         // Keep compatibility with symfony/config < 4.2
-        $rootNode = \method_exists(TreeBuilder::class, 'getRootNode') ? $treeBuilder->getRootNode() : $treeBuilder->root('stof_doctrine_extensions');
+        $rootNode = \method_exists($treeBuilder, 'getRootNode') ? $treeBuilder->getRootNode() : $treeBuilder->root('stof_doctrine_extensions');
 
         $rootNode
             ->append($this->getVendorNode('orm'))
@@ -44,7 +44,7 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder($name);
         // Keep compatibility with symfony/config < 4.2
-        $node = \method_exists(TreeBuilder::class, 'getRootNode') ? $treeBuilder->getRootNode() : $treeBuilder->root($name);
+        $node = \method_exists($treeBuilder, 'getRootNode') ? $treeBuilder->getRootNode() : $treeBuilder->root($name);
 
         $node
             ->useAttributeAsKey('id')
@@ -71,7 +71,7 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder('class');
         // Keep compatibility with symfony/config < 4.2
-        $node = \method_exists(TreeBuilder::class, 'getRootNode') ? $treeBuilder->getRootNode() : $treeBuilder->root('class');
+        $node = \method_exists($treeBuilder, 'getRootNode') ? $treeBuilder->getRootNode() : $treeBuilder->root('class');
 
         $node
             ->addDefaultsIfNotSet()
@@ -126,7 +126,7 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder('uploadable');
         // Keep compatibility with symfony/config < 4.2
-        $node = \method_exists(TreeBuilder::class, 'getRootNode') ? $treeBuilder->getRootNode() : $treeBuilder->root('uploadable');
+        $node = \method_exists($treeBuilder, 'getRootNode') ? $treeBuilder->getRootNode() : $treeBuilder->root('uploadable');
 
         $node
             ->addDefaultsIfNotSet()
