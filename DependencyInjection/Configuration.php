@@ -16,10 +16,10 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder('stof_doctrine_extensions');
         if (\method_exists($treeBuilder, 'getRootNode')) {
-            $rootNode = $treeBuilder->getRootNode();
+            $node = $treeBuilder->getRootNode();
         } else {
             // BC layer for symfony/config 4.1 and older
-            $rootNode = $treeBuilder->root('stof_doctrine_extensions');
+            $node = $treeBuilder->root('stof_doctrine_extensions');
         }
 
         $rootNode
@@ -48,10 +48,10 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder($name);
         if (\method_exists($treeBuilder, 'getRootNode')) {
-            $rootNode = $treeBuilder->getRootNode();
+            $node = $treeBuilder->getRootNode();
         } else {
             // BC layer for symfony/config 4.1 and older
-            $rootNode = $treeBuilder->root($name);
+            $node = $treeBuilder->root($name);
         }
 
         $node
@@ -79,10 +79,10 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder('class');
         if (\method_exists($treeBuilder, 'getRootNode')) {
-            $rootNode = $treeBuilder->getRootNode();
+            $node = $treeBuilder->getRootNode();
         } else {
             // BC layer for symfony/config 4.1 and older
-            $rootNode = $treeBuilder->root('class');
+            $node = $treeBuilder->root('class');
         }
 
         $node
@@ -138,10 +138,10 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder('uploadable');
         if (\method_exists($treeBuilder, 'getRootNode')) {
-            $rootNode = $treeBuilder->getRootNode();
+            $node = $treeBuilder->getRootNode();
         } else {
             // BC layer for symfony/config 4.1 and older
-            $rootNode = $treeBuilder->root('uploadable');
+            $node = $treeBuilder->root('uploadable');
         }
 
         $node
