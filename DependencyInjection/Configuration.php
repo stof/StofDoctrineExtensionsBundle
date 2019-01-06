@@ -16,10 +16,10 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder('stof_doctrine_extensions');
         if (\method_exists($treeBuilder, 'getRootNode')) {
-            $node = $treeBuilder->getRootNode();
+            $rootNode = $treeBuilder->getRootNode();
         } else {
             // BC layer for symfony/config 4.1 and older
-            $node = $treeBuilder->root('stof_doctrine_extensions');
+            $rootNode = $treeBuilder->root('stof_doctrine_extensions');
         }
 
         $rootNode
