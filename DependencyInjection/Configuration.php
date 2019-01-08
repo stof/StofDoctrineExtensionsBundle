@@ -14,8 +14,13 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('stof_doctrine_extensions');
+        $treeBuilder = new TreeBuilder('stof_doctrine_extensions');
+        if (\method_exists($treeBuilder, 'getRootNode')) {
+            $rootNode = $treeBuilder->getRootNode();
+        } else {
+            // BC layer for symfony/config 4.1 and older
+            $rootNode = $treeBuilder->root('stof_doctrine_extensions');
+        }
 
         $rootNode
             ->append($this->getVendorNode('orm'))
@@ -41,8 +46,13 @@ class Configuration implements ConfigurationInterface
      */
     private function getVendorNode($name)
     {
-        $treeBuilder = new TreeBuilder();
-        $node = $treeBuilder->root($name);
+        $treeBuilder = new TreeBuilder($name);
+        if (\method_exists($treeBuilder, 'getRootNode')) {
+            $node = $treeBuilder->getRootNode();
+        } else {
+            // BC layer for symfony/config 4.1 and older
+            $node = $treeBuilder->root($name);
+        }
 
         $node
             ->useAttributeAsKey('id')
@@ -67,8 +77,13 @@ class Configuration implements ConfigurationInterface
 
     private function getClassNode()
     {
-        $treeBuilder = new TreeBuilder();
-        $node = $treeBuilder->root('class');
+        $treeBuilder = new TreeBuilder('class');
+        if (\method_exists($treeBuilder, 'getRootNode')) {
+            $node = $treeBuilder->getRootNode();
+        } else {
+            // BC layer for symfony/config 4.1 and older
+            $node = $treeBuilder->root('class');
+        }
 
         $node
             ->addDefaultsIfNotSet()
@@ -121,8 +136,13 @@ class Configuration implements ConfigurationInterface
 
     private function getUploadableNode()
     {
-        $treeBuilder = new TreeBuilder();
-        $node = $treeBuilder->root('uploadable');
+        $treeBuilder = new TreeBuilder('uploadable');
+        if (\method_exists($treeBuilder, 'getRootNode')) {
+            $node = $treeBuilder->getRootNode();
+        } else {
+            // BC layer for symfony/config 4.1 and older
+            $node = $treeBuilder->root('uploadable');
+        }
 
         $node
             ->addDefaultsIfNotSet()
