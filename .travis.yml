@@ -1,6 +1,7 @@
 language: php
 
 php:
+  - 7.1
   - 7.2
 
 env:
@@ -10,6 +11,8 @@ env:
 matrix:
   fast_finish: true
   include:
+    - php: 7.1
+      env: DEPENDENCIES="symfony/lts:^3"
     - php: 7.2
       env: STABILITY=dev
 
