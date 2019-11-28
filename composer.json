@@ -17,12 +17,13 @@
         "gedmo/doctrine-extensions": "^2.3.4"
     },
     "require-dev": {
-        "symfony/phpunit-bridge": "^4.0",
+        "symfony/phpunit-bridge": "^4.4",
         "symfony/security-bundle": "^4.3 || ^5.0"
     },
     "suggest": {
         "doctrine/doctrine-bundle": "to use the ORM extensions",
-        "doctrine/mongodb-odm-bundle": "to use the MongoDB ODM extensions"
+        "doctrine/mongodb-odm-bundle": "to use the MongoDB ODM extensions",
+        "symfony/mime": "To use the Mime component integration for Uploadable"
     },
     "autoload": {
         "psr-4": { "Stof\\DoctrineExtensionsBundle\\": "" }
