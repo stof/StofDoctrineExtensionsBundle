@@ -8,9 +8,17 @@ Installation Using Symfony Flex
 applications. If your project already uses Symfony Flex, execute this command to
 download, register and configure the bundle automatically:
 
+For Symfony 3 and early versions of Symfony 4:
+
 .. code-block:: terminal
 
     $ composer require stof/doctrine-extensions-bundle
+
+For Symfony 4.4 and Symfony 5:
+
+.. code-block:: terminal
+
+    $ composer require antishov/doctrine-extensions-bundle
 
 That's all! You can skip the rest of this article.
 
