@@ -9,7 +9,7 @@ class MimeTypeGuesserAdapter implements MimeTypeGuesserInterface
 {
     public function guess($filePath)
     {
-        return MimeTypes::getDefault()->guess($filePath);
+        return MimeTypes::getDefault()->guessMimeType($filePath);
     }
 
 }
