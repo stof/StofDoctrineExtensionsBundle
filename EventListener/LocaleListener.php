@@ -4,7 +4,7 @@ namespace Stof\DoctrineExtensionsBundle\EventListener;
 
 use Gedmo\Translatable\TranslatableListener;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 /**
@@ -24,7 +24,7 @@ class LocaleListener implements EventSubscriberInterface
     /**
      * @internal
      */
-    public function onKernelRequest(GetResponseEvent $event)
+    public function onKernelRequest(RequestEvent $event)
     {
         $this->translatableListener->setTranslatableLocale($event->getRequest()->getLocale());
     }

@@ -2,14 +2,14 @@
 
 namespace Stof\DoctrineExtensionsBundle\Uploadable;
 
-use Symfony\Component\HttpFoundation\File\MimeType\MimeTypeGuesser;
 use Gedmo\Uploadable\MimeType\MimeTypeGuesserInterface;
+use Symfony\Component\Mime\MimeTypes;
 
 class MimeTypeGuesserAdapter implements MimeTypeGuesserInterface
 {
     public function guess($filePath)
     {
-        return MimeTypeGuesser::getInstance()->guess($filePath);
+        return MimeTypes::getDefault()->guessMimeType($filePath);
     }
 
 }
