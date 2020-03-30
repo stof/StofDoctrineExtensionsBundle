@@ -1,3 +1,14 @@
+## 1.4.0 (2020-03-30)
+
+Features:
+
+* Added support for Symfony 5
+
+Removed:
+
+* Dropped support for unmaintained versions of Symfony, and for Symfony 3.4. The minimum Symfony version is now 4.3
+* Dropped support for unmaintained PHP versions.
+
 ## 1.3.0 (2017-12-24)
 
 Features:
