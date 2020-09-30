@@ -19,25 +19,25 @@ to register their mapping in Doctrine when you want to use them.
                         gedmo_translatable:
                             type: annotation
                             prefix: Gedmo\Translatable\Entity
-                            dir: "%kernel.project_dir%/vendor/gedmo/doctrine-extensions/lib/Gedmo/Translatable/Entity"
+                            dir: "%kernel.project_dir%/vendor/gedmo/doctrine-extensions/src/Translatable/Entity"
                             alias: GedmoTranslatable # (optional) it will default to the name set for the mapping
                             is_bundle: false
                         gedmo_translator:
                             type: annotation
                             prefix: Gedmo\Translator\Entity
-                            dir: "%kernel.project_dir%/vendor/gedmo/doctrine-extensions/lib/Gedmo/Translator/Entity"
+                            dir: "%kernel.project_dir%/vendor/gedmo/doctrine-extensions/src/Translator/Entity"
                             alias: GedmoTranslator # (optional) it will default to the name set for the mapping
                             is_bundle: false
                         gedmo_loggable:
                             type: annotation
                             prefix: Gedmo\Loggable\Entity
-                            dir: "%kernel.project_dir%/vendor/gedmo/doctrine-extensions/lib/Gedmo/Loggable/Entity"
+                            dir: "%kernel.project_dir%/vendor/gedmo/doctrine-extensions/src/Loggable/Entity"
                             alias: GedmoLoggable # (optional) it will default to the name set for the mapping
                             is_bundle: false
                         gedmo_tree:
                             type: annotation
                             prefix: Gedmo\Tree\Entity
-                            dir: "%kernel.project_dir%/vendor/gedmo/doctrine-extensions/lib/Gedmo/Tree/Entity"
+                            dir: "%kernel.project_dir%/vendor/gedmo/doctrine-extensions/src/Tree/Entity"
                             alias: GedmoTree # (optional) it will default to the name set for the mapping
                             is_bundle: false
 
