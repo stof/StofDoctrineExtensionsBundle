@@ -14,7 +14,7 @@
     "require": {
         "php": "^7.1.3",
         "symfony/framework-bundle": "^4.3 || ^5.0",
-        "gedmo/doctrine-extensions": "^2.3.4"
+        "gedmo/doctrine-extensions": "^2.3.4 || ^3.0.0"
     },
     "require-dev": {
         "symfony/phpunit-bridge": "^4.4",
