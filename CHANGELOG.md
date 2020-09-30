@@ -1,3 +1,9 @@
+## 1.5.0 (2020-09-30)
+
+Features:
+
+* Added support for `gedmo/doctrine-extensions` 3
+
 ## 1.4.0 (2020-03-30)
 
 Features:
