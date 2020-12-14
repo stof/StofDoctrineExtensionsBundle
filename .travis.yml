@@ -5,6 +5,7 @@ php:
   - 7.2
   - 7.3
   - 7.4
+  - 8.0
 
 env:
   global:
@@ -16,6 +17,8 @@ matrix:
     - php: 7.1
       env: COMPOSER_FLAGS="--prefer-lowest"
     - php: 7.4
+      env: STABILITY=dev
+    - php: 8.0
       env: STABILITY=dev
 
 sudo: false
