@@ -18,7 +18,6 @@ matrix:
       env: COMPOSER_FLAGS="--prefer-lowest"
     - php: 7.4
       env: STABILITY=dev
-    - php: 8.0
 
 sudo: false
 
