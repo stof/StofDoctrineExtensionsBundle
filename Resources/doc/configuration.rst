@@ -40,6 +40,12 @@ to register their mapping in Doctrine when you want to use them.
                             dir: "%kernel.project_dir%/vendor/gedmo/doctrine-extensions/src/Tree/Entity"
                             alias: GedmoTree # (optional) it will default to the name set for the mapping
                             is_bundle: false
+                        gedmo_sluggable:
+                            type: annotation
+                            prefix: Gedmo\Sluggable\SluggableListener
+                            dir: "%kernel.project_dir%/vendor/gedmo/doctrine-extensions/src/Sluggable"
+                            alias: GedmoSluggable # (optional) it will default to the name set for the mapping
+                            is_bundle: false
 
 .. note::
 
