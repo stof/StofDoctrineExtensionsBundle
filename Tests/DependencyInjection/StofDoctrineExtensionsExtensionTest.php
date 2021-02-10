@@ -101,4 +101,41 @@ class StofDoctrineExtensionsExtensionTest extends TestCase
         $this->assertCount(1, $def->getTag('doctrine.event_subscriber'));
         $this->assertCount(1, $def->getTag('doctrine_mongodb.odm.event_subscriber'));
     }
+
+    public function testConfigWithCustomListenerPriorities()
+    {
+        $extension = new StofDoctrineExtensionsExtension();
+        $container = new ContainerBuilder();
+
+        $config = array(
+            'orm' => array('default' => array(
+                'blameable' => 0,
+                'loggable' => -1,
+                'uploadable' => true,
+                'sortable' => false,
+            )),
+            'mongodb' => array('default' => array(
+                'blameable' => 0,
+                'loggable' => -1,
+                'uploadable' => true,
+                'sortable' => false,
+            )),
+        );
+
+        $extension->load(array($config), $container);
+
+        $def = $container->getDefinition('stof_doctrine_extensions.listener.blameable');
+        $this->assertTrue($def->hasTag('doctrine.event_subscriber'));
+        $this->assertArraySubset(array(array('priority' => 0)), $def->getTag('doctrine.event_subscriber'));
+
+        $def = $container->getDefinition('stof_doctrine_extensions.listener.loggable');
+        $this->assertTrue($def->hasTag('doctrine.event_subscriber'));
+        $this->assertArraySubset(array(array('priority' => -1)), $def->getTag('doctrine.event_subscriber'));
+
+        $def = $container->getDefinition('stof_doctrine_extensions.listener.uploadable');
+        $this->assertTrue($def->hasTag('doctrine.event_subscriber'));
+        $this->assertArraySubset(array(array('priority' => -5)), $def->getTag('doctrine.event_subscriber'));
+
+        $this->assertFalse($container->hasDefinition('stof_doctrine_extensions.listener.sortable'));
+    }
 }

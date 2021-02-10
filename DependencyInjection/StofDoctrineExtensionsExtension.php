@@ -106,8 +106,8 @@ class StofDoctrineExtensionsExtension extends Extension
         );
 
         foreach ($configs as $name => $listeners) {
-            foreach ($listeners as $ext => $enabled) {
-                if (!$enabled) {
+            foreach ($listeners as $ext => $settingValue) {
+                if (false === $settingValue) {
                     continue;
                 }
 
@@ -120,6 +120,10 @@ class StofDoctrineExtensionsExtension extends Extension
 
                 if (isset($listenerPriorities[$ext])) {
                     $attributes['priority'] = $listenerPriorities[$ext];
+                }
+
+                if (is_numeric($settingValue)) {
+                    $attributes['priority'] = $settingValue;
                 }
 
                 $definition = $container->getDefinition(sprintf('stof_doctrine_extensions.listener.%s', $ext));
