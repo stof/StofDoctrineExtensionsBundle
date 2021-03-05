@@ -1,0 +1,58 @@
+name: CI
+
+on:
+    push:
+    pull_request:
+
+jobs:
+    check_composer:
+        name: Check composer metadata
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v2
+            - uses: shivammathur/setup-php@v2
+            - name: Validate composer.json
+              run: composer validate --strict --no-check-lock
+
+    tests:
+        name: "Tests on PHP ${{ matrix.php }}${{ matrix.name_suffix }}"
+        runs-on: ubuntu-latest
+
+        strategy:
+            fail-fast: false
+            matrix:
+                php: [ '7.1', '7.2', '7.3', '7.4', '8.0' ]
+                name_suffix: ['']
+                stability: ['stable']
+                composer_flags: ['']
+                include:
+                    - php: '7.1'
+                      name_suffix: ' (lowest deps)'
+                      stability: 'stable'
+                      composer_flags: '--prefer-lowest'
+                    - php: '8.0'
+                      name_suffix: ' (dev deps)'
+                      stability: 'dev'
+                      composer_flags: ''
+
+        steps:
+            -   uses: actions/checkout@v2
+
+            -   uses: shivammathur/setup-php@v2
+                with:
+                    coverage: "none"
+                    php-version: "${{ matrix.php }}"
+
+            -   name: Configure stability
+                if: "matrix.stability != 'stable'"
+                run: composer config minimum-stability ${{ matrix.stability }}
+
+            -   name: Install dependencies
+                run: composer update --ansi --no-progress --prefer-dist ${{ matrix.composer_flags }}
+
+            -   name: Install PHPUnit
+                run: vendor/bin/simple-phpunit install
+
+            -   name: Run tests
+                run: vendor/bin/simple-phpunit -v --colors=always
