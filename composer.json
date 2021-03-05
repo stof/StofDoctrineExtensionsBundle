@@ -17,7 +17,7 @@
         "gedmo/doctrine-extensions": "^2.3.4 || ^3.0.0"
     },
     "require-dev": {
-        "symfony/phpunit-bridge": "^4.4",
+        "symfony/phpunit-bridge": "^v5.2.4",
         "symfony/security-bundle": "^4.3 || ^5.0"
     },
     "suggest": {
