@@ -6,7 +6,7 @@ Features:
 
 Removed:
 
-* Dropped support for unmaintained versions of Symfony. The minim Symfony versions are now 4.4 and 5.2.
+* Dropped support for unmaintained versions of Symfony. The minimum Symfony versions are now 4.4 and 5.2.
 
 ## 1.5.0 (2020-09-30)
 
