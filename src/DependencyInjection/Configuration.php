@@ -2,25 +2,16 @@
 
 namespace Stof\DoctrineExtensionsBundle\DependencyInjection;
 
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 class Configuration implements ConfigurationInterface
 {
-    /**
-     * Generates the configuration tree.
-     *
-     * @return TreeBuilder
-     */
-    public function getConfigTreeBuilder()
+    public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('stof_doctrine_extensions');
-        if (\method_exists($treeBuilder, 'getRootNode')) {
-            $rootNode = $treeBuilder->getRootNode();
-        } else {
-            // BC layer for symfony/config 4.1 and older
-            $rootNode = $treeBuilder->root('stof_doctrine_extensions');
-        }
+        $rootNode = $treeBuilder->getRootNode();
 
         $rootNode
             ->append($this->getVendorNode('orm'))
@@ -41,18 +32,10 @@ class Configuration implements ConfigurationInterface
         return $treeBuilder;
     }
 
-    /**
-     * @param string $name
-     */
-    private function getVendorNode($name)
+    private function getVendorNode(string $name): ArrayNodeDefinition
     {
         $treeBuilder = new TreeBuilder($name);
-        if (\method_exists($treeBuilder, 'getRootNode')) {
-            $node = $treeBuilder->getRootNode();
-        } else {
-            // BC layer for symfony/config 4.1 and older
-            $node = $treeBuilder->root($name);
-        }
+        $node = $treeBuilder->getRootNode();
 
         $node
             ->useAttributeAsKey('id')
@@ -75,15 +58,10 @@ class Configuration implements ConfigurationInterface
         return $node;
     }
 
-    private function getClassNode()
+    private function getClassNode(): ArrayNodeDefinition
     {
         $treeBuilder = new TreeBuilder('class');
-        if (\method_exists($treeBuilder, 'getRootNode')) {
-            $node = $treeBuilder->getRootNode();
-        } else {
-            // BC layer for symfony/config 4.1 and older
-            $node = $treeBuilder->root('class');
-        }
+        $node = $treeBuilder->getRootNode();
 
         $node
             ->addDefaultsIfNotSet()
@@ -134,15 +112,10 @@ class Configuration implements ConfigurationInterface
         return $node;
     }
 
-    private function getUploadableNode()
+    private function getUploadableNode(): ArrayNodeDefinition
     {
         $treeBuilder = new TreeBuilder('uploadable');
-        if (\method_exists($treeBuilder, 'getRootNode')) {
-            $node = $treeBuilder->getRootNode();
-        } else {
-            // BC layer for symfony/config 4.1 and older
-            $node = $treeBuilder->root('uploadable');
-        }
+        $node = $treeBuilder->getRootNode();
 
         $node
             ->addDefaultsIfNotSet()
