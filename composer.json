@@ -26,7 +26,10 @@
         "symfony/mime": "To use the Mime component integration for Uploadable"
     },
     "autoload": {
-        "psr-4": { "Stof\\DoctrineExtensionsBundle\\": "" }
+        "psr-4": { "Stof\\DoctrineExtensionsBundle\\": "src" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Stof\\DoctrineExtensionsBundle\\Tests\\": "tests" }
     },
     "extra": {
         "branch-alias": {
