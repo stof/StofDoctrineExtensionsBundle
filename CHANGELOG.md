@@ -1,3 +1,13 @@
+## 1.6.0 (2021-03-05)
+
+Features:
+
+* Added support for PHP 8
+
+Removed:
+
+* Dropped support for unmaintained versions of Symfony. The minim Symfony versions are now 4.4 and 5.2.
+
 ## 1.5.0 (2020-09-30)
 
 Features:
