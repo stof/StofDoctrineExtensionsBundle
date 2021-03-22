@@ -2,5 +2,6 @@
 /.gitattributes export-ignore
 /.gitignore export-ignore
 /.github export-ignore
+/.symfony.bundle.yaml export-ignore
 /docs export-ignore
 /phpunit.xml.dist export-ignore
