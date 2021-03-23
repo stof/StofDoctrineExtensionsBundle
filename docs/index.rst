@@ -35,7 +35,7 @@ See the official `official DoctrineExtensions documentation`_ for more details.
 
     installation
     configuration
-    softdeletable-filter
+    softdeleteable-filter
     uploadable-extension
     advanced
 
