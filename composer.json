@@ -13,16 +13,16 @@
     ],
     "require": {
         "php": "^7.1.3 || ^8.0",
-        "symfony/config": "^4.4 || ^5.2",
-        "symfony/dependency-injection": "^4.4 || ^5.2",
-        "symfony/event-dispatcher": "^4.4 || ^5.2",
-        "symfony/http-kernel": "^4.4 || ^5.2",
+        "symfony/config": "^4.4 || ^5.2 || ^6.0",
+        "symfony/dependency-injection": "^4.4 || ^5.2 || ^6.0",
+        "symfony/event-dispatcher": "^4.4 || ^5.2 || ^6.0",
+        "symfony/http-kernel": "^4.4 || ^5.2 || ^6.0",
         "gedmo/doctrine-extensions": "^2.3.4 || ^3.0.0"
     },
     "require-dev": {
-        "symfony/mime": "^4.4 || ^5.2",
-        "symfony/phpunit-bridge": "^v5.2.4",
-        "symfony/security-core": "^4.4 || ^5.2"
+        "symfony/mime": "^4.4 || ^5.2 || ^6.0",
+        "symfony/phpunit-bridge": "^v5.2.4 || ^6.0",
+        "symfony/security-core": "^4.4 || ^5.2 || ^6.0"
     },
     "suggest": {
         "doctrine/doctrine-bundle": "to use the ORM extensions",
