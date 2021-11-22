@@ -1,3 +1,14 @@
+## 1.7.0 (2021-11-22)
+
+Features:
+
+* Added support for Symfony 6
+
+Misc:
+
+* Added a CI job running on PHP 8.1
+* Renamed the main branch to `main`. Requiring `dev-master` explicitly will fail. Constraints `^1.7@dev` should be used to use the dev version matching a semver range instead, when necessary.
+
 ## 1.6.0 (2021-03-05)
 
 Features:
