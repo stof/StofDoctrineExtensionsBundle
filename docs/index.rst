@@ -39,5 +39,5 @@ See the official `official DoctrineExtensions documentation`_ for more details.
     uploadable-extension
     advanced
 
-.. _`DoctrineExtensions`: https://github.com/Atlantic18/DoctrineExtensions
-.. _`official DoctrineExtensions documentation`: https://github.com/Atlantic18/DoctrineExtensions/tree/v2.4.x/doc
+.. _`DoctrineExtensions`: https://github.com/doctrine-extensions/DoctrineExtensions
+.. _`official DoctrineExtensions documentation`: https://github.com/doctrine-extensions/DoctrineExtensions/tree/main/doc

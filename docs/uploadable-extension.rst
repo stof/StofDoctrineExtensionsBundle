@@ -33,4 +33,4 @@ form is valid, do the following::
 And that's it. The Uploadable extension handles the rest of the stuff. Remember
 to read its documentation!
 
-.. _`official Uploadable documentation`: https://github.com/Atlantic18/DoctrineExtensions/blob/v2.4.x/doc/uploadable.md
+.. _`official Uploadable documentation`: https://github.com/doctrine-extensions/DoctrineExtensions/blob/main/doc/uploadable.md

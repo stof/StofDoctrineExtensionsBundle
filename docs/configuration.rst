@@ -162,4 +162,4 @@ Use the DoctrineExtensions library
 All explanations about this library are available on the official
 `DoctrineExtensions documentation`_.
 
-.. _`DoctrineExtensions documentation`: https://github.com/Atlantic18/DoctrineExtensions/tree/v2.4.x/doc
+.. _`DoctrineExtensions documentation`: https://github.com/doctrine-extensions/DoctrineExtensions/tree/main/doc
