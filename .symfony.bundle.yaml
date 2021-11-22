@@ -1,4 +1,4 @@
-branches: ['master']
-maintained_branches: ['master']
+branches: ['main']
+maintained_branches: ['main']
 doc_dir: 'docs/'
 dev_branch_alias: '1.x'
