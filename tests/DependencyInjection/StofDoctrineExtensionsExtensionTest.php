@@ -8,36 +8,38 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class StofDoctrineExtensionsExtensionTest extends TestCase
 {
-    public static function provideExtensions()
+    public static function provideExtensions(): array
     {
-        return array(
-            array('blameable'),
-            array('loggable'),
-            array('reference_integrity'),
-            array('sluggable'),
-            array('softdeleteable'),
-            array('sortable'),
-            array('timestampable'),
-            array('translatable'),
-            array('tree'),
-            array('uploadable'),
-        );
+        return [
+            ['blameable'],
+            ['loggable'],
+            ['reference_integrity'],
+            ['sluggable'],
+            ['softdeleteable'],
+            ['sortable'],
+            ['timestampable'],
+            ['translatable'],
+            ['tree'],
+            ['uploadable'],
+        ];
     }
 
     /**
      * @dataProvider provideExtensions
      */
-    public function testLoadORMConfig($listener)
+    public function testLoadORMConfig($listener): void
     {
         $extension = new StofDoctrineExtensionsExtension();
         $container = new ContainerBuilder();
 
-        $config = array('orm' => array(
-            'default' => array($listener => true),
-            'other' => array($listener => true),
-        ));
+        $config = [
+            'orm' => [
+            'default' => [$listener => true],
+            'other' => [$listener => true],
+            ]
+        ];
 
-        $extension->load(array($config), $container);
+        $extension->load([$config], $container);
 
         $this->assertTrue($container->hasDefinition('stof_doctrine_extensions.listener.'.$listener));
 
@@ -53,17 +55,19 @@ class StofDoctrineExtensionsExtensionTest extends TestCase
     /**
      * @dataProvider provideExtensions
      */
-    public function testLoadMongodbConfig($listener)
+    public function testLoadMongodbConfig($listener): void
     {
         $extension = new StofDoctrineExtensionsExtension();
         $container = new ContainerBuilder();
 
-        $config = array('mongodb' => array(
-            'default' => array($listener => true),
-            'other' => array($listener => true),
-        ));
+        $config = [
+            'mongodb' => [
+            'default' => [$listener => true],
+            'other' => [$listener => true],
+            ]
+        ];
 
-        $extension->load(array($config), $container);
+        $extension->load([$config], $container);
 
         $this->assertTrue($container->hasDefinition('stof_doctrine_extensions.listener.'.$listener));
 
@@ -79,17 +83,17 @@ class StofDoctrineExtensionsExtensionTest extends TestCase
     /**
      * @dataProvider provideExtensions
      */
-    public function testLoadBothConfig($listener)
+    public function testLoadBothConfig($listener): void
     {
         $extension = new StofDoctrineExtensionsExtension();
         $container = new ContainerBuilder();
 
-        $config = array(
-            'orm' => array('default' => array($listener => true)),
-            'mongodb' => array('default' => array($listener => true)),
-        );
+        $config = [
+            'orm' => ['default' => [$listener => true]],
+            'mongodb' => ['default' => [$listener => true]],
+        ];
 
-        $extension->load(array($config), $container);
+        $extension->load([$config], $container);
 
         $this->assertTrue($container->hasDefinition('stof_doctrine_extensions.listener.'.$listener));
 

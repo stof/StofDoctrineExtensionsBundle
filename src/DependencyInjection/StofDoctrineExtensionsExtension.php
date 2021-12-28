@@ -11,8 +11,8 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class StofDoctrineExtensionsExtension extends Extension
 {
-    private $entityManagers   = array();
-    private $documentManagers = array();
+    private $entityManagers   = [];
+    private $documentManagers = [];
 
     /**
      * @return void
@@ -26,7 +26,7 @@ class StofDoctrineExtensionsExtension extends Extension
 
         $loader = new PhpFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-        $loaded = array();
+        $loaded = [];
 
         $this->entityManagers = $this->processObjectManagerConfigurations($config['orm'], $container, $loader, $loaded, 'doctrine.event_subscriber');
         $this->documentManagers = $this->processObjectManagerConfigurations($config['mongodb'], $container, $loader, $loaded, 'doctrine_mongodb.odm.event_subscriber');
@@ -49,7 +49,7 @@ class StofDoctrineExtensionsExtension extends Extension
 
             if ($uploadableConfig['default_file_path']) {
                 $container->getDefinition('stof_doctrine_extensions.listener.uploadable')
-                    ->addMethodCall('setDefaultPath', array($uploadableConfig['default_file_path']));
+                    ->addMethodCall('setDefaultPath', [$uploadableConfig['default_file_path']]);
             }
 
             if ($uploadableConfig['mime_type_guesser_class']) {
@@ -102,11 +102,11 @@ class StofDoctrineExtensionsExtension extends Extension
     {
         $usedManagers = array();
 
-        $listenerPriorities = array(
+        $listenerPriorities = [
             'translatable' => -10,
             'loggable' => 5,
             'uploadable' => -5,
-        );
+        ];
 
         foreach ($configs as $name => $listeners) {
             foreach ($listeners as $ext => $enabled) {
@@ -119,7 +119,7 @@ class StofDoctrineExtensionsExtension extends Extension
                     $loaded[$ext] = true;
                 }
 
-                $attributes = array('connection' => $name);
+                $attributes = ['connection' => $name];
 
                 if (isset($listenerPriorities[$ext])) {
                     $attributes['priority'] = $listenerPriorities[$ext];
