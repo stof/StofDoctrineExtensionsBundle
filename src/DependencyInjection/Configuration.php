@@ -5,6 +5,18 @@ namespace Stof\DoctrineExtensionsBundle\DependencyInjection;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
+use Stof\DoctrineExtensionsBundle\Uploadable\UploadedFileInfo;
+use Stof\DoctrineExtensionsBundle\Uploadable\MimeTypeGuesserAdapter;
+use Gedmo\ReferenceIntegrity\ReferenceIntegrityListener;
+use Gedmo\Uploadable\UploadableListener;
+use Gedmo\SoftDeleteable\SoftDeleteableListener;
+use Gedmo\Sortable\SortableListener;
+use Gedmo\Loggable\LoggableListener;
+use Gedmo\Tree\TreeListener;
+use Gedmo\Sluggable\SluggableListener;
+use Gedmo\Blameable\BlameableListener;
+use Gedmo\Timestampable\TimestampableListener;
+use Gedmo\Translatable\TranslatableListener;
 
 class Configuration implements ConfigurationInterface
 {
@@ -68,43 +80,43 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->scalarNode('translatable')
                     ->cannotBeEmpty()
-                    ->defaultValue('Gedmo\Translatable\TranslatableListener')
+                    ->defaultValue(TranslatableListener::class)
                 ->end()
                 ->scalarNode('timestampable')
                     ->cannotBeEmpty()
-                    ->defaultValue('Gedmo\\Timestampable\\TimestampableListener')
+                    ->defaultValue(TimestampableListener::class)
                 ->end()
                 ->scalarNode('blameable')
                     ->cannotBeEmpty()
-                    ->defaultValue('Gedmo\\Blameable\\BlameableListener')
+                    ->defaultValue(BlameableListener::class)
                 ->end()
                 ->scalarNode('sluggable')
                     ->cannotBeEmpty()
-                    ->defaultValue('Gedmo\\Sluggable\\SluggableListener')
+                    ->defaultValue(SluggableListener::class)
                 ->end()
                 ->scalarNode('tree')
                     ->cannotBeEmpty()
-                    ->defaultValue('Gedmo\\Tree\\TreeListener')
+                    ->defaultValue(TreeListener::class)
                 ->end()
                 ->scalarNode('loggable')
                     ->cannotBeEmpty()
-                    ->defaultValue('Gedmo\Loggable\LoggableListener')
+                    ->defaultValue(LoggableListener::class)
                 ->end()
                 ->scalarNode('sortable')
                     ->cannotBeEmpty()
-                    ->defaultValue('Gedmo\\Sortable\\SortableListener')
+                    ->defaultValue(SortableListener::class)
                 ->end()
                 ->scalarNode('softdeleteable')
                     ->cannotBeEmpty()
-                    ->defaultValue('Gedmo\\SoftDeleteable\\SoftDeleteableListener')
+                    ->defaultValue(SoftDeleteableListener::class)
                 ->end()
                 ->scalarNode('uploadable')
                     ->cannotBeEmpty()
-                    ->defaultValue('Gedmo\\Uploadable\\UploadableListener')
+                    ->defaultValue(UploadableListener::class)
                 ->end()
                 ->scalarNode('reference_integrity')
                     ->cannotBeEmpty()
-                    ->defaultValue('Gedmo\\ReferenceIntegrity\\ReferenceIntegrityListener')
+                    ->defaultValue(ReferenceIntegrityListener::class)
                 ->end()
             ->end()
         ;
@@ -126,11 +138,11 @@ class Configuration implements ConfigurationInterface
                 ->end()
                 ->scalarNode('mime_type_guesser_class')
                     ->cannotBeEmpty()
-                    ->defaultValue('Stof\\DoctrineExtensionsBundle\\Uploadable\\MimeTypeGuesserAdapter')
+                    ->defaultValue(MimeTypeGuesserAdapter::class)
                 ->end()
                 ->scalarNode('default_file_info_class')
                     ->cannotBeEmpty()
-                    ->defaultValue('Stof\\DoctrineExtensionsBundle\\Uploadable\\UploadedFileInfo')
+                    ->defaultValue(UploadedFileInfo::class)
                 ->end()
                 ->booleanNode('validate_writable_directory')->defaultTrue()->end()
             ->end()
