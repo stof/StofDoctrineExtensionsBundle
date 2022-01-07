@@ -14,5 +14,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $containerConfigurator->services()
         ->set('stof_doctrine_extensions.listener.sluggable', '%stof_doctrine_extensions.listener.sluggable.class%')
             ->call('setAnnotationReader', [new ReferenceConfigurator('annotation_reader')])
+            ->tag('stof_doctrine_extensions.listener')
     ;
 };

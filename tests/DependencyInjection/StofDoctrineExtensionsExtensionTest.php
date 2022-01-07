@@ -105,4 +105,34 @@ class StofDoctrineExtensionsExtensionTest extends TestCase
         $this->assertCount(1, $def->getTag('doctrine.event_subscriber'));
         $this->assertCount(1, $def->getTag('doctrine_mongodb.odm.event_subscriber'));
     }
+
+    public function testLoadsDefaultCache(): void
+    {
+        $extension = new StofDoctrineExtensionsExtension();
+        $container = new ContainerBuilder();
+
+        $extension->load([], $container);
+
+        $this->assertTrue($container->hasAlias('stof_doctrine_extensions.cache.pool.default'));
+        $this->assertSame(
+            'stof_doctrine_extensions.cache.pool.array',
+            (string) $container->getAlias('stof_doctrine_extensions.cache.pool.default')
+        );
+    }
+
+    public function testSettingCustomCache(): void
+    {
+        $extension = new StofDoctrineExtensionsExtension();
+        $container = new ContainerBuilder();
+
+        $extension->load([
+            'custom_cache' => ['metadata_cache_pool' => 'my_custom_service_cache'],
+        ], $container);
+
+        $this->assertTrue($container->hasAlias('stof_doctrine_extensions.cache.pool.default'));
+        $this->assertSame(
+            'my_custom_service_cache',
+            (string) $container->getAlias('stof_doctrine_extensions.cache.pool.default')
+        );
+    }
 }

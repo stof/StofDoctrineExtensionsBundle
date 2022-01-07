@@ -21,6 +21,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             ->call('setTranslationFallback', ['%stof_doctrine_extensions.translation_fallback%'])
             ->call('setPersistDefaultLocaleTranslation', ['%stof_doctrine_extensions.persist_default_translation%'])
             ->call('setSkipOnLoad', ['%stof_doctrine_extensions.skip_translation_on_load%'])
+            ->tag('stof_doctrine_extensions.listener')
 
         ->set('stof_doctrine_extensions.event_listener.locale', '%stof_doctrine_extensions.event_listener.locale.class%')
             ->tag('kernel.event_subscriber')

@@ -2,6 +2,7 @@
 
 namespace Stof\DoctrineExtensionsBundle\DependencyInjection;
 
+use Symfony\Component\Cache\Adapter\ArrayAdapter;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\Config\Definition\Processor;
@@ -66,6 +67,8 @@ class StofDoctrineExtensionsExtension extends Extension
         foreach ($config['class'] as $listener => $class) {
             $container->setParameter(sprintf('stof_doctrine_extensions.listener.%s.class', $listener), $class);
         }
+
+        $this->configureCache($container, $config);
     }
 
     /**
@@ -130,5 +133,13 @@ class StofDoctrineExtensionsExtension extends Extension
         }
 
         return array_keys($usedManagers);
+    }
+
+    private function configureCache(ContainerBuilder $container, array $config): void
+    {
+        $container
+            ->register('stof_doctrine_extensions.cache.pool.array', ArrayAdapter::class);
+
+        $container->setAlias('stof_doctrine_extensions.cache.pool.default', $config['metadata_cache_pool']);
     }
 }

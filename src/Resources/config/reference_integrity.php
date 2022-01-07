@@ -16,5 +16,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services
         ->set('stof_doctrine_extensions.listener.reference_integrity', '%stof_doctrine_extensions.listener.reference_integrity.class%')
             ->call('setAnnotationReader', [new ReferenceConfigurator('annotation_reader')])
+            ->tag('stof_doctrine_extensions.listener')
     ;
 };

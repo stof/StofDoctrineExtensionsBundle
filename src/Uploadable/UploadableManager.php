@@ -43,5 +43,4 @@ class UploadableManager
     {
         return $this->listener;
     }
-
 }

@@ -16,6 +16,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $containerConfigurator->services()
         ->set('stof_doctrine_extensions.listener.loggable', '%stof_doctrine_extensions.listener.loggable.class%')
             ->call('setAnnotationReader', [new ReferenceConfigurator('annotation_reader')])
+            ->tag('stof_doctrine_extensions.listener')
 
         ->set('stof_doctrine_extensions.event_listener.logger', '%stof_doctrine_extensions.event_listener.logger.class%')
             ->tag('kernel.event_subscriber')
