@@ -8,7 +8,7 @@ use Symfony\Component\Mime\MimeTypes;
 class MimeTypeGuesserAdapter implements MimeTypeGuesserInterface
 {
     /**
-     * @param $filePath
+     * @param string $filePath
      * @return ?string
      */
     public function guess($filePath)
