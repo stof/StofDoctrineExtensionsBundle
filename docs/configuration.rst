@@ -156,6 +156,18 @@ instead of ``entity-manager``.
     files, the last one will be used. So you have to list all the listeners you
     want to detach.
 
+Create table
+----------------------------------
+To be able to use the bundle with default configuration, an ``ext_log_entries`` table must be created. This can be done with doctrine migrations facilities:
+
+.. code-block:: terminal
+
+    $ php bin/console make:migration
+    $ php bin/console doctrine:migrations:migrate
+
+Otherwise, you can manually create the table with this columns : id (INT), action (VARCHAR), logged_at (Datetime), object_id (VARCHAR), object_class (VARCHAR), version (INT), data (VARCHAR), username (VARCHAR).
+
+
 Use the DoctrineExtensions library
 ----------------------------------
 
