@@ -56,6 +56,12 @@ to register their mapping in Doctrine when you want to use them.
     The mapping for MongoDB is similar. The ODM documents are in the ``Document``
     subnamespace of each extension instead of ``Entity``.
 
+.. note::
+
+    If you added any of these mappings, be sure to update your schema to add the new table(s) - i.e. by
+    generating and executing a migration.
+
+
 Configure the entity managers
 -----------------------------
 
