@@ -29,6 +29,9 @@ class LocaleListener implements EventSubscriberInterface
         $this->translatableListener->setTranslatableLocale($event->getRequest()->getLocale());
     }
 
+    /**
+     * @return string[]
+     */
     public static function getSubscribedEvents()
     {
         return array(

@@ -14,26 +14,41 @@ class UploadedFileInfo implements FileInfoInterface
         $this->uploadedFile = $uploadedFile;
     }
 
+    /**
+     * @return ?string
+     */
     public function getTmpName()
     {
         return $this->uploadedFile->getPathname();
     }
 
+    /**
+     * @return ?string
+     */
     public function getName()
     {
         return $this->uploadedFile->getClientOriginalName();
     }
 
+    /**
+     * @return ?string
+     */
     public function getSize()
     {
         return $this->uploadedFile->getSize();
     }
 
+    /**
+     * @return ?string
+     */
     public function getType()
     {
         return $this->uploadedFile->getMimeType();
     }
 
+    /**
+     * @return int
+     */
     public function getError()
     {
         return $this->uploadedFile->getError();
@@ -41,6 +56,8 @@ class UploadedFileInfo implements FileInfoInterface
 
     /**
      * {@inheritDoc}
+     *
+     * @return bool
      */
     public function isUploadedFile()
     {
