@@ -14,6 +14,9 @@ class StofDoctrineExtensionsExtension extends Extension
     private $entityManagers   = array();
     private $documentManagers = array();
 
+    /**
+     * @return void
+     */
     public function load(array $configs, ContainerBuilder $container)
     {
         $processor = new Processor();
