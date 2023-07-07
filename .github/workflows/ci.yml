@@ -22,16 +22,16 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                php: [ '7.1', '7.2', '7.3', '7.4', '8.0', '8.1', '8.2' ]
+                php: [ '7.2', '7.3', '7.4', '8.0', '8.1', '8.2' ]
                 name_suffix: ['']
                 stability: ['stable']
                 composer_flags: ['']
                 include:
-                    - php: '7.1'
+                    - php: '7.2'
                       name_suffix: ' (lowest deps)'
                       stability: 'stable'
                       composer_flags: '--prefer-lowest'
-                    - php: '8.0'
+                    - php: '8.2'
                       name_suffix: ' (dev deps)'
                       stability: 'dev'
                       composer_flags: ''
