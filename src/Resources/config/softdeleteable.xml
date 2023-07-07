@@ -9,6 +9,9 @@
     </parameters>
     <services>
         <service id="stof_doctrine_extensions.listener.softdeleteable" class="%stof_doctrine_extensions.listener.softdeleteable.class%" public="false">
+            <call method="setCacheItemPool">
+                <argument type="service" id="stof_doctrine_extensions.metadata_cache" />
+            </call>
             <call method="setAnnotationReader">
                 <argument type="service" id="annotation_reader" />
             </call>

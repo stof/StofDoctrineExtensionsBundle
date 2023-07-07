@@ -13,11 +13,12 @@
     ],
     "require": {
         "php": "^7.2.5 || ^8.0",
+        "symfony/cache": "^5.4 || ^6.0",
         "symfony/config": "^5.4 || ^6.0",
         "symfony/dependency-injection": "^5.4 || ^6.0",
         "symfony/event-dispatcher": "^5.4 || ^6.0",
         "symfony/http-kernel": "^5.4 || ^6.0",
-        "gedmo/doctrine-extensions": "^2.3.12 || ^3.0.0"
+        "gedmo/doctrine-extensions": "^3.5.0"
     },
     "require-dev": {
         "symfony/mime": "^5.4 || ^6.0",
