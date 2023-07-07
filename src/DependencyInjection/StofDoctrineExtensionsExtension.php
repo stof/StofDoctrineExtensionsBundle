@@ -17,6 +17,11 @@ class StofDoctrineExtensionsExtension extends Extension
             'onFlush',
             'loadClassMetadata',
         ),
+        'ip_traceable' => array(
+            'prePersist',
+            'onFlush',
+            'loadClassMetadata',
+        ),
         'loggable' => array(
             'loadClassMetadata',
             'onFlush',
