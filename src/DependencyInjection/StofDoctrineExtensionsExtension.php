@@ -2,7 +2,9 @@
 
 namespace Stof\DoctrineExtensionsBundle\DependencyInjection;
 
+use Symfony\Component\Cache\Adapter\ArrayAdapter;
 use Symfony\Component\Config\Loader\LoaderInterface;
+use Symfony\Component\DependencyInjection\Alias;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
@@ -132,6 +134,12 @@ class StofDoctrineExtensionsExtension extends Extension
                     $uploadableConfig['mime_type_guesser_class']
                 );
             }
+        }
+
+        if (isset($config['metadata_cache_pool'])) {
+            $container->setAlias('stof_doctrine_extensions.metadata_cache', new Alias($config['metadata_cache_pool'], false));
+        } else {
+            $container->register('stof_doctrine_extensions.metadata_cache', ArrayAdapter::class)->setPublic(false);
         }
 
         foreach ($config['class'] as $listener => $class) {
