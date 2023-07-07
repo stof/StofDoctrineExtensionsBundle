@@ -17,7 +17,7 @@
         "symfony/dependency-injection": "^4.4 || ^5.2 || ^6.0",
         "symfony/event-dispatcher": "^4.4 || ^5.2 || ^6.0",
         "symfony/http-kernel": "^4.4 || ^5.2 || ^6.0",
-        "gedmo/doctrine-extensions": "^2.3.4 || ^3.0.0"
+        "gedmo/doctrine-extensions": "^2.3.12 || ^3.0.0"
     },
     "require-dev": {
         "symfony/mime": "^4.4 || ^5.2 || ^6.0",

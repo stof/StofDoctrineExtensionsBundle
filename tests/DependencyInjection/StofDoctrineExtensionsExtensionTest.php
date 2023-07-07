@@ -2,6 +2,8 @@
 
 namespace Stof\DoctrineExtensionsBundle\Tests\DependencyInjection;
 
+use Doctrine\Common\Annotations\AnnotationReader;
+use Doctrine\Common\EventSubscriber;
 use Stof\DoctrineExtensionsBundle\DependencyInjection\StofDoctrineExtensionsExtension;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -43,11 +45,12 @@ class StofDoctrineExtensionsExtensionTest extends TestCase
 
         $def = $container->getDefinition('stof_doctrine_extensions.listener.'.$listener);
 
-        $this->assertTrue($def->hasTag('doctrine.event_subscriber'));
+        $this->assertTrue($def->hasTag('doctrine.event_listener'));
 
-        $tags = $def->getTag('doctrine.event_subscriber');
+        $tags = $def->getTag('doctrine.event_listener');
+        $configuredManagers = array_unique(array_column($tags, 'connection'));
 
-        $this->assertCount(2, $tags);
+        $this->assertCount(2, $configuredManagers);
     }
 
     /**
@@ -69,11 +72,12 @@ class StofDoctrineExtensionsExtensionTest extends TestCase
 
         $def = $container->getDefinition('stof_doctrine_extensions.listener.'.$listener);
 
-        $this->assertTrue($def->hasTag('doctrine_mongodb.odm.event_subscriber'));
+        $this->assertTrue($def->hasTag('doctrine_mongodb.odm.event_listener'));
 
-        $tags = $def->getTag('doctrine_mongodb.odm.event_subscriber');
+        $tags = $def->getTag('doctrine_mongodb.odm.event_listener');
+        $configuredManagers = array_unique(array_column($tags, 'connection'));
 
-        $this->assertCount(2, $tags);
+        $this->assertCount(2, $configuredManagers);
     }
 
     /**
@@ -95,10 +99,37 @@ class StofDoctrineExtensionsExtensionTest extends TestCase
 
         $def = $container->getDefinition('stof_doctrine_extensions.listener.'.$listener);
 
-        $this->assertTrue($def->hasTag('doctrine.event_subscriber'));
-        $this->assertTrue($def->hasTag('doctrine_mongodb.odm.event_subscriber'));
+        $this->assertTrue($def->hasTag('doctrine.event_listener'));
+        $this->assertTrue($def->hasTag('doctrine_mongodb.odm.event_listener'));
 
-        $this->assertCount(1, $def->getTag('doctrine.event_subscriber'));
-        $this->assertCount(1, $def->getTag('doctrine_mongodb.odm.event_subscriber'));
+        $this->assertCount(1, array_unique(array_column($def->getTag('doctrine.event_listener'), 'connection')));
+        $this->assertCount(1, array_unique(array_column($def->getTag('doctrine_mongodb.odm.event_listener'), 'connection')));
+    }
+
+    /**
+     * @dataProvider provideExtensions
+     */
+    public function testEventConsistency(string $listener)
+    {
+        $extension = new StofDoctrineExtensionsExtension();
+        $container = new ContainerBuilder();
+        $container->register('annotation_reader', AnnotationReader::class);
+
+        $config = array('orm' => array(
+            'default' => array($listener => true),
+        ));
+
+        $extension->load(array($config), $container);
+
+        $def = $container->getDefinition('stof_doctrine_extensions.listener.'.$listener);
+        $configuredEvents = array_column($def->getTag('doctrine.event_listener'), 'event');
+
+        $listenerInstance = $container->get('stof_doctrine_extensions.listener.'.$listener);
+
+        if (!$listenerInstance instanceof EventSubscriber) {
+            $this->markTestSkipped(sprintf('The listener for "%s" is not a Doctrine event subscriber.', $listener));
+        }
+
+        $this->assertEqualsCanonicalizing($listenerInstance->getSubscribedEvents(), $configuredEvents);
     }
 }
