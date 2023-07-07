@@ -14,6 +14,7 @@ class StofDoctrineExtensionsExtensionTest extends TestCase
     {
         return array(
             array('blameable'),
+            array('ip_traceable'),
             array('loggable'),
             array('reference_integrity'),
             array('sluggable'),
