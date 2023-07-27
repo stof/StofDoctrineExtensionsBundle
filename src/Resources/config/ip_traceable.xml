@@ -12,6 +12,12 @@
             <call method="setAnnotationReader">
                 <argument type="service" id=".stof_doctrine_extensions.reader" on-invalid="ignore" />
             </call>
+            <call method="setForceUseAttributeReader">
+                <argument>%stof_doctrine_extensions.force_use_attribute_reader%</argument>
+            </call>
+            <call method="setSeparateXmlMapping">
+                <argument>%stof_doctrine_extensions.separate_xml_mapping%</argument>
+            </call>
         </service>
 
         <service id="stof_doctrine_extensions.event_listener.ip_trace" class="Stof\DoctrineExtensionsBundle\EventListener\IpTraceListener" public="false">

@@ -31,6 +31,12 @@
             <call method="setSkipOnLoad">
                 <argument>%stof_doctrine_extensions.skip_translation_on_load%</argument>
             </call>
+            <call method="setForceUseAttributeReader">
+                <argument>%stof_doctrine_extensions.force_use_attribute_reader%</argument>
+            </call>
+            <call method="setSeparateXmlMapping">
+                <argument>%stof_doctrine_extensions.separate_xml_mapping%</argument>
+            </call>
         </service>
 
         <service id="stof_doctrine_extensions.event_listener.locale" class="%stof_doctrine_extensions.event_listener.locale.class%">
