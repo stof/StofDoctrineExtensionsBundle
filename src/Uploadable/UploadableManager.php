@@ -3,14 +3,20 @@
 namespace Stof\DoctrineExtensionsBundle\Uploadable;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Gedmo\Uploadable\FileInfo\FileInfoInterface;
 use Gedmo\Uploadable\UploadableListener;
 
 class UploadableManager
 {
     /** @var \Gedmo\Uploadable\UploadableListener */
     private $listener;
+    /** @var class-string<FileInfoInterface> */
     private $fileInfoClass;
 
+    /**
+     * @param UploadableListener              $listener
+     * @param class-string<FileInfoInterface> $fileInfoClass
+     */
     public function __construct(UploadableListener $listener, $fileInfoClass)
     {
         $this->listener = $listener;
@@ -24,6 +30,8 @@ class UploadableManager
      *
      * @param object $entity   - The entity you are marking to "Upload" as soon as you call "flush".
      * @param mixed  $fileInfo - The file info object or array. In Symfony, this will be typically an UploadedFile instance.
+     *
+     * @return void
      */
     public function markEntityToUpload($entity, $fileInfo)
     {

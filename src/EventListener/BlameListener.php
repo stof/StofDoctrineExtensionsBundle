@@ -18,8 +18,11 @@ use Gedmo\Blameable\BlameableListener;
  */
 class BlameListener implements EventSubscriberInterface
 {
+    /** @var AuthorizationCheckerInterface|null */
     private $authorizationChecker;
+    /** @var TokenStorageInterface|null */
     private $tokenStorage;
+    /** @var BlameableListener */
     private $blameableListener;
 
     public function __construct(BlameableListener $blameableListener, TokenStorageInterface $tokenStorage = null, AuthorizationCheckerInterface $authorizationChecker = null)
@@ -32,7 +35,7 @@ class BlameListener implements EventSubscriberInterface
     /**
      * @internal
      */
-    public function onKernelRequest(RequestEvent $event)
+    public function onKernelRequest(RequestEvent $event): void
     {
         if (!$event->isMainRequest()) {
             return;

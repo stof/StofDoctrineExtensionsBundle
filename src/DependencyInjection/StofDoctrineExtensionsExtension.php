@@ -81,7 +81,9 @@ class StofDoctrineExtensionsExtension extends Extension
         ),
     );
 
+    /** @var list<string> */
     private $entityManagers   = array();
+    /** @var list<string> */
     private $documentManagers = array();
 
     /**
@@ -150,7 +152,7 @@ class StofDoctrineExtensionsExtension extends Extension
     /**
      * @internal
      */
-    public function configValidate(ContainerBuilder $container)
+    public function configValidate(ContainerBuilder $container): void
     {
         foreach ($this->entityManagers as $name) {
             if (!$container->hasDefinition(sprintf('doctrine.dbal.%s_connection', $name))) {
@@ -166,13 +168,13 @@ class StofDoctrineExtensionsExtension extends Extension
     }
 
     /**
-     * @param array            $configs
-     * @param ContainerBuilder $container
-     * @param LoaderInterface  $loader
-     * @param array            $loaded
-     * @param string           $doctrineListenerTag
+     * @param array<string, array<string, bool>> $configs
+     * @param ContainerBuilder                   $container
+     * @param LoaderInterface                    $loader
+     * @param array<string, true>                $loaded
+     * @param string                             $doctrineListenerTag
      *
-     * @return array
+     * @return list<string>
      */
     private function processObjectManagerConfigurations(array $configs, ContainerBuilder $container, LoaderInterface $loader, array &$loaded, string $doctrineListenerTag)
     {

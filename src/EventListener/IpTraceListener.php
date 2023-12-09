@@ -13,6 +13,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
  */
 final class IpTraceListener implements EventSubscriberInterface
 {
+    /** @var IpTraceableListener */
     private $ipTraceableListener;
 
     public function __construct(IpTraceableListener $ipTraceableListener)
@@ -20,7 +21,7 @@ final class IpTraceListener implements EventSubscriberInterface
         $this->ipTraceableListener = $ipTraceableListener;
     }
 
-    public function onKernelRequest(RequestEvent $event)
+    public function onKernelRequest(RequestEvent $event): void
     {
         if (!$event->isMainRequest()) {
             return;
