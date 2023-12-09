@@ -22,7 +22,7 @@
     },
     "require-dev": {
         "symfony/mime": "^5.4 || ^6.0 || ^7.0",
-        "symfony/phpunit-bridge": "^v5.4 || ^6.0 || ^7.0",
+        "symfony/phpunit-bridge": "^v6.4.1 || ^7.0.1",
         "symfony/security-core": "^5.4 || ^6.0 || ^7.0"
     },
     "suggest": {
