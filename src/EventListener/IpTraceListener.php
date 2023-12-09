@@ -22,7 +22,7 @@ final class IpTraceListener implements EventSubscriberInterface
 
     public function onKernelRequest(RequestEvent $event)
     {
-        if (HttpKernelInterface::MAIN_REQUEST !== $event->getRequestType()) {
+        if (!$event->isMainRequest()) {
             return;
         }
 
