@@ -45,16 +45,16 @@ class StofDoctrineExtensionsExtensionTest extends TestCase
 
         $extension->load(array($config), $container);
 
-        $this->assertTrue($container->hasDefinition('stof_doctrine_extensions.listener.'.$listener));
+        self::assertTrue($container->hasDefinition('stof_doctrine_extensions.listener.'.$listener));
 
         $def = $container->getDefinition('stof_doctrine_extensions.listener.'.$listener);
 
-        $this->assertTrue($def->hasTag('doctrine.event_listener'));
+        self::assertTrue($def->hasTag('doctrine.event_listener'));
 
         $tags = $def->getTag('doctrine.event_listener');
         $configuredManagers = array_unique(array_column($tags, 'connection'));
 
-        $this->assertCount(2, $configuredManagers);
+        self::assertCount(2, $configuredManagers);
     }
 
     /**
@@ -72,16 +72,16 @@ class StofDoctrineExtensionsExtensionTest extends TestCase
 
         $extension->load(array($config), $container);
 
-        $this->assertTrue($container->hasDefinition('stof_doctrine_extensions.listener.'.$listener));
+        self::assertTrue($container->hasDefinition('stof_doctrine_extensions.listener.'.$listener));
 
         $def = $container->getDefinition('stof_doctrine_extensions.listener.'.$listener);
 
-        $this->assertTrue($def->hasTag('doctrine_mongodb.odm.event_listener'));
+        self::assertTrue($def->hasTag('doctrine_mongodb.odm.event_listener'));
 
         $tags = $def->getTag('doctrine_mongodb.odm.event_listener');
         $configuredManagers = array_unique(array_column($tags, 'connection'));
 
-        $this->assertCount(2, $configuredManagers);
+        self::assertCount(2, $configuredManagers);
     }
 
     /**
@@ -99,15 +99,15 @@ class StofDoctrineExtensionsExtensionTest extends TestCase
 
         $extension->load(array($config), $container);
 
-        $this->assertTrue($container->hasDefinition('stof_doctrine_extensions.listener.'.$listener));
+        self::assertTrue($container->hasDefinition('stof_doctrine_extensions.listener.'.$listener));
 
         $def = $container->getDefinition('stof_doctrine_extensions.listener.'.$listener);
 
-        $this->assertTrue($def->hasTag('doctrine.event_listener'));
-        $this->assertTrue($def->hasTag('doctrine_mongodb.odm.event_listener'));
+        self::assertTrue($def->hasTag('doctrine.event_listener'));
+        self::assertTrue($def->hasTag('doctrine_mongodb.odm.event_listener'));
 
-        $this->assertCount(1, array_unique(array_column($def->getTag('doctrine.event_listener'), 'connection')));
-        $this->assertCount(1, array_unique(array_column($def->getTag('doctrine_mongodb.odm.event_listener'), 'connection')));
+        self::assertCount(1, array_unique(array_column($def->getTag('doctrine.event_listener'), 'connection')));
+        self::assertCount(1, array_unique(array_column($def->getTag('doctrine_mongodb.odm.event_listener'), 'connection')));
     }
 
     /**
@@ -131,9 +131,9 @@ class StofDoctrineExtensionsExtensionTest extends TestCase
         $listenerInstance = $container->get('stof_doctrine_extensions.listener.'.$listener);
 
         if (!$listenerInstance instanceof EventSubscriber) {
-            $this->markTestSkipped(sprintf('The listener for "%s" is not a Doctrine event subscriber.', $listener));
+            self::markTestSkipped(sprintf('The listener for "%s" is not a Doctrine event subscriber.', $listener));
         }
 
-        $this->assertEqualsCanonicalizing($listenerInstance->getSubscribedEvents(), $configuredEvents);
+        self::assertEqualsCanonicalizing($listenerInstance->getSubscribedEvents(), $configuredEvents);
     }
 }

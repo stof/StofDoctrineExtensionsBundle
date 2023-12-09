@@ -57,9 +57,6 @@ class LoggerListener implements EventSubscriberInterface
         }
     }
 
-    /**
-     * @return string[]
-     */
     public static function getSubscribedEvents()
     {
         return array(

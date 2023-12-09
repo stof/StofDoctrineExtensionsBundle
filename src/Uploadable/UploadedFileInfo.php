@@ -32,11 +32,13 @@ class UploadedFileInfo implements FileInfoInterface
     }
 
     /**
-     * @return int|false
+     * @return int|null
      */
     public function getSize()
     {
-        return $this->uploadedFile->getSize();
+        $size = $this->uploadedFile->getSize();
+
+        return $size !== false ? $size : null;
     }
 
     /**
