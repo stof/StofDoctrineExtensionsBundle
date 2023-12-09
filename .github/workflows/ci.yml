@@ -10,7 +10,7 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - uses: actions/checkout@v3
+            - uses: actions/checkout@v4
             - uses: shivammathur/setup-php@v2
             - name: Validate composer.json
               run: composer validate --strict --no-check-lock
@@ -22,7 +22,7 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                php: [ '7.2', '7.3', '7.4', '8.0', '8.1', '8.2' ]
+                php: [ '7.2', '7.3', '7.4', '8.0', '8.1', '8.2', '8.3' ]
                 name_suffix: ['']
                 stability: ['stable']
                 composer_flags: ['']
@@ -31,13 +31,13 @@ jobs:
                       name_suffix: ' (lowest deps)'
                       stability: 'stable'
                       composer_flags: '--prefer-lowest'
-                    - php: '8.2'
+                    - php: '8.3'
                       name_suffix: ' (dev deps)'
                       stability: 'dev'
                       composer_flags: ''
 
         steps:
-            -   uses: actions/checkout@v3
+            -   uses: actions/checkout@v4
 
             -   uses: shivammathur/setup-php@v2
                 with:
