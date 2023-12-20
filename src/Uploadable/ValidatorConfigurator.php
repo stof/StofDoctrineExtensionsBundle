@@ -9,6 +9,7 @@ use Gedmo\Uploadable\Mapping\Validator;
  */
 class ValidatorConfigurator
 {
+    /** @var bool */
     private $validateWritableDirectory;
 
     /**
@@ -19,7 +20,7 @@ class ValidatorConfigurator
         $this->validateWritableDirectory = $validateWritableDirectory;
     }
 
-    public function configure()
+    public function configure(): void
     {
         Validator::$validateWritableDirectory = $this->validateWritableDirectory;
     }

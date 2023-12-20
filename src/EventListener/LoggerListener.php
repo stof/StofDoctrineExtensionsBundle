@@ -2,6 +2,7 @@
 
 namespace Stof\DoctrineExtensionsBundle\EventListener;
 
+use Gedmo\Loggable\Loggable;
 use Gedmo\Loggable\LoggableListener;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
@@ -14,13 +15,21 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  * Sets the username from the security context by listening on kernel.request
  *
  * @author Christophe Coevoet <stof@notk.org>
+ *
+ * @phpstan-template T of Loggable|object
  */
 class LoggerListener implements EventSubscriberInterface
 {
+    /** @var AuthorizationCheckerInterface|null */
     private $authorizationChecker;
+    /** @var TokenStorageInterface|null */
     private $tokenStorage;
+    /** @var LoggableListener<T> */
     private $loggableListener;
 
+    /**
+     * @param LoggableListener<T> $loggableListener
+     */
     public function __construct(LoggableListener $loggableListener, TokenStorageInterface $tokenStorage = null, AuthorizationCheckerInterface $authorizationChecker = null)
     {
         $this->loggableListener = $loggableListener;
@@ -31,7 +40,7 @@ class LoggerListener implements EventSubscriberInterface
     /**
      * @internal
      */
-    public function onKernelRequest(RequestEvent $event)
+    public function onKernelRequest(RequestEvent $event): void
     {
         if (!$event->isMainRequest()) {
             return;
@@ -48,9 +57,6 @@ class LoggerListener implements EventSubscriberInterface
         }
     }
 
-    /**
-     * @return string[]
-     */
     public static function getSubscribedEvents()
     {
         return array(

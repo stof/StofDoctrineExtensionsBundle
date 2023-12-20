@@ -2,6 +2,7 @@
 
 namespace Stof\DoctrineExtensionsBundle\DependencyInjection\Compiler;
 
+use Stof\DoctrineExtensionsBundle\DependencyInjection\StofDoctrineExtensionsExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 
@@ -23,6 +24,9 @@ class ValidateExtensionConfigurationPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        $container->getExtension('stof_doctrine_extensions')->configValidate($container);
+        $extension = $container->getExtension('stof_doctrine_extensions');
+        \assert($extension instanceof StofDoctrineExtensionsExtension);
+
+        $extension->configValidate($container);
     }
 }

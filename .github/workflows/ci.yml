@@ -15,6 +15,25 @@ jobs:
             - name: Validate composer.json
               run: composer validate --strict --no-check-lock
 
+    static_analysis:
+        name: Static analysis
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+
+            - uses: shivammathur/setup-php@v2
+              with:
+                  coverage: none
+                  php-version: '8.2'
+
+            - name: Install dependencies
+              run: composer update --ansi --no-progress --prefer-dist --no-interaction
+
+            - name: Install PHPUnit
+              run: vendor/bin/simple-phpunit install
+
+            - run: vendor/bin/phpstan analyze
+
     tests:
         name: "Tests on PHP ${{ matrix.php }}${{ matrix.name_suffix }}"
         runs-on: ubuntu-latest
