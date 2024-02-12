@@ -117,7 +117,6 @@ class StofDoctrineExtensionsExtensionTest extends TestCase
     {
         $extension = new StofDoctrineExtensionsExtension();
         $container = new ContainerBuilder();
-        $container->register('annotation_reader', AnnotationReader::class);
 
         $config = array('orm' => array(
             'default' => array($listener => true),
