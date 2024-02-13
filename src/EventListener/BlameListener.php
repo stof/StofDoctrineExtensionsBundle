@@ -18,12 +18,9 @@ use Gedmo\Blameable\BlameableListener;
  */
 class BlameListener implements EventSubscriberInterface
 {
-    /** @var AuthorizationCheckerInterface|null */
-    private $authorizationChecker;
-    /** @var TokenStorageInterface|null */
-    private $tokenStorage;
-    /** @var BlameableListener */
-    private $blameableListener;
+    private ?AuthorizationCheckerInterface $authorizationChecker;
+    private ?TokenStorageInterface $tokenStorage;
+    private BlameableListener $blameableListener;
 
     public function __construct(BlameableListener $blameableListener, TokenStorageInterface $tokenStorage = null, AuthorizationCheckerInterface $authorizationChecker = null)
     {

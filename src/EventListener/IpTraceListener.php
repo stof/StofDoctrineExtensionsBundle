@@ -13,8 +13,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
  */
 final class IpTraceListener implements EventSubscriberInterface
 {
-    /** @var IpTraceableListener */
-    private $ipTraceableListener;
+    private IpTraceableListener $ipTraceableListener;
 
     public function __construct(IpTraceableListener $ipTraceableListener)
     {

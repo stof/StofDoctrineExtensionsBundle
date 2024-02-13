@@ -8,16 +8,14 @@ use Gedmo\Uploadable\UploadableListener;
 
 class UploadableManager
 {
-    /** @var \Gedmo\Uploadable\UploadableListener */
-    private $listener;
+    private UploadableListener $listener;
     /** @var class-string<FileInfoInterface> */
-    private $fileInfoClass;
+    private string $fileInfoClass;
 
     /**
-     * @param UploadableListener              $listener
      * @param class-string<FileInfoInterface> $fileInfoClass
      */
-    public function __construct(UploadableListener $listener, $fileInfoClass)
+    public function __construct(UploadableListener $listener, string $fileInfoClass)
     {
         $this->listener = $listener;
         $this->fileInfoClass = $fileInfoClass;
@@ -51,5 +49,4 @@ class UploadableManager
     {
         return $this->listener;
     }
-
 }

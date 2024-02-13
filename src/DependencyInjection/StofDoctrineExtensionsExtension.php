@@ -82,9 +82,9 @@ class StofDoctrineExtensionsExtension extends Extension
     );
 
     /** @var list<string> */
-    private $entityManagers   = array();
+    private array $entityManagers = array();
     /** @var list<string> */
-    private $documentManagers = array();
+    private array $documentManagers = array();
 
     /**
      * @return void

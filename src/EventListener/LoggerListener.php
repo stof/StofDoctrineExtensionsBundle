@@ -20,12 +20,10 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  */
 class LoggerListener implements EventSubscriberInterface
 {
-    /** @var AuthorizationCheckerInterface|null */
-    private $authorizationChecker;
-    /** @var TokenStorageInterface|null */
-    private $tokenStorage;
+    private ?AuthorizationCheckerInterface $authorizationChecker;
+    private ?TokenStorageInterface  $tokenStorage;
     /** @var LoggableListener<T> */
-    private $loggableListener;
+    private LoggableListener $loggableListener;
 
     /**
      * @param LoggableListener<T> $loggableListener
