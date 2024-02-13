@@ -7,8 +7,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class UploadedFileInfo implements FileInfoInterface
 {
-    /** @var UploadedFile */
-    private $uploadedFile;
+    private UploadedFile $uploadedFile;
 
     public function __construct(UploadedFile $uploadedFile)
     {
