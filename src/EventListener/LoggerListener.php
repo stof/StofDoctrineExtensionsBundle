@@ -56,7 +56,7 @@ class LoggerListener implements EventSubscriberInterface
     }
 
     /**
-     * @return string[]
+     * @inheritdoc
      */
     public static function getSubscribedEvents()
     {

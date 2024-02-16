@@ -49,7 +49,7 @@ class BlameListener implements EventSubscriberInterface
     }
 
     /**
-     * @return string[]
+     * @inheritdoc
      */
     public static function getSubscribedEvents()
     {

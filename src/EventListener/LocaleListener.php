@@ -30,7 +30,7 @@ class LocaleListener implements EventSubscriberInterface
     }
 
     /**
-     * @return string[]
+     * @inheritdoc
      */
     public static function getSubscribedEvents()
     {
