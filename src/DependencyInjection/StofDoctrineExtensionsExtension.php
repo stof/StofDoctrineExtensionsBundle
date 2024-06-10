@@ -11,6 +11,9 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
+/**
+ * @internal
+ */
 class StofDoctrineExtensionsExtension extends Extension
 {
     private const LISTENER_EVENTS = array(
