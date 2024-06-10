@@ -2,6 +2,7 @@
 
 namespace Stof\DoctrineExtensionsBundle;
 
+use Stof\DoctrineExtensionsBundle\DependencyInjection\Compiler\ReaderPass;
 use Stof\DoctrineExtensionsBundle\DependencyInjection\Compiler\ValidateExtensionConfigurationPass;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -16,5 +17,6 @@ class StofDoctrineExtensionsBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         $container->addCompilerPass(new ValidateExtensionConfigurationPass());
+        $container->addCompilerPass(new ReaderPass());
     }
 }
