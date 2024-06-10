@@ -49,7 +49,7 @@ class BlameListener implements EventSubscriberInterface
     }
 
     /**
-     * @inheritdoc
+     * @return array<string, string|array{0: string, 1: int}|list<array{0: string, 1?: int}>>
      */
     public static function getSubscribedEvents()
     {
