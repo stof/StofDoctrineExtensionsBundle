@@ -4,7 +4,6 @@ namespace Stof\DoctrineExtensionsBundle\EventListener;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
-use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
@@ -51,7 +50,7 @@ class BlameListener implements EventSubscriberInterface
     /**
      * @return array<string, string>
      */
-    public static function getSubscribedEvents(): array
+    public static function getSubscribedEvents()
     {
         return array(
             KernelEvents::REQUEST => 'onKernelRequest',
