@@ -36,7 +36,7 @@ final class IpTraceListener implements EventSubscriberInterface
     /**
      * @return array<string, array<int, int|string>>
      */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return array(
             KernelEvents::REQUEST => ['onKernelRequest', 500],
