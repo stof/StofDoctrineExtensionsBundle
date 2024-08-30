@@ -106,6 +106,9 @@ class StofDoctrineExtensionsExtension extends Extension
         $this->entityManagers = $this->processObjectManagerConfigurations($config['orm'], $container, $loader, $loaded, 'doctrine.event_listener');
         $this->documentManagers = $this->processObjectManagerConfigurations($config['mongodb'], $container, $loader, $loaded, 'doctrine_mongodb.odm.event_listener');
 
+
+        $container->setParameter('stof_doctrine_extensions.force_use_attribute_reader', $config['force_use_attribute_reader']);
+        $container->setParameter('stof_doctrine_extensions.separate_xml_mapping', $config['separate_xml_mapping']);
         $container->setParameter('stof_doctrine_extensions.default_locale', $config['default_locale']);
         $container->setParameter('stof_doctrine_extensions.translation_fallback', $config['translation_fallback']);
         $container->setParameter('stof_doctrine_extensions.persist_default_translation', $config['persist_default_translation']);

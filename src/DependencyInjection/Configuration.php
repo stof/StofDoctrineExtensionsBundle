@@ -26,6 +26,8 @@ class Configuration implements ConfigurationInterface
                     ->cannotBeEmpty()
                     ->defaultValue('en')
                 ->end()
+                ->booleanNode('force_use_attribute_reader')->defaultFalse()->end()
+                ->booleanNode('separate_xml_mapping')->defaultFalse()->end()
                 ->booleanNode('translation_fallback')->defaultFalse()->end()
                 ->booleanNode('persist_default_translation')->defaultFalse()->end()
                 ->booleanNode('skip_translation_on_load')->defaultFalse()->end()
