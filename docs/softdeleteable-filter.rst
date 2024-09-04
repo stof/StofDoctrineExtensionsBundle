@@ -10,12 +10,10 @@ Doctrine filter.
     # (or config/packages/doctrine.yaml if you use Flex)
     doctrine:
         orm:
-            entity_managers:
-                default:
-                    filters:
-                        softdeleteable:
-                            class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
-                            enabled: true
+            filters:
+                softdeleteable:
+                    class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
+                    enabled: true
 
 .. note::
 
