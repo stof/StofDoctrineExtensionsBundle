@@ -28,7 +28,7 @@ class LoggerListener implements EventSubscriberInterface
     /**
      * @param LoggableListener<T> $loggableListener
      */
-    public function __construct(LoggableListener $loggableListener, TokenStorageInterface $tokenStorage = null, AuthorizationCheckerInterface $authorizationChecker = null)
+    public function __construct(LoggableListener $loggableListener, ?TokenStorageInterface $tokenStorage = null, ?AuthorizationCheckerInterface $authorizationChecker = null)
     {
         $this->loggableListener = $loggableListener;
         $this->tokenStorage = $tokenStorage;
