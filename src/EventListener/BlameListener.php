@@ -7,6 +7,7 @@ use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Symfony\Contracts\Service\ResetInterface;
 
 use Gedmo\Blameable\BlameableListener;
 
@@ -15,7 +16,7 @@ use Gedmo\Blameable\BlameableListener;
  *
  * @author David Buchmann <mail@davidbu.ch>
  */
-class BlameListener implements EventSubscriberInterface
+class BlameListener implements EventSubscriberInterface, ResetInterface
 {
     private ?AuthorizationCheckerInterface $authorizationChecker;
     private ?TokenStorageInterface $tokenStorage;
@@ -55,5 +56,10 @@ class BlameListener implements EventSubscriberInterface
         return array(
             KernelEvents::REQUEST => 'onKernelRequest',
         );
+    }
+
+    public function reset(): void
+    {
+        $this->blameableListener->setUserValue(null);
     }
 }

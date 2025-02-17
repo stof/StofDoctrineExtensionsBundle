@@ -6,6 +6,7 @@ use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\EventSubscriber;
 use Stof\DoctrineExtensionsBundle\DependencyInjection\StofDoctrineExtensionsExtension;
 use PHPUnit\Framework\TestCase;
+use Stof\DoctrineExtensionsBundle\Tests\Mock\FakeUser;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class StofDoctrineExtensionsExtensionTest extends TestCase
@@ -134,5 +135,59 @@ class StofDoctrineExtensionsExtensionTest extends TestCase
         }
 
         self::assertEqualsCanonicalizing($listenerInstance->getSubscribedEvents(), $configuredEvents);
+    }
+
+    public function testBlameListenerReset(): void
+    {
+        $blameableListener = self::createMock(\Gedmo\Blameable\BlameableListener::class);
+        $blameableListener
+            ->expects(self::exactly(2))
+            ->method('setUserValue')
+            ->willReturnCallback(function ($user) {
+                static $callCount = 0;
+                if ($callCount === 0) {
+                    self::assertInstanceOf(FakeUser::class, $user);
+                } elseif ($callCount === 1) {
+                    self::assertNull($user);
+                }
+                $callCount++;
+            });
+
+        $tokenStorage = self::createMock(\Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface::class);
+        $authorizationChecker = self::createMock(\Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface::class);
+
+        $token = self::createMock(\Symfony\Component\Security\Core\Authentication\Token\TokenInterface::class);
+        $token->method('getUser')->willReturn(new FakeUser());
+
+        $tokenStorage->method('getToken')->willReturn($token);
+        $authorizationChecker->method('isGranted')->with('IS_AUTHENTICATED_REMEMBERED')->willReturn(true);
+
+        $blameListener = new \Stof\DoctrineExtensionsBundle\EventListener\BlameListener($blameableListener, $tokenStorage, $authorizationChecker);
+
+        $blameListener->onKernelRequest(new \Symfony\Component\HttpKernel\Event\RequestEvent(
+            self::createMock(\Symfony\Component\HttpKernel\HttpKernelInterface::class),
+            self::createMock(\Symfony\Component\HttpFoundation\Request::class),
+            \Symfony\Component\HttpKernel\HttpKernelInterface::MAIN_REQUEST
+        ));
+
+        $blameListener->reset();
+    }
+
+    public function testBlameListenerHasKernelReset(): void
+    {
+        $extension = new StofDoctrineExtensionsExtension();
+        $container = new ContainerBuilder();
+
+        $config = array('orm' => array(
+            'default' => array('blameable' => true),
+        ));
+
+        $extension->load(array($config), $container);
+
+        self::assertTrue($container->hasDefinition('stof_doctrine_extensions.event_listener.blame'));
+
+        $def = $container->getDefinition('stof_doctrine_extensions.event_listener.blame');
+
+        self::assertTrue($def->hasTag('kernel.reset'));
     }
 }
