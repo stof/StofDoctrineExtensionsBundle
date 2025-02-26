@@ -100,6 +100,7 @@ class StofDoctrineExtensionsExtension extends Extension
         $config = $processor->processConfiguration($configuration, $configs);
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader->load('tool.xml');
 
         $loaded = array();
 

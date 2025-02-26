@@ -14,6 +14,8 @@ use Gedmo\Blameable\BlameableListener;
  * Sets the username from the security context by listening on kernel.request
  *
  * @author David Buchmann <mail@davidbu.ch>
+ *
+ * @deprecated to be removed in 2.0, use the actor provider instead
  */
 class BlameListener implements EventSubscriberInterface
 {

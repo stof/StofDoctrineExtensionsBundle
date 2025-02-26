@@ -18,7 +18,7 @@
         "symfony/dependency-injection": "^5.4 || ^6.0 || ^7.0",
         "symfony/event-dispatcher": "^5.4 || ^6.0 || ^7.0",
         "symfony/http-kernel": "^5.4 || ^6.0 || ^7.0",
-        "gedmo/doctrine-extensions": "^3.15.0"
+        "gedmo/doctrine-extensions": "^3.19.0"
     },
     "require-dev": {
         "phpstan/phpstan": "^1.10",
