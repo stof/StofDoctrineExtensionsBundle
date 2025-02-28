@@ -16,6 +16,8 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  *
  * @author Christophe Coevoet <stof@notk.org>
  *
+ * @deprecated to be removed in 2.0, use the actor provider instead
+ *
  * @phpstan-template T of Loggable|object
  */
 class LoggerListener implements EventSubscriberInterface
