@@ -12,11 +12,9 @@
             <call method="setAnnotationReader">
                 <argument type="service" id=".stof_doctrine_extensions.reader" on-invalid="ignore" />
             </call>
-        </service>
-
-        <service id="stof_doctrine_extensions.event_listener.ip_trace" class="Stof\DoctrineExtensionsBundle\EventListener\IpTraceListener" public="false">
-            <argument type="service" id="stof_doctrine_extensions.listener.ip_traceable" />
-            <tag name="kernel.event_subscriber" />
+            <call method="setIpAddressProvider">
+                <argument type="service" id="stof_doctrine_extensions.tool.ip_address_provider" />
+            </call>
         </service>
     </services>
 </container>
