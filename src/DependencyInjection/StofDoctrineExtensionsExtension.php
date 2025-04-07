@@ -44,6 +44,7 @@ class StofDoctrineExtensionsExtension extends Extension
         'softdeleteable' => array(
             'loadClassMetadata',
             'onFlush',
+            'postFlush',
         ),
         'sortable' => array(
             'onFlush',
