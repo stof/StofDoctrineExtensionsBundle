@@ -9,5 +9,9 @@
             <argument type="service" id="security.token_storage" on-invalid="null" />
             <argument type="service" id="security.authorization_checker" on-invalid="null" />
         </service>
+
+        <service id="stof_doctrine_extensions.tool.ip_address_provider" class="Stof\DoctrineExtensionsBundle\Tool\RequestStackIpAddressProvider" public="false">
+            <argument type="service" id="request_stack" on-invalid="null" />
+        </service>
     </services>
 </container>
