@@ -20,8 +20,6 @@ final class ReaderPass implements CompilerPassInterface
             return;
         }
 
-        if (\PHP_VERSION_ID >= 80000) {
-            $container->register('.stof_doctrine_extensions.reader', AttributeReader::class);
-        }
+        $container->register('.stof_doctrine_extensions.reader', AttributeReader::class);
     }
 }
