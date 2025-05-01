@@ -12,12 +12,12 @@
         }
     ],
     "require": {
-        "php": "^7.4 || ^8.0",
-        "symfony/cache": "^5.4 || ^6.0 || ^7.0",
-        "symfony/config": "^5.4 || ^6.0 || ^7.0",
-        "symfony/dependency-injection": "^5.4 || ^6.0 || ^7.0",
-        "symfony/event-dispatcher": "^5.4 || ^6.0 || ^7.0",
-        "symfony/http-kernel": "^5.4 || ^6.0 || ^7.0",
+        "php": "^8.1",
+        "symfony/cache": "^6.4 || ^7.0",
+        "symfony/config": "^6.4 || ^7.0",
+        "symfony/dependency-injection": "^6.4 || ^7.0",
+        "symfony/event-dispatcher": "^6.4 || ^7.0",
+        "symfony/http-kernel": "^6.4 || ^7.0",
         "gedmo/doctrine-extensions": "^3.20.0"
     },
     "require-dev": {
@@ -26,9 +26,9 @@
         "phpstan/phpstan-phpunit": "^2.0",
         "phpstan/phpstan-strict-rules": "^2.0",
         "phpstan/phpstan-symfony": "^2.0",
-        "symfony/mime": "^5.4 || ^6.0 || ^7.0",
+        "symfony/mime": "^6.4 || ^7.0",
         "symfony/phpunit-bridge": "^v6.4.1 || ^7.0.1",
-        "symfony/security-core": "^5.4 || ^6.0 || ^7.0"
+        "symfony/security-core": "^6.4 || ^7.0"
     },
     "suggest": {
         "doctrine/doctrine-bundle": "to use the ORM extensions",
