@@ -8,9 +8,11 @@ use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 /**
- * This listeners sets the current locale for the TranslatableListener
+ * This listener sets the current locale for the TranslatableListener
  *
  * @author Christophe COEVOET
+ *
+ * @deprecated since 1.14. Use the LocaleSynchronizer instead.
  */
 class LocaleListener implements EventSubscriberInterface
 {

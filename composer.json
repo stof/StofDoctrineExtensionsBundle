@@ -13,12 +13,13 @@
     ],
     "require": {
         "php": "^8.1",
+        "gedmo/doctrine-extensions": "^3.20.0",
         "symfony/cache": "^6.4 || ^7.0",
         "symfony/config": "^6.4 || ^7.0",
         "symfony/dependency-injection": "^6.4 || ^7.0",
         "symfony/event-dispatcher": "^6.4 || ^7.0",
         "symfony/http-kernel": "^6.4 || ^7.0",
-        "gedmo/doctrine-extensions": "^3.20.0"
+        "symfony/translation-contracts": "^2.5 || ^3.5"
     },
     "require-dev": {
         "phpstan/phpstan": "^2.1",
