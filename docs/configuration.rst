@@ -130,6 +130,15 @@ manager, declare the extensions you want to enable:
                 default:
                     tree: true
                     timestampable: false # not needed: listeners are not enabled by default
+                    translatable: false
+                    blameable: false
+                    sluggable: false
+                    loggable: false
+                    ip_traceable: false
+                    sortable: false
+                    softdeleteable: false
+                    uploadable: false
+                    reference_integrity: false
                 other:
                     timestampable: true
 
@@ -143,7 +152,16 @@ manager, declare the extensions you want to enable:
                     <stof-doctrine-extensions:entity-manager
                         id="default"
                         tree="true"
-                        timestampable="false"
+                        timestampable="false" <!-- not needed: listeners are not enabled by default -->
+                        translatable="false"
+                        blameable="false"
+                        sluggable="false"
+                        loggable="false"
+                        ip_traceable="false"
+                        sortable="false"
+                        softdeleteable="false"
+                        uploadable="false"
+                        reference_integrity="false"
                     />
                     <stof-doctrine-extensions:entity-manager
                         id="other"
