@@ -10,7 +10,7 @@ to register their mapping in Doctrine when you want to use them.
 .. code-block:: yaml
 
     # app/config/config.yml
-    # (or config/packages/doctrine.yaml if you use Flex)
+    # (or config/packages/doctrine.yaml)
     doctrine:
         orm:
             entity_managers:
@@ -78,7 +78,7 @@ the asked language. If you don't provide it explicitly, it will default to
     .. code-block:: yaml
 
         # app/config/config.yml
-        # (or config/packages/stof_doctrine_extensions.yaml if you use Flex)
+        # (or config/packages/stof_doctrine_extensions.yaml)
         stof_doctrine_extensions:
             default_locale: en_US
 
@@ -100,7 +100,7 @@ the asked language. If you don't provide it explicitly, it will default to
     .. code-block:: xml
 
         <!-- app/config/config.xml -->
-        <!-- (or config/packages/stof_doctrine_extensions.yaml if you use Flex) -->
+        <!-- (or config/packages/stof_doctrine_extensions.yaml) -->
         <container xmlns:stof-doctrine-extensions="http://example.org/schema/dic/stof_doctrine_extensions">
             <stof-doctrine-extensions:config default-locale="en_US">
                 <stof-doctrine-extensions:orm>
@@ -123,7 +123,7 @@ manager, declare the extensions you want to enable:
     .. code-block:: yaml
 
         # app/config/config.yml
-        # (or config/packages/stof_doctrine_extensions.yaml if you use Flex)
+        # (or config/packages/stof_doctrine_extensions.yaml)
         stof_doctrine_extensions:
             default_locale: en_US
             orm:
@@ -145,7 +145,7 @@ manager, declare the extensions you want to enable:
     .. code-block:: xml
 
         <!-- app/config/config.xml -->
-        <!-- (or config/packages/stof_doctrine_extensions.yaml if you use Flex) -->
+        <!-- (or config/packages/stof_doctrine_extensions.yaml) -->
         <container xmlns:stof-doctrine_extensions="http://example.org/schema/dic/stof_doctrine_extensions">
             <stof-doctrine-extensions:config default-locale="en_US">
                 <stof-doctrine-extensions:orm>
