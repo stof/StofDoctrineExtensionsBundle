@@ -31,4 +31,4 @@ To disable the behavior, e.g. for admin users who may see deleted items,
 disable the filter. Here is an example::
 
     $filters = $em->getFilters();
-    $filters->disable('softdeleteable');
+    $filters->disable('soft_delete');
