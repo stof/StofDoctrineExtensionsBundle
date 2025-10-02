@@ -20,6 +20,7 @@ class Configuration implements ConfigurationInterface
             ->append($this->getVendorNode('orm'))
             ->append($this->getVendorNode('mongodb'))
             ->append($this->getClassNode())
+            ->append($this->getSoftDeleteableNode())
             ->append($this->getUploadableNode())
             ->children()
                 ->scalarNode('default_locale')
@@ -111,6 +112,21 @@ class Configuration implements ConfigurationInterface
                     ->cannotBeEmpty()
                     ->defaultValue('Gedmo\\ReferenceIntegrity\\ReferenceIntegrityListener')
                 ->end()
+            ->end()
+        ;
+
+        return $node;
+    }
+
+    private function getSoftDeleteableNode(): ArrayNodeDefinition
+    {
+        $treeBuilder = new TreeBuilder('softdeleteable');
+        $node = $treeBuilder->getRootNode();
+
+        $node
+            ->addDefaultsIfNotSet()
+            ->children()
+                ->booleanNode('handle_post_flush_event')->defaultFalse()->end()
             ->end()
         ;
 

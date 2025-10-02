@@ -113,6 +113,12 @@ class StofDoctrineExtensionsExtension extends Extension
         $container->setParameter('stof_doctrine_extensions.persist_default_translation', $config['persist_default_translation']);
         $container->setParameter('stof_doctrine_extensions.skip_translation_on_load', $config['skip_translation_on_load']);
 
+        // Register the softdeleteable configuration if the listener is used
+        if (isset($loaded['softdeleteable'])) {
+            $container->getDefinition('stof_doctrine_extensions.listener.softdeleteable')
+                ->replaceArgument(0, $config['softdeleteable']['handle_post_flush_event']);
+        }
+
         // Register the uploadable configuration if the listener is used
         if (isset($loaded['uploadable'])) {
             $uploadableConfig = $config['uploadable'];
